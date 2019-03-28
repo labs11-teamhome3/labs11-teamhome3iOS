@@ -74,6 +74,7 @@
 		7BF8735C21F7D0F500737729 /* CommentsCollectionViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8735B21F7D0F500737729 /* CommentsCollectionViewController.graphql */; };
 		7BF8736221FA6B4B00737729 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8736121FA6B4B00737729 /* Activity.swift */; };
 		C4D48ED210903108208DB396 /* Pods_TeamHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */; };
+		EB061D08224D8498006221D3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D07224D8498006221D3 /* Todo.swift */; };
 		F877E0B8221F859A00A78D08 /* FolderConcept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */; };
 		F877E0BA221F873A00A78D08 /* FolderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */; };
 		F8A527812230861900E715E8 /* FolderContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */; };
@@ -156,6 +157,7 @@
 		7BF8735B21F7D0F500737729 /* CommentsCollectionViewController.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CommentsCollectionViewController.graphql; sourceTree = "<group>"; };
 		7BF8736121FA6B4B00737729 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		DE4B1FF0DF331C25C53901F0 /* Pods-TeamHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamHome/Pods-TeamHome.debug.xcconfig"; sourceTree = "<group>"; };
+		EB061D07224D8498006221D3 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FolderConcept.storyboard; sourceTree = "<group>"; };
 		F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManagementViewController.swift; sourceTree = "<group>"; };
 		F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentsTableViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		7BA77E6D21E6BAAF00C862C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EB061D07224D8498006221D3 /* Todo.swift */,
 				7BA77E8621E7BDD400C862C1 /* Mock json */,
 				7BA77E8421E7B2B500C862C1 /* User.swift */,
 				7BA77E8921E7F3E200C862C1 /* Message.swift */,
@@ -572,6 +575,7 @@
 				F8BEA7F5222D035D0003C352 /* FolderDetailViewController.swift in Sources */,
 				7B2C51EC220B2CF7004990BB /* TagCollectionViewCell.swift in Sources */,
 				7BF8736221FA6B4B00737729 /* Activity.swift in Sources */,
+				EB061D08224D8498006221D3 /* Todo.swift in Sources */,
 				7B2C51F2220CB563004990BB /* CommentsCollectionReusableView.swift in Sources */,
 				10295B6922274F92002C8940 /* DocumentDetailViewController.swift in Sources */,
 				7BA77E8321E798A800C862C1 /* TabBarChildrenProtocol.swift in Sources */,
@@ -722,13 +726,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W6VGBGBJ68;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/TeamHome/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DanielaParra.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -741,13 +745,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W6VGBGBJ68;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/TeamHome/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DanielaParra.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
