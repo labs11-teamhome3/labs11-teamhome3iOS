@@ -75,6 +75,8 @@
 		7BF8736221FA6B4B00737729 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8736121FA6B4B00737729 /* Activity.swift */; };
 		C4D48ED210903108208DB396 /* Pods_TeamHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */; };
 		EB061D08224D8498006221D3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D07224D8498006221D3 /* Todo.swift */; };
+		EB061D0B224E7CCA006221D3 /* Query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB061D0A224E7CCA006221D3 /* Query.graphql */; };
+		EB061D0D225021AB006221D3 /* NewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D0C225021AB006221D3 /* NewTest.swift */; };
 		F877E0B8221F859A00A78D08 /* FolderConcept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */; };
 		F877E0BA221F873A00A78D08 /* FolderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */; };
 		F8A527812230861900E715E8 /* FolderContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */; };
@@ -158,6 +160,8 @@
 		7BF8736121FA6B4B00737729 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		DE4B1FF0DF331C25C53901F0 /* Pods-TeamHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamHome/Pods-TeamHome.debug.xcconfig"; sourceTree = "<group>"; };
 		EB061D07224D8498006221D3 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		EB061D0A224E7CCA006221D3 /* Query.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Query.graphql; sourceTree = "<group>"; };
+		EB061D0C225021AB006221D3 /* NewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTest.swift; sourceTree = "<group>"; };
 		F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FolderConcept.storyboard; sourceTree = "<group>"; };
 		F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManagementViewController.swift; sourceTree = "<group>"; };
 		F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentsTableViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			children = (
 				7BD6589D21F00A55004FF34A /* API.swift */,
 				7B734DF821FFF48D00F56C5F /* Helper */,
+				EB061D09224E7C1A006221D3 /* GraphQL Query */,
 				7BA77E6F21E6BAC400C862C1 /* Resources */,
 				7BA77E6D21E6BAAF00C862C1 /* Models */,
 				7BA77E6C21E6BAA600C862C1 /* View Controllers */,
@@ -346,6 +351,15 @@
 			path = "Mock json";
 			sourceTree = "<group>";
 		};
+		EB061D09224E7C1A006221D3 /* GraphQL Query */ = {
+			isa = PBXGroup;
+			children = (
+				EB061D0C225021AB006221D3 /* NewTest.swift */,
+				EB061D0A224E7CCA006221D3 /* Query.graphql */,
+			);
+			path = "GraphQL Query";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BF8735421F6D46C00737729 /* ActivityTimelineViewController.graphql in Resources */,
+				EB061D0B224E7CCA006221D3 /* Query.graphql in Resources */,
 				7B734DFF22000EFF00F56C5F /* Montserrat-Regular.ttf in Resources */,
 				103E7301222DEEA200F54B0F /* DocumentsDetailCollectionViewController.graphql in Resources */,
 				7BA77ED021ED50BB00C862C1 /* MessagesCollectionViewController.graphql in Resources */,
@@ -534,6 +549,7 @@
 			files = (
 				F8A527832230972500E715E8 /* FolderContentsTableViewController.graphql in Sources */,
 				7BA77EC021E950BB00C862C1 /* SubscriberCollectionViewCell.swift in Sources */,
+				EB061D0D225021AB006221D3 /* NewTest.swift in Sources */,
 				10E2A19C2216153F007EC662 /* AddEditDocumentViewController.swift in Sources */,
 				103E72FD222DEE4100F54B0F /* DocumentsDetailCollectionViewController.swift in Sources */,
 				7B734DF721FF6E3900F56C5F /* Appearance.swift in Sources */,

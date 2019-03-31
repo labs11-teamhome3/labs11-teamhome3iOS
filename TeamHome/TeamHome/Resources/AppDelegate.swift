@@ -12,12 +12,13 @@ import UIKit
  class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let task = NewTest()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Sets basic theme for all of application
-        Appearance.setTheme()
-        
+        //Appearance.setTheme()
+        task.testData()
         return true
     }
     

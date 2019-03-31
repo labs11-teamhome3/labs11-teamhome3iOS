@@ -1,4 +1,4 @@
-query FindTeamById($id: ID!) {
+#query FindTeamById($id: ID!) {
     findTeam(input: {
              id: $id
              }) {
@@ -18,7 +18,7 @@ query FindTeamById($id: ID!) {
     }
 }
 
-mutation kickUser($teamId: ID!, $userKickedId: ID!) {
+#mutation kickUser($teamId: ID!, $userKickedId: ID!) {
     kickUser(input: {
              id: $teamId
              user: $userKickedId

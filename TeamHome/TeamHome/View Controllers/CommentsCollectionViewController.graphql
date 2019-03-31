@@ -1,4 +1,4 @@
-query FindCommentsByMessage($messageId: ID!) {
+#query FindCommentsByMessage($messageId: ID!) {
     findMsgCommentsByMessage(input:  {
                              message: $messageId
                              }) {
@@ -20,7 +20,7 @@ query FindCommentsByMessage($messageId: ID!) {
     }
 }
 
-mutation likeComment($id: ID!) {
+#mutation likeComment($id: ID!) {
     likeMsgComment(input: {
                    id: $id
                    }) {
@@ -28,7 +28,7 @@ mutation likeComment($id: ID!) {
     }
 }
 
-mutation unlikeComment($id: ID!) {
+#mutation unlikeComment($id: ID!) {
     unLikeMsgComment(input: {
                      id: $id
                      }) {
@@ -36,7 +36,7 @@ mutation unlikeComment($id: ID!) {
     }
 }
 
-mutation deleteComment($id: ID!) {
+#mutation deleteComment($id: ID!) {
     deleteMsgComment(input: {
                      id: $id
                      }) {

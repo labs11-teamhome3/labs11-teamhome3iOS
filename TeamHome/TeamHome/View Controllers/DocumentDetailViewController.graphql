@@ -1,4 +1,4 @@
-mutation AddDocumentComment($document: String!, $comment: String!){
+#mutation AddDocumentComment($document: String!, $comment: String!){
     addDocComment(input: {
         document:$document
         content: $comment
@@ -9,14 +9,14 @@ mutation AddDocumentComment($document: String!, $comment: String!){
     }
 }
 
-mutation SubscribeToDocument($documentID: ID!){
+#mutation SubscribeToDocument($documentID: ID!){
     subscribeDoc(input: {
                  id: $documentID
                  }){
         _id
     }
 }
-mutation UnsubscribeFromDocument($documentID: ID!){
+#mutation UnsubscribeFromDocument($documentID: ID!){
     unsubscribeDoc(input: {
                  id: $documentID
                  }){
@@ -24,7 +24,7 @@ mutation UnsubscribeFromDocument($documentID: ID!){
     }
 }
 
-query FindDocumentInput($docID: ID!){
+#query FindDocumentInput($docID: ID!){
     findDocument(input: {
                  id:$docID
                  }) {
