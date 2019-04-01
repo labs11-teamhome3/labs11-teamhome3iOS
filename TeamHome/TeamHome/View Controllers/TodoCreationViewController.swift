@@ -11,7 +11,7 @@ import UIKit
 class TodoCreationViewController: UIViewController {
 
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
