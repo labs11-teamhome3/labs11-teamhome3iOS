@@ -1,4 +1,4 @@
-mutation AddNewMessage($title: String!, $team: String!, $content: String!, $tagId: String) {
+#mutation AddNewMessage($title: String!, $team: String!, $content: String!, $tagId: String) {
     addMessage(input: {
                title: $title
                team: $team
@@ -10,7 +10,7 @@ mutation AddNewMessage($title: String!, $team: String!, $content: String!, $tagI
     }
 }
 
-mutation AddNewImagesMessage($title: String!, $team: String!, $content: String!, $images: [String], $tagId: String) {
+#mutation AddNewImagesMessage($title: String!, $team: String!, $content: String!, $images: [String], $tagId: String) {
     addMessage(input: {
                title: $title
                team: $team
@@ -23,7 +23,7 @@ mutation AddNewImagesMessage($title: String!, $team: String!, $content: String!,
     }
 }
 
-mutation UpdateMessage($id: ID!, $title: String, $teamId: String, $content: String, $images: [String], $tagId: String) {
+#mutation UpdateMessage($id: ID!, $title: String, $teamId: String, $content: String, $images: [String], $tagId: String) {
     updateMessage(input: {
                   id: $id
                   title: $title
@@ -36,7 +36,7 @@ mutation UpdateMessage($id: ID!, $title: String, $teamId: String, $content: Stri
     }
 }
 
-mutation CreateNewTag($name: String!, $teamId: String) {
+#mutation CreateNewTag($name: String!, $teamId: String) {
     addTag(input: {
            name: $name
            team: $teamId

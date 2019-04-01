@@ -1,0 +1,10 @@
+query TodoLists {
+    todoLists {
+        id
+        description
+        ownedBy {
+            id
+            name
+        }
+    }
+}

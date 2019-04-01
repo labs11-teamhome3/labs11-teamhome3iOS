@@ -1,4 +1,4 @@
-query FindMessageById($id: ID!) {
+#query FindMessageById($id: ID!) {
     findMessage(input: {
                 id: $id
                 }) {
@@ -31,7 +31,7 @@ query FindMessageById($id: ID!) {
     }
 }
 
-mutation CreateImageComment($message: String!, $content: String!, $image: String) {
+#mutation CreateImageComment($message: String!, $content: String!, $image: String) {
     addMsgComment(input: {
                   message: $message
                   content: $content
@@ -41,7 +41,7 @@ mutation CreateImageComment($message: String!, $content: String!, $image: String
     }
 }
 
-mutation CreateComment($message: String!, $content: String!) {
+#mutation CreateComment($message: String!, $content: String!) {
     addMsgComment(input: {
                   message: $message
                   content: $content
@@ -50,13 +50,13 @@ mutation CreateComment($message: String!, $content: String!) {
     }
 }
 
-mutation Subscribe($id: ID!) {
+#mutation Subscribe($id: ID!) {
     subscribe(input: { id: $id }) {
         _id
     }
 }
 
-mutation Unsubscribe($id: ID!) {
+#mutation Unsubscribe($id: ID!) {
     unsubscribe(input: { id: $id }) {
         _id
     }

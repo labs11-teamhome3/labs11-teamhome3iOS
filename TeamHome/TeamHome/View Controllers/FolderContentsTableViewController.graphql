@@ -1,4 +1,4 @@
-query FindDocumentsByFolder($folderID: ID!){
+#query FindDocumentsByFolder($folderID: ID!){
     findDocumentsByFolder(input: {
         folder: $folderID
     }){

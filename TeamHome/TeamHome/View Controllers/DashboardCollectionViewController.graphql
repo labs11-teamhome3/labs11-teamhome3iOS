@@ -1,4 +1,4 @@
-query findTeamsByUser {
+#query findTeamsByUser {
     findTeamsByUser {
         name
         _id
@@ -6,7 +6,7 @@ query findTeamsByUser {
     }
 }
 
-mutation CreateTeam($name: String!, $premium: Boolean) {
+#mutation CreateTeam($name: String!, $premium: Boolean) {
     addTeam(input: {
             name: $name
             premium: $premium
