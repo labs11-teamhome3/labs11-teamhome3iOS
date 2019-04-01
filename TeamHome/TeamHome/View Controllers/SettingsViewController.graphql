@@ -1,4 +1,4 @@
-mutation UpdateUser($firstName: String, $lastName: String, $email: String, $phoneNumber: String, $avatar: String, $receiveEmails: Boolean, $receiveTexts: Boolean) {
+#mutation UpdateUser($firstName: String, $lastName: String, $email: String, $phoneNumber: String, $avatar: String, $receiveEmails: Boolean, $receiveTexts: Boolean) {
     updateUser(input: {
                firstName: $firstName
                lastName: $lastName
@@ -13,13 +13,13 @@ mutation UpdateUser($firstName: String, $lastName: String, $email: String, $phon
         _id
     }
 }
-mutation updateTeam(
+#mutation updateTeam(
                     $id: ID!
                     $name: String
                     $users: [TeamUserInput]
                     $premium: Boolean
                     ) {
-    updateTeam(
+#   updateTeam(
                input: { id: $id, name: $name, users: $users, premium: $premium }
                ) {
         _id

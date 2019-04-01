@@ -1,4 +1,4 @@
-query FindMessagesByTeam($teamId: ID!) {
+#query FindMessagesByTeam($teamId: ID!) {
     findMessagesByTeam(input: {
                        team: $teamId
                        }) {
@@ -27,7 +27,7 @@ query FindMessagesByTeam($teamId: ID!) {
     }
 }
 
-query FindTagsByTeam($teamId: ID!) {
+#query FindTagsByTeam($teamId: ID!) {
     findTagsByTeam(input: {
                    team: $teamId
                    }) {

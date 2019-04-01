@@ -1,4 +1,4 @@
-query CurrentUser {
+#query CurrentUser {
     currentUser {
         _id
         authId

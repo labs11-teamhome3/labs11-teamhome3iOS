@@ -1,4 +1,4 @@
-query FindCommentsByDocument($documentID: ID!) {
+#query FindCommentsByDocument($documentID: ID!) {
     findDocCommentsByDocument(input:  {
                              document: $documentID
                              }) {
@@ -20,7 +20,7 @@ query FindCommentsByDocument($documentID: ID!) {
     }
 }
 
-mutation likeDocumentComment($id: ID!) {
+#mutation likeDocumentComment($id: ID!) {
     likeDocComment(input: {
                    id: $id
                    }) {
@@ -28,7 +28,7 @@ mutation likeDocumentComment($id: ID!) {
     }
 }
 
-mutation unlikeDocumentComment($id: ID!) {
+#mutation unlikeDocumentComment($id: ID!) {
     unLikeDocComment(input: {
                      id: $id
                      }) {
@@ -36,7 +36,7 @@ mutation unlikeDocumentComment($id: ID!) {
     }
 }
 
-mutation deleteDocumentComment($id: ID!) {
+#mutation deleteDocumentComment($id: ID!) {
     deleteDocComment(input: {
                      id: $id
                      }) {
