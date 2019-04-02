@@ -9,7 +9,8 @@
 import UIKit
 
 class TodoCreationViewController: UIViewController {
-
+    var todos: [String]?
+    
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
