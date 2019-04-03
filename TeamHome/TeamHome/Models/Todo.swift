@@ -25,4 +25,9 @@ struct TodoList {
     var todos: [Todo]
     var completed: Bool
     var inTeam: Team?
+    
+    
+    init(todoList: TodoList){
+        
+    }
 }
