@@ -33,6 +33,7 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     @IBOutlet weak var sortByTableView: UITableView!
     @IBOutlet weak var todosTableView: UITableView!
     
+    
     // MARK: TODO THIS REPEATED CODE SHOULD CONSOLIDATE INTO ONE FUNCTION...
     @IBAction func filterByButtonTapped(_ sender: Any) {
         animateDropMenu(tableView: filterByTableView)
@@ -58,10 +59,10 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         super.viewDidLoad()
         filterByTableView.isHidden = true
         sortByTableView.isHidden = true
-        tableViewData = [cellData(opened: false, title: "Title1", sectionData: ["Cell1", "Cell2", "Cell3"]),
-                         cellData(opened: false, title: "Title1", sectionData: ["Cell1", "Cell2", "Cell3"]),
-                         cellData(opened: false, title: "Title1", sectionData: ["Cell1", "Cell2", "Cell3"]),
-                         cellData(opened: false, title: "Title1", sectionData: ["Cell1", "Cell2", "Cell3"])]
+        tableViewData = [cellData(opened: false, title: "TodoList_01", sectionData: ["Task1", "Task2", "Task3"]),
+                         cellData(opened: false, title: "TodoList_02", sectionData: ["Task1", "Task2", "Task3"]),
+                         cellData(opened: false, title: "TodoList_03", sectionData: ["Task1", "Task2", "Task3"]),
+                         cellData(opened: false, title: "TodoList_04", sectionData: ["Task1", "Task2", "Task3"])]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,12 +91,12 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == todosTableView {
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
                 cell.textLabel?.text = tableViewData[indexPath.section].title
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-                cell.textLabel?.text = tableViewData[indexPath.section].sectionData[indexPath.row - 1]
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
+                cell.taskNameLabel?.text = tableViewData[indexPath.section].sectionData[indexPath.row - 1]
                 return cell
             }
         }
