@@ -57,12 +57,16 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpViewAppearance()
+        createGradientLayer()
         filterByTableView.isHidden = true
         sortByTableView.isHidden = true
         tableViewData = [cellData(opened: false, title: "TodoList_01", sectionData: ["Task1", "Task2", "Task3"]),
                          cellData(opened: false, title: "TodoList_02", sectionData: ["Task1", "Task2", "Task3"]),
                          cellData(opened: false, title: "TodoList_03", sectionData: ["Task1", "Task2", "Task3"]),
                          cellData(opened: false, title: "TodoList_04", sectionData: ["Task1", "Task2", "Task3"])]
+        // This gets rid of the empty table cell in the tableView at the bottom.
+        todosTableView.tableFooterView = UIView()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -145,5 +149,24 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         // Pass the selected object to the new view controller.
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+    }
     
+    private var gradientLayer: CAGradientLayer!
+    // MARK: - Private Functions
+    // Create gradient layer for view background.
+    private func createGradientLayer() {
+        gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = self.view.bounds
+        
+        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        
+        
+        gradientLayer.locations = [0.0, 0.5]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }

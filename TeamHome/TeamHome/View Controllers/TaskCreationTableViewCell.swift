@@ -10,6 +10,10 @@ import UIKit
 
 class TaskCreationTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var taskTextField: UITextField!
+    // Don't think we need an edit button
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
     @IBAction func trashButtonTapped(_ sender: Any) {
     }
 
