@@ -6,11 +6,11 @@
 ////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 ////
 //
-//import UIKit
-//
-//protocol DashboardReusableViewDelegate: class {
-//    func didClickAddTeam()
-//}
+import UIKit
+
+protocol DashboardReusableViewDelegate: class {
+    func didClickAddTeam()
+}
 //
 //class DashboardCollectionReusableView: UICollectionReusableView {
 //

@@ -6,12 +6,12 @@
 ////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 ////
 //
-//import UIKit
+import UIKit
 //import Material
 //
-//protocol TeamCellDelegate: class {
-//    func presentActionSheet(with optionMenu: UIAlertController)
-//}
+protocol TeamCellDelegate: class {
+    func presentActionSheet(with optionMenu: UIAlertController)
+}
 //
 //class DashboardTeamCollectionViewCell: UICollectionViewCell {
 //    
