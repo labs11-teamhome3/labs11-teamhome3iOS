@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -980,18 +980,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vHa-BJ-Uhd" userLabel="Invite Stack">
-                                <rect key="frame" x="16" y="156" width="382" height="37"/>
+                                <rect key="frame" x="16" y="156" width="382" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-qX-2Qd">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8f-UA-Ewp">
-                                                <rect key="frame" x="0.0" y="0.0" width="41" height="37"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                                 <state key="normal" title="Button" image="Add Team Member"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJu-DM-5ai">
-                                                <rect key="frame" x="49" y="0.0" width="131" height="37"/>
+                                                <rect key="frame" x="62" y="0.0" width="131" height="50"/>
                                                 <state key="normal" title="Invite Some People"/>
                                             </button>
                                         </subviews>
@@ -999,7 +999,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygl-Oo-Hee">
-                                <rect key="frame" x="16" y="201" width="114" height="30"/>
+                                <rect key="frame" x="16" y="214" width="114" height="30"/>
                                 <state key="normal" title="+ Add New Todo"/>
                                 <connections>
                                     <segue destination="w7M-Js-xRy" kind="popoverPresentation" identifier="TodoSegue" popoverAnchorView="ygl-Oo-Hee" id="g4D-YZ-ZFP">
@@ -1008,7 +1008,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2nv-2d-tgv">
-                                <rect key="frame" x="138" y="201" width="260" height="180"/>
+                                <rect key="frame" x="138" y="214" width="260" height="180"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-eF-nwr" userLabel="Sort Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="150"/>
@@ -1118,7 +1118,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-Jg-TE9">
-                                <rect key="frame" x="16" y="397" width="382" height="400"/>
+                                <rect key="frame" x="16" y="410" width="382" height="387"/>
                                 <color key="backgroundColor" red="0.059734245364206899" green="0.068640209552604678" blue="0.69414260786802029" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" textLabel="XkL-I6-51b" style="IBUITableViewCellStyleDefault" id="Q0Y-3d-bJc">
@@ -1337,24 +1337,24 @@
                                         <rect key="frame" x="0.0" y="228" width="366" height="558"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sU9-dO-03t">
-                                                <rect key="frame" x="0.0" y="0.0" width="366" height="172"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="224"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WcG-Aj-61t">
-                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="172"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="224"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bAp-UB-UwO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="236" height="37"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="236" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36n-IV-boA">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Trash"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2H-tp-kEX">
-                                                                        <rect key="frame" x="63" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="63" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Edit"/>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="754" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task List Item" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VAe-cb-pzs">
-                                                                        <rect key="frame" x="126" y="0.0" width="110" height="37"/>
+                                                                        <rect key="frame" x="126" y="0.0" width="110" height="50"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1367,18 +1367,18 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9FH-3P-1Nw">
-                                                                <rect key="frame" x="0.0" y="45" width="236" height="37"/>
+                                                                <rect key="frame" x="0.0" y="58" width="236" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBw-iZ-12W">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Trash"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyR-po-dxm">
-                                                                        <rect key="frame" x="63" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="63" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Edit"/>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="754" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task List Item" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uQN-Hr-YT7">
-                                                                        <rect key="frame" x="126" y="0.0" width="110" height="37"/>
+                                                                        <rect key="frame" x="126" y="0.0" width="110" height="50"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1391,18 +1391,18 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aOt-65-oTS">
-                                                                <rect key="frame" x="0.0" y="90" width="236" height="37"/>
+                                                                <rect key="frame" x="0.0" y="116" width="236" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5h3-ik-1mC">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Trash"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSb-LQ-bnD">
-                                                                        <rect key="frame" x="63" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="63" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Edit"/>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="754" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task List Item" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pQk-gu-VIy">
-                                                                        <rect key="frame" x="126" y="0.0" width="110" height="37"/>
+                                                                        <rect key="frame" x="126" y="0.0" width="110" height="50"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1415,18 +1415,18 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tzx-zf-wkn">
-                                                                <rect key="frame" x="0.0" y="135" width="236" height="37"/>
+                                                                <rect key="frame" x="0.0" y="174" width="236" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2V-Yt-X4u">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Trash"/>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-zs-OF4">
-                                                                        <rect key="frame" x="63" y="0.0" width="55" height="37"/>
+                                                                        <rect key="frame" x="63" y="0.0" width="55" height="50"/>
                                                                         <state key="normal" image="Edit"/>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="754" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task List Item" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yib-Xj-OD9">
-                                                                        <rect key="frame" x="126" y="0.0" width="110" height="37"/>
+                                                                        <rect key="frame" x="126" y="0.0" width="110" height="50"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1447,7 +1447,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7d-7c-2CS">
-                                                <rect key="frame" x="0.0" y="254" width="366" height="304"/>
+                                                <rect key="frame" x="0.0" y="306" width="366" height="252"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
                                         </subviews>
@@ -1478,24 +1478,24 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Activity Tab" width="56.347827911376953" height="56.347827911376953"/>
+        <image name="Activity Tab" width="24" height="24"/>
         <image name="Add" width="16" height="16"/>
-        <image name="Add Team Member" width="37.5" height="37.5"/>
-        <image name="Arrow Down" width="13.60629940032959" height="13.60629940032959"/>
-        <image name="Change Team" width="50.823528289794922" height="50.823528289794922"/>
+        <image name="Add Team Member" width="50" height="50"/>
+        <image name="Arrow Down" width="24" height="24"/>
+        <image name="Change Team" width="24" height="24"/>
         <image name="Checklist" width="20" height="20"/>
-        <image name="Documents" width="54" height="54"/>
-        <image name="Edit" width="37.5" height="37.5"/>
-        <image name="Logo With Nodes" width="246" height="245"/>
-        <image name="Messages Tab" width="46.285713195800781" height="46.285713195800781"/>
-        <image name="Settings Tab" width="94.254547119140625" height="94.254547119140625"/>
-        <image name="Team Tab" width="54" height="54"/>
-        <image name="Trash" width="37.5" height="37.5"/>
-        <image name="User Avatar Image" width="233.31645202636719" height="233.31645202636719"/>
-        <image name="facebook" width="365" height="365"/>
-        <image name="google-plus" width="365" height="365"/>
+        <image name="Documents" width="24" height="24"/>
+        <image name="Edit" width="50" height="50"/>
+        <image name="Logo With Nodes" width="123" height="122.5"/>
+        <image name="Messages Tab" width="24" height="24"/>
+        <image name="Settings Tab" width="24" height="24"/>
+        <image name="Team Tab" width="24" height="24"/>
+        <image name="Trash" width="50" height="50"/>
+        <image name="User Avatar Image" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="facebook" width="512" height="512"/>
+        <image name="google-plus" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9db-bK-rdS"/>
+        <segue reference="DPm-Su-I7i"/>
     </inferredMetricsTieBreakers>
 </document>

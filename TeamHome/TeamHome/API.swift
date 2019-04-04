@@ -2,18 +2,27 @@
 
 import Apollo
 
-public final class TodoListsQuery: GraphQLQuery {
+public final class CurrentUserQuery: GraphQLQuery {
   public let operationDefinition =
-    "query TodoLists {\n  todoLists {\n    __typename\n    id\n    description\n    ownedBy {\n      __typename\n      id\n      name\n    }\n  }\n}"
+    "query CurrentUser($authId: String, $id: ID) {\n  user(authId: $authId, id: $id) {\n    __typename\n    id\n    createdAt\n    authId\n    name\n  }\n}"
 
-  public init() {
+  public var authId: String?
+  public var id: GraphQLID?
+
+  public init(authId: String? = nil, id: GraphQLID? = nil) {
+    self.authId = authId
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["authId": authId, "id": id]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("todoLists", type: .nonNull(.list(.object(TodoList.selections)))),
+      GraphQLField("user", arguments: ["authId": GraphQLVariable("authId"), "id": GraphQLVariable("id")], type: .nonNull(.object(User.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -22,27 +31,28 @@ public final class TodoListsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(todoLists: [TodoList?]) {
-      self.init(unsafeResultMap: ["__typename": "Query", "todoLists": todoLists.map { (value: TodoList?) -> ResultMap? in value.flatMap { (value: TodoList) -> ResultMap in value.resultMap } }])
+    public init(user: User) {
+      self.init(unsafeResultMap: ["__typename": "Query", "user": user.resultMap])
     }
 
-    public var todoLists: [TodoList?] {
+    public var user: User {
       get {
-        return (resultMap["todoLists"] as! [ResultMap?]).map { (value: ResultMap?) -> TodoList? in value.flatMap { (value: ResultMap) -> TodoList in TodoList(unsafeResultMap: value) } }
+        return User(unsafeResultMap: resultMap["user"]! as! ResultMap)
       }
       set {
-        resultMap.updateValue(newValue.map { (value: TodoList?) -> ResultMap? in value.flatMap { (value: TodoList) -> ResultMap in value.resultMap } }, forKey: "todoLists")
+        resultMap.updateValue(newValue.resultMap, forKey: "user")
       }
     }
 
-    public struct TodoList: GraphQLSelectionSet {
-      public static let possibleTypes = ["TodoList"]
+    public struct User: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-        GraphQLField("description", type: .nonNull(.scalar(String.self))),
-        GraphQLField("ownedBy", type: .list(.nonNull(.object(OwnedBy.selections)))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("authId", type: .scalar(String.self)),
+        GraphQLField("name", type: .scalar(String.self)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -51,8 +61,8 @@ public final class TodoListsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, description: String, ownedBy: [OwnedBy]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "TodoList", "id": id, "description": description, "ownedBy": ownedBy.flatMap { (value: [OwnedBy]) -> [ResultMap] in value.map { (value: OwnedBy) -> ResultMap in value.resultMap } }])
+      public init(id: GraphQLID, createdAt: String? = nil, authId: String? = nil, name: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "User", "id": id, "createdAt": createdAt, "authId": authId, "name": name])
       }
 
       public var __typename: String {
@@ -73,68 +83,30 @@ public final class TodoListsQuery: GraphQLQuery {
         }
       }
 
-      public var description: String {
+      public var createdAt: String? {
         get {
-          return resultMap["description"]! as! String
+          return resultMap["createdAt"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "description")
+          resultMap.updateValue(newValue, forKey: "createdAt")
         }
       }
 
-      public var ownedBy: [OwnedBy]? {
+      public var authId: String? {
         get {
-          return (resultMap["ownedBy"] as? [ResultMap]).flatMap { (value: [ResultMap]) -> [OwnedBy] in value.map { (value: ResultMap) -> OwnedBy in OwnedBy(unsafeResultMap: value) } }
+          return resultMap["authId"] as? String
         }
         set {
-          resultMap.updateValue(newValue.flatMap { (value: [OwnedBy]) -> [ResultMap] in value.map { (value: OwnedBy) -> ResultMap in value.resultMap } }, forKey: "ownedBy")
+          resultMap.updateValue(newValue, forKey: "authId")
         }
       }
 
-      public struct OwnedBy: GraphQLSelectionSet {
-        public static let possibleTypes = ["User"]
-
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        ]
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
+      public var name: String? {
+        get {
+          return resultMap["name"] as? String
         }
-
-        public init(id: GraphQLID, name: String) {
-          self.init(unsafeResultMap: ["__typename": "User", "id": id, "name": name])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var id: GraphQLID {
-          get {
-            return resultMap["id"]! as! GraphQLID
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "id")
-          }
-        }
-
-        public var name: String {
-          get {
-            return resultMap["name"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
         }
       }
     }

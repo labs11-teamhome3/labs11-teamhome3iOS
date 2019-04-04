@@ -79,6 +79,7 @@
 		EB061D08224D8498006221D3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D07224D8498006221D3 /* Todo.swift */; };
 		EB061D0B224E7CCA006221D3 /* Query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB061D0A224E7CCA006221D3 /* Query.graphql */; };
 		EB061D0D225021AB006221D3 /* NewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D0C225021AB006221D3 /* NewTest.swift */; };
+		EB6D344622552F9E002C92AC /* TodoCreation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB6D344522552F9E002C92AC /* TodoCreation.graphql */; };
 		F877E0B8221F859A00A78D08 /* FolderConcept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */; };
 		F877E0BA221F873A00A78D08 /* FolderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */; };
 		F8A527812230861900E715E8 /* FolderContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */; };
@@ -166,6 +167,7 @@
 		EB061D07224D8498006221D3 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EB061D0A224E7CCA006221D3 /* Query.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Query.graphql; sourceTree = "<group>"; };
 		EB061D0C225021AB006221D3 /* NewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTest.swift; sourceTree = "<group>"; };
+		EB6D344522552F9E002C92AC /* TodoCreation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoCreation.graphql; sourceTree = "<group>"; };
 		F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FolderConcept.storyboard; sourceTree = "<group>"; };
 		F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManagementViewController.swift; sourceTree = "<group>"; };
 		F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentsTableViewController.swift; sourceTree = "<group>"; };
@@ -297,8 +299,8 @@
 				F8BEA7F6222D03860003C352 /* FoldersTableViewController.swift */,
 				7BF8735121F6D37300737729 /* InviteToTeamViewController.graphql */,
 				7BA77EAD21E9385E00C862C1 /* InviteToTeamViewController.swift */,
-				7BF8734B21F6B4C200737729 /* LandingPageViewController.graphql */,
 				7BA77E8021E797C200C862C1 /* LandingPageViewController.swift */,
+				7BF8734B21F6B4C200737729 /* LandingPageViewController.graphql */,
 				7BA77E9D21E807D200C862C1 /* MessageBoardViewController.swift */,
 				7BA77EA121E80E3E00C862C1 /* MessageCollectionViewCell.swift */,
 				7BF8735921F7BA8400737729 /* MessageDetailViewController.graphql */,
@@ -311,6 +313,7 @@
 				7B2C51EB220B2CF7004990BB /* TagCollectionViewCell.swift */,
 				7BF8734F21F6D24400737729 /* TeamDetailTableViewController.graphql */,
 				2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */,
+				EB6D344522552F9E002C92AC /* TodoCreation.graphql */,
 				2C34E0B122507186001D3EB9 /* TodoListViewController.swift */,
 				7BA77EBB21E93D1300C862C1 /* TeamDetailTableViewController.swift */,
 			);
@@ -437,6 +440,7 @@
 				7BF8735A21F7BA8400737729 /* MessageDetailViewController.graphql in Resources */,
 				7BA77E9921E8033C00C862C1 /* TeamExample.json in Resources */,
 				7BA77E9821E8033C00C862C1 /* MessageExample.json in Resources */,
+				EB6D344622552F9E002C92AC /* TodoCreation.graphql in Resources */,
 				7BF8735621F6D50B00737729 /* SettingsViewController.graphql in Resources */,
 				7BF8735021F6D24400737729 /* TeamDetailTableViewController.graphql in Resources */,
 				7BE481CB2207871000F518F9 /* CreateNewUserViewController.graphql in Resources */,
@@ -756,7 +760,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DanielaParra.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -775,7 +779,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DanielaParra.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

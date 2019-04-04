@@ -6,11 +6,11 @@
 ////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 ////
 //
-//import UIKit
-//import Auth0
-//import Apollo
+import UIKit
+import Auth0
+import Apollo
 //
-//class CreateNewUserViewController: UIViewController {
+class CreateNewUserViewController: UIViewController {
 //
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
@@ -60,8 +60,8 @@
 //    var apollo: ApolloClient?
 //    var user: DatabaseUser?
 //
-//    @IBOutlet weak var avatarImageView: UIImageView!
-//    @IBOutlet weak var firstNameTextField: UITextField!
-//    @IBOutlet weak var lastNameTextField: UITextField!
-//    @IBOutlet weak var emailTextField: UITextField!
-//}
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+}
