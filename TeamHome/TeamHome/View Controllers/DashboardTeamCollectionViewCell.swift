@@ -37,7 +37,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
         imageView.frame = CGRect(x: 8, y: 8, width: 24, height: 24)
         imageView.tintColor = .white
         
-        if team{
+        if team.premium! == true {
             premiumIcon.addSubview(imageView)
         }
         

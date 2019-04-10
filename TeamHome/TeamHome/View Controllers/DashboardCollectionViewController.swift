@@ -64,7 +64,7 @@ import Apollo
         return teams?.count ?? 0
     }
 
-     Set up cell with team name and letter icon from the first letter of team name
+     // Set up cell with team name and letter icon from the first letter of team name
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! DashboardTeamCollectionViewCell
 
