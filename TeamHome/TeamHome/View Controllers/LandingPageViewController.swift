@@ -89,7 +89,6 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
     @IBAction func googleLogIn(_ sender: Any) {
         Auth0
             .webAuth()
-            .responseType([.idToken])
             .audience("https://manaje.auth0.com/userinfo")
             .connection("google-oauth2")
             .scope("openid profile email")
@@ -101,6 +100,8 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                         // Unwrap tokens to use for Apollo and to decode.
                         guard let idToken = credentials.idToken else { return }
 
+                        guard let  authId = self.decodePayload(tokenstr: idToken) else {return}
+                        let newId = String(authId.split(separator: "|")[1])
                         // Set up Apollo client with idToken from auth0.
                         self.setUpApollo(with: idToken)
 
@@ -109,7 +110,7 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
 
                         guard let apollo = self.apollo else {return}
 
-                        apollo.fetch(query: CurrentUserQuery(), queue: DispatchQueue.global(), resultHandler: { (result, error) in
+                        apollo.fetch(query: CurrentUserQuery(authId: newId), queue: DispatchQueue.global(), resultHandler: { (result, error) in
                             if let error = error {
                                 NSLog("Error logging in with google: \(error.localizedDescription)")
                                 return
@@ -124,7 +125,7 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                             NSLog("\(data)")
                              let currentUser = data.user
                             self.currentUser = currentUser
-                            print(currentUser.name)
+            
 
                             // Perform segue to Dashboard VC.
                             DispatchQueue.main.async {
@@ -161,7 +162,7 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                         self.setUpApollo(with: idToken)
 
                         // Store credentials with manager for future handling
-                        _ = credentialsManager.store(credentials: credentials)
+                    _ = credentialsManager.store(credentials: credentials)
 
                         guard let apollo = self.apollo else {return}
 
@@ -179,8 +180,7 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                             }
                             let currentUser = data.user
                             self.currentUser = currentUser
-                            print(currentUser.name)
-
+                
                             // Perform segue to Dashboard VC.
                             self.performSegue(withIdentifier: "ShowDashboard", sender: self)
                         })
@@ -319,30 +319,30 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
    }
 
 //     MARK: - Navigation
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        //Pass to Dashboard Collection VC
-//        if segue.identifier == "ShowDashboard" {
-//           guard let destinationVC = segue.destination as? DashboardCollectionViewController,
-//               let topView = destinationVC.topViewController,
-//                let nextVC = topView as? DashboardCollectionViewController,
-//                let apollo = apollo,
-//                let currentUser = currentUser else { return }
-//
-//            // Pass Apollo client.
-//            destinationVC.currentUser = currentUser
-//            destinationVC.apollo = apollo
-//
-//      } else if segue.identifier == "ShowNewUser" {
-//            guard let destinationVC = segue.destination as? CreateNewUserViewController,
-//                let apollo = apollo,
-//                let user = user else { return }
-//
-//            // Pass Apollo client.
-//            destinationVC.apollo = apollo
-//            destinationVC.user = user
-//        }
-//    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Pass to Dashboard Collection VC
+        if segue.identifier == "ShowDashboard" {
+           guard let destinationVC = segue.destination as? DashboardCollectionViewController,
+               //let topView = destinationVC.topViewController,
+                //let nextVC = topView as? DashboardCollectionViewController,
+                let apollo = apollo,
+                let currentUser = currentUser else { return }
+
+            // Pass Apollo client.
+            destinationVC.currentUser = currentUser
+            destinationVC.apollo = apollo
+
+      } else if segue.identifier == "ShowNewUser" {
+            guard let destinationVC = segue.destination as? CreateNewUserViewController,
+                let apollo = apollo,
+                let user = user else { return }
+
+            // Pass Apollo client.
+            destinationVC.apollo = apollo
+            destinationVC.user = user
+        }
+    }
 
     // MARK: - Keyboard Animation and Delegate functions
 

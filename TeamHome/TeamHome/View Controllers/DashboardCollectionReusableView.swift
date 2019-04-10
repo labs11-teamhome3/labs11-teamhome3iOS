@@ -11,15 +11,15 @@ import UIKit
 protocol DashboardReusableViewDelegate: class {
     func didClickAddTeam()
 }
-//
-//class DashboardCollectionReusableView: UICollectionReusableView {
-//
-//    @IBAction func addTeam(_ sender: Any) {
-//        delegate?.didClickAddTeam()
-//    }
-//    
-//    weak var delegate: DashboardReusableViewDelegate?
-//    
-//    @IBOutlet weak var addButton: UIButton!
-//    @IBOutlet weak var yourTeamsLabel: UILabel!
-//}
+
+class DashboardCollectionReusableView: UICollectionReusableView {
+
+    @IBAction func addTeam(_ sender: Any) {
+        delegate?.didClickAddTeam()
+    }
+    
+    weak var delegate: DashboardReusableViewDelegate?
+    
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var yourTeamsLabel: UILabel!
+}
