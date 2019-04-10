@@ -1,5 +1,5 @@
-query CurrentUser($authId:String, $id: ID) {
-    user(authId: $authId, id: $id){
+query CurrentUser($authId:String) {
+    user(authId: $authId){
         id
         createdAt
         authId

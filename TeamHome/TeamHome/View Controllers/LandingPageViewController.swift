@@ -31,49 +31,53 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
 //        }
     }
 
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        // Credential manager checks if user has a valid token.
-//        guard credentialsManager.hasValid() else { return }
-//
-//        // Fetches the credentials.
-//        credentialsManager.credentials { (error, credentials) in
-//            if let error = error {
-//                NSLog("\(error)")
-//                return
-//            }
-//
-//            // Unwrap idToken to use for Apollo and to decode.
-//            guard let credentials = credentials,
-//                let idToken = credentials.idToken else { return }
-//
-//            // Set up Apollo client with idToken from auth0.
-//            self.setUpApollo(with: idToken)
-//
-//            guard let apollo = self.apollo else {return}
-//
-//            apollo.fetch(query: CurrentUserQuery(), queue: DispatchQueue.global(), resultHandler: { (result, error) in
-//                if let error = error {
-//                    NSLog("Error logging in: \(error)")
-//                    return
-//                }
-//
-//                guard let result = result,
-//                    let data = result.data else {
-//                        // Perform other segue
-//                        self.performSegue(withIdentifier: "ShowNewUser", sender: self)
-//                        return
-//                }
-//                let currentUser = data.user
-//                self.currentUser = currentUser
-//                print(currentUser.name ?? "")
-//
-//                // Perform segue to Dashboard VC.
-//               // self.performSegue(withIdentifier: "ShowDashboard", sender: self)
-//            })
-//        }
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Credential manager checks if user has a valid token.
+        guard credentialsManager.hasValid() else { return }
+
+        // Fetches the credentials.
+        credentialsManager.credentials { (error, credentials) in
+            if let error = error {
+                NSLog("\(error)")
+                return
+            }
+
+            // Unwrap idToken to use for Apollo and to decode.
+            guard let credentials = credentials,
+                let idToken = credentials.idToken else { return }
+
+            // Set up Apollo client with idToken from auth0.
+            guard let  authId = self.decodePayload(tokenstr: idToken) else {return}
+            let newId = String(authId.split(separator: "|")[1])
+            self.setUpApollo(with: idToken)
+
+            guard let apollo = self.apollo else {return}
+
+            apollo.fetch(query: CurrentUserQuery(authId: newId), queue: DispatchQueue.global(), resultHandler: { (result, error) in
+                if let error = error {
+                    NSLog("Error logging in: \(error)")
+                    return
+                }
+
+                guard let result = result,
+                    let data = result.data else {
+                        // Perform other segue
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "ShowNewUser", sender: self)
+                        }
+                        return
+                }
+                let currentUser = data.user
+                self.currentUser = currentUser
+                print(currentUser.name ?? "")
+
+                // Perform segue to Dashboard VC.
+                self.performSegue(withIdentifier: "ShowDashboard", sender: self)
+            })
+        }
+    }
 
 
     // MARK: - IBActions
@@ -85,6 +89,7 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
     @IBAction func googleLogIn(_ sender: Any) {
         Auth0
             .webAuth()
+            .responseType([.idToken])
             .audience("https://manaje.auth0.com/userinfo")
             .connection("google-oauth2")
             .scope("openid profile email")
@@ -122,7 +127,10 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                             print(currentUser.name)
 
                             // Perform segue to Dashboard VC.
-                           // self.performSegue(withIdentifier: "ShowDashboard", sender: self)
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "ShowDashboard", sender: self)
+                            }
+                           
                         })
 
                     case .failure(let error):
@@ -311,21 +319,21 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
    }
 
 //     MARK: - Navigation
-
+//
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        //Pass to Dashboard Collection VC
 //        if segue.identifier == "ShowDashboard" {
-////           guard let destinationVC = segue.destination as? DashboardCollectionViewController,
-////               let topView = destinationVC.topViewController,
-////                let nextVC = topView as? DashboardCollectionViewController,
-////                let apollo = apollo,
-////                let currentUser = currentUser else { return }
-////
-////            // Pass Apollo client.
-////            destinationVC.currentUser = currentUser
-////            destinationVC.apollo = apollo
-////
-//        } else if segue.identifier == "ShowNewUser" {
+//           guard let destinationVC = segue.destination as? DashboardCollectionViewController,
+//               let topView = destinationVC.topViewController,
+//                let nextVC = topView as? DashboardCollectionViewController,
+//                let apollo = apollo,
+//                let currentUser = currentUser else { return }
+//
+//            // Pass Apollo client.
+//            destinationVC.currentUser = currentUser
+//            destinationVC.apollo = apollo
+//
+//      } else if segue.identifier == "ShowNewUser" {
 //            guard let destinationVC = segue.destination as? CreateNewUserViewController,
 //                let apollo = apollo,
 //                let user = user else { return }
@@ -399,6 +407,28 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
         }()
     }
 
+    func decodePayload(tokenstr: String) -> String? {
+        var newId: String?
+        //splitting JWT to extract payload
+        let arr = tokenstr.split(separator: ".")
+        var base64String = String(arr[1])
+        
+        if base64String.count % 4 != 0 {
+            let padlen = 4 - base64String.count % 4
+            base64String.append(contentsOf: repeatElement("=", count: padlen))
+        }
+        
+        let jsonDecoder = JSONDecoder()
+        
+        guard let data = Data(base64Encoded: base64String) else {return nil}
+        let auth = try! jsonDecoder.decode(User.self, from: data)
+        let str = String(data: data, encoding: .utf8)
+
+        print(str)
+        return auth.sub
+    }
+    
+    
     // Present alert to user for auth0 errors
     private func presentAlert(for error: Error) {
         //For testing

@@ -2,27 +2,106 @@
 
 import Apollo
 
-public final class CurrentUserQuery: GraphQLQuery {
+public final class CreateNewUserMutation: GraphQLMutation {
   public let operationDefinition =
-    "query CurrentUser($authId: String, $id: ID) {\n  user(authId: $authId, id: $id) {\n    __typename\n    id\n    createdAt\n    authId\n    name\n  }\n}"
+    "mutation CreateNewUser($name: String!, $email: String!) {\n  createUser(name: $name, email: $email) {\n    __typename\n    id\n  }\n}"
 
-  public var authId: String?
-  public var id: GraphQLID?
+  public var name: String
+  public var email: String
 
-  public init(authId: String? = nil, id: GraphQLID? = nil) {
-    self.authId = authId
-    self.id = id
+  public init(name: String, email: String) {
+    self.name = name
+    self.email = email
   }
 
   public var variables: GraphQLMap? {
-    return ["authId": authId, "id": id]
+    return ["name": name, "email": email]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("createUser", arguments: ["name": GraphQLVariable("name"), "email": GraphQLVariable("email")], type: .nonNull(.object(CreateUser.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createUser: CreateUser) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "createUser": createUser.resultMap])
+    }
+
+    public var createUser: CreateUser {
+      get {
+        return CreateUser(unsafeResultMap: resultMap["createUser"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "createUser")
+      }
+    }
+
+    public struct CreateUser: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "User", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class CurrentUserQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query CurrentUser($authId: String) {\n  user(authId: $authId) {\n    __typename\n    id\n    createdAt\n    authId\n    name\n  }\n}"
+
+  public var authId: String?
+
+  public init(authId: String? = nil) {
+    self.authId = authId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["authId": authId]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("user", arguments: ["authId": GraphQLVariable("authId"), "id": GraphQLVariable("id")], type: .nonNull(.object(User.selections))),
+      GraphQLField("user", arguments: ["authId": GraphQLVariable("authId")], type: .nonNull(.object(User.selections))),
     ]
 
     public private(set) var resultMap: ResultMap
