@@ -2,6 +2,7 @@ query teamsByUser($userId:ID) {
     teamsByUser(userId:$userId) {
         id
         teamName
+        premium
     }
 }
 

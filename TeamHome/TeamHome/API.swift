@@ -194,7 +194,7 @@ public final class CurrentUserQuery: GraphQLQuery {
 
 public final class TeamsByUserQuery: GraphQLQuery {
   public let operationDefinition =
-    "query teamsByUser($userId: ID) {\n  teamsByUser(userId: $userId) {\n    __typename\n    id\n    teamName\n  }\n}"
+    "query teamsByUser($userId: ID) {\n  teamsByUser(userId: $userId) {\n    __typename\n    id\n    teamName\n    premium\n  }\n}"
 
   public var userId: GraphQLID?
 
@@ -239,6 +239,7 @@ public final class TeamsByUserQuery: GraphQLQuery {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("teamName", type: .nonNull(.scalar(String.self))),
+        GraphQLField("premium", type: .scalar(Bool.self)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -247,8 +248,8 @@ public final class TeamsByUserQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, teamName: String) {
-        self.init(unsafeResultMap: ["__typename": "Team", "id": id, "teamName": teamName])
+      public init(id: GraphQLID, teamName: String, premium: Bool? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Team", "id": id, "teamName": teamName, "premium": premium])
       }
 
       public var __typename: String {
@@ -275,6 +276,15 @@ public final class TeamsByUserQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "teamName")
+        }
+      }
+
+      public var premium: Bool? {
+        get {
+          return resultMap["premium"] as? Bool
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "premium")
         }
       }
     }

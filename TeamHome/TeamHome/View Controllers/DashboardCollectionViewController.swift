@@ -64,16 +64,16 @@ import Apollo
         return teams?.count ?? 0
     }
 
-    // Set up cell with team name and letter icon from the first letter of team name
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! DashboardTeamCollectionViewCell
-//
-//        guard let team = teams?[indexPath.row] else { return UICollectionViewCell()}
-//        cell.team = team
-//        cell.delegate = self
-//
-//        return cell
-//    }
+     Set up cell with team name and letter icon from the first letter of team name
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! DashboardTeamCollectionViewCell
+
+        guard let team = teams?[indexPath.row] else { return UICollectionViewCell()}
+        cell.team = team
+        cell.delegate = self
+
+        return cell
+    }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(
@@ -101,29 +101,29 @@ import Apollo
     
     // MARK: - Navigation
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        // Pass variable to all the views that branch off main tab bar
-//        if segue.identifier == "ShowMainTabBar" {
-//            guard let destinationVC = segue.destination as? UITabBarController,
-//                let teams = teams,
-//                let currentUser = currentUser,
-//                let indexPaths = collectionView.indexPathsForSelectedItems,
-//                let indexPath = indexPaths.first else { return }
-//            // Pass Apollo client and team thru navigation controller to the view controller desired
-//            for childVC in destinationVC.children {
-//                if let childVC = childVC as? UINavigationController {
-//                    guard let nextVC = childVC.viewControllers.first else { return }
-//                    if let nextVC = nextVC as? TabBarChildrenProtocol {
-//                        let team = teams[indexPath.row]
-//                        nextVC.team = team
-//                        nextVC.apollo = apollo
-//                        nextVC.currentUser = currentUser
-//                    }
-//                }
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        // Pass variable to all the views that branch off main tab bar
+        if segue.identifier == "ShowMainTabBar" {
+            guard let destinationVC = segue.destination as? UITabBarController,
+                let teams = teams,
+                let currentUser = currentUser,
+                let indexPaths = collectionView.indexPathsForSelectedItems,
+                let indexPath = indexPaths.first else { return }
+            // Pass Apollo client and team thru navigation controller to the view controller desired
+            for childVC in destinationVC.children {
+                if let childVC = childVC as? UINavigationController {
+                    guard let nextVC = childVC.viewControllers.first else { return }
+                    if let nextVC = nextVC as? TabBarChildrenProtocol {
+                        let team = teams[indexPath.row]
+                        nextVC.team = team
+                        nextVC.apollo = apollo
+                        nextVC.currentUser = currentUser
+                    }
+                }
+            }
+        }
+    }
     
     // MARK: - Private Methods
     
