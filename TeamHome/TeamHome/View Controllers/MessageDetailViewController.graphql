@@ -1,52 +1,51 @@
-#query FindMessageById($id: ID!) {
-    findMessage(input: {
-                id: $id
-                }) {
-        _id
+query FindMessageById($id: ID!) {
+    message(id: $id
+                ) {
+        id
         title
         user {
-            firstName
-            lastName
-            avatar
+            name
+            profilePic
         }
         team {
             name
-            _id
+            id
         }
         content
         images
         tag {
             name
-            _id
+            id
         }
         comments
         subscribedUsers {
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
         createdAt
-        updatedAt
+#updatedAt
     }
 }
 
-#mutation CreateImageComment($message: String!, $content: String!, $image: String) {
-    addMsgComment(input: {
-                  message: $message
-                  content: $content
-                  image: $image
-                  }) {
-        _id
+mutation CreateImageComment($messageId: ID!, $userId: ID! $content: String!, $image: String) {
+    addMessageComment(
+                messageId: $messageId
+                userId:$userId
+                content: $content
+                image: $image
+                  ) {
+        id
     }
 }
 
-#mutation CreateComment($message: String!, $content: String!) {
-    addMsgComment(input: {
-                  message: $message
-                  content: $content
-                  }) {
-        _id
+mutation CreateComment($message: String!,$userId: ID! $content: String!) {
+    addMessageComment(
+                messageId: $messageId
+                userId: $userId
+                content: $content
+                  ) {
+        id
     }
 }
 

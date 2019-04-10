@@ -33,10 +33,10 @@ import Apollo
                     let data = result.data else { return }
                 let currentUser = data.user
                 self.currentUser = currentUser
-                print(currentUser.name)
+            
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Welcome \(currentUser.name)", message: "Looks like you're already sign in. Pick a team to start.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Welcome \(String(describing: currentUser.name))", message: "Looks like you're already sign in. Pick a team to start.", preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
