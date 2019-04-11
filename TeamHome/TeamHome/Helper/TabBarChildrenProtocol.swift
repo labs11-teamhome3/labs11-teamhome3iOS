@@ -9,7 +9,7 @@
 import Apollo
 
 protocol TabBarChildrenProtocol: class {
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser? { get set }
+    var team: TeamsByUserQuery.Data.TeamsByUser? { get set }
     var apollo: ApolloClient? { get set }
-    var currentUser: CurrentUserQuery.Data.CurrentUser? { get set }
+    var currentUser: CurrentUserQuery.Data.User? { get set }
 }

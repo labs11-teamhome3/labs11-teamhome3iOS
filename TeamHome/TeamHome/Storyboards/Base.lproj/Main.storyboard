@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -980,17 +980,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vHa-BJ-Uhd" userLabel="Invite Stack">
-                                <rect key="frame" x="16" y="156" width="382" height="37"/>
+                                <rect key="frame" x="16" y="156" width="382" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-qX-2Qd">
+
                                         <rect key="frame" x="0.0" y="0.0" width="188" height="37"/>
+
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8f-UA-Ewp">
-                                                <rect key="frame" x="0.0" y="0.0" width="41" height="37"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                                 <state key="normal" title="Button" image="Add Team Member"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJu-DM-5ai">
+
                                                 <rect key="frame" x="49" y="0.0" width="139" height="37"/>
                                                 <color key="backgroundColor" red="0.2400799096" green="0.19025737049999999" blue="0.26877105239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title=" Invite Some People ">
@@ -1002,6 +1005,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygl-Oo-Hee">
+
                                 <rect key="frame" x="16" y="201" width="98" height="35"/>
                                 <color key="backgroundColor" red="0.2400799096" green="0.19025737049999999" blue="0.26877105239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1010,12 +1014,14 @@
                                 <state key="normal" title=" Add Todo ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+
                                 <connections>
                                     <segue destination="kF9-NA-MB1" kind="show" identifier="TodoSegue" id="yIx-AO-RJg"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2nv-2d-tgv">
                                 <rect key="frame" x="122" y="201" width="276" height="210"/>
+
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-eF-nwr" userLabel="Sort Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="175"/>
@@ -1129,8 +1135,10 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-Jg-TE9">
+
                                 <rect key="frame" x="16" y="427" width="382" height="370"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" textLabel="XkL-I6-51b" rowHeight="35" style="IBUITableViewCellStyleDefault" id="Q0Y-3d-bJc">
                                         <rect key="frame" x="0.0" y="28" width="382" height="35"/>
@@ -1726,6 +1734,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ol6-HF-Dlt">
                                         <rect key="frame" x="108" y="0.0" width="274" height="150"/>
                                         <subviews>
+
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QeB-M3-5wM" userLabel="Left Owner Team Member Stack">
                                                 <rect key="frame" x="0.0" y="0.0" width="133" height="150"/>
                                                 <subviews>
@@ -1774,6 +1783,7 @@
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
+
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="bGz-Ia-uoP" secondAttribute="bottom" id="9cS-WD-ArS"/>
                                                     <constraint firstItem="bGz-Ia-uoP" firstAttribute="top" secondItem="VSg-pp-Gvi" secondAttribute="bottom" id="Vlj-xL-Axn"/>
@@ -1998,6 +2008,6 @@
         <image name="google-plus" width="365" height="365"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DPm-Su-I7i"/>
+        <segue reference="9db-bK-rdS"/>
     </inferredMetricsTieBreakers>
 </document>

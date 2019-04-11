@@ -1,11 +1,11 @@
+////
+////  DashboardTeamCollectionViewCell.swift
+////  TeamHome
+////
+////  Created by Daniela Parra on 1/16/19.
+////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
+////
 //
-//  DashboardTeamCollectionViewCell.swift
-//  TeamHome
-//
-//  Created by Daniela Parra on 1/16/19.
-//  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
-//
-
 import UIKit
 import Material
 
@@ -37,7 +37,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
         imageView.frame = CGRect(x: 8, y: 8, width: 24, height: 24)
         imageView.tintColor = .white
         
-        if team.premium {
+        if team.premium! == true {
             premiumIcon.addSubview(imageView)
         }
         
@@ -52,7 +52,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
         
         toolbar = Toolbar(rightViews: [premiumIcon, moreButton])
         
-        toolbar.title = team.name
+        toolbar.title = team.teamName
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = .white
         toolbar.detail = ""
@@ -100,7 +100,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     weak var delegate: TeamCellDelegate?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser? {
+    var team: TeamsByUserQuery.Data.TeamsByUser? {
         didSet {
             setTheme()
         }

@@ -1,15 +1,8 @@
-query CurrentUser {
-    currentUser {
-        _id
+query CurrentUser($authId:String) {
+user(authId: $authId){
+        id
+        createdAt
         authId
-        firstName
-        lastName
-        email
-        phoneNumber
-        avatar
-        toggles {
-            receiveEmails
-            receiveTexts
-        }
+        name
     }
 }

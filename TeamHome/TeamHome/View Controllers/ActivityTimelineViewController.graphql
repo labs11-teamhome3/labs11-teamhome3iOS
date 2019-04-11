@@ -1,4 +1,4 @@
-query FindActivityByTeam($teamId: ID!) {
+#query FindActivityByTeam($teamId: ID!) {
     findMessagesByTeam(input: {
                        team: $teamId
                        }) {
@@ -20,7 +20,7 @@ query FindActivityByTeam($teamId: ID!) {
         updatedAt
     }
 }
-query FindDocumentActivityByTeam($teamId: ID!){
+#query FindDocumentActivityByTeam($teamId: ID!){
     findDocumentsByTeam(input: {
                         team: $teamId
                         }) {

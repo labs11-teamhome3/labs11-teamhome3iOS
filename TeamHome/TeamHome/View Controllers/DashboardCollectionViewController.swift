@@ -1,15 +1,15 @@
+////
+////  DashboardCollectionViewController.swift
+////  TeamHome
+////
+////  Created by Daniela Parra on 1/16/19.
+////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
+////
 //
-//  DashboardCollectionViewController.swift
-//  TeamHome
-//
-//  Created by Daniela Parra on 1/16/19.
-//  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
-//
-
 import UIKit
 import Apollo
 
-class DashboardCollectionViewController: UICollectionViewController, TeamCellDelegate, DashboardReusableViewDelegate {
+ class DashboardCollectionViewController: UICollectionViewController, TeamCellDelegate, DashboardReusableViewDelegate {
     
     // MARK: - Lifecycle Methods
     
@@ -26,12 +26,16 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
                     return
                 }
                 guard let result = result,
-                    let data = result.data,
-                    let currentUser = data.currentUser else { return }
+                    let data = result.data else { return }
+                let currentUser = data.user
                 self.currentUser = currentUser
-                print(currentUser.firstName)
+
+            
+                
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Welcome \(currentUser.firstName)", message: "Looks like you're already sign in. Pick a team to start.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Welcome \(String(describing: currentUser.name))", message: "Looks like you're already sign in. Pick a team to start.", preferredStyle: .alert)
+                    
+
                     alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -40,10 +44,12 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
         }
         
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Welcome \(currentUser.firstName)", message: "This is your team dashboard. Pick a team to start.", preferredStyle: .alert)
+
+            let alert = UIAlertController(title: "Welcome \(currentUser.name)", message: "This is your team dashboard. Pick a team to start.", preferredStyle: .alert)
+
             alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        } 
+        }
     }
     
     // MARK: - IBActions
@@ -55,19 +61,23 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
         return teams?.count ?? 0
     }
 
-    // Set up cell with team name and letter icon from the first letter of team name
+     // Set up cell with team name and letter icon from the first letter of team name
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! DashboardTeamCollectionViewCell
+
+
         guard let team = teams?[indexPath.row] else { return UICollectionViewCell()}
         cell.team = team
         cell.delegate = self
+
+
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
-            withReuseIdentifier: "DashboardCollectionReusableView", for: indexPath) as? DashboardCollectionReusableView else { return UICollectionReusableView()}
+            withReuseIdentifier: "DashboardCollectionReusableView", for: indexPath) as?                                                  DashboardCollectionReusableView else { return UICollectionReusableView()}
         
         headerView.delegate = self
         return headerView
@@ -87,6 +97,7 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
         // Pass variable to all the views that branch off main tab bar
         if segue.identifier == "ShowMainTabBar" {
             guard let destinationVC = segue.destination as? UITabBarController,
@@ -112,13 +123,19 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
     // MARK: - Private Methods
     // Load all teams that the current user belongs to
     private func loadTeams(with apollo: ApolloClient) {
-        watcher = apollo.watch(query: FindTeamsByUserQuery()) { (result, error) in
+
+        
+        guard let currentUser = currentUser else {return}
+        let userId = currentUser.id
+        
+        watcher = apollo.watch(query: TeamsByUserQuery(userId: userId)) { (result, error) in
+
             if let error = error {
                 NSLog("\(error)")
             }
             
             // Save teams from result to variable or let user create a team to join
-            guard let teams = result?.data?.findTeamsByUser else { return }
+            guard let teams = result?.data?.teamsByUser else { return }
             if teams.count == 0 {
                 // Let user know they should create new team
                 return
@@ -135,9 +152,12 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
             textField.placeholder = "Name of team:"
         }
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (alertAction) in
-            guard let textField = alert.textFields?.first, let teamName = textField.text else { return }
+
+            guard let textField = alert.textFields?.first, let teamName = textField.text, let user = self.currentUser else { return }
+            let userId = user.id
+
             // Create team based off textfield prompt. Teams are automatically set to "not premium" because advanced settings available on web application.
-            apollo.perform(mutation: CreateTeamMutation(name: teamName, premium: false), queue: DispatchQueue.global(), resultHandler: { (result, error) in
+            apollo.perform(mutation: CreateTeamMutation(teamName: teamName, userId: userId), queue: DispatchQueue.global(), resultHandler: { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
@@ -179,11 +199,16 @@ class DashboardCollectionViewController: UICollectionViewController, TeamCellDel
     }
     
     // MARK: - Properties
-    private var watcher: GraphQLQueryWatcher<FindTeamsByUserQuery>?
+
+    
+    private var watcher: GraphQLQueryWatcher<TeamsByUserQuery>?
     var apollo: ApolloClient?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var currentUser: CurrentUserQuery.Data.User?
+    
     var gradientLayer: CAGradientLayer!
-    var teams: [FindTeamsByUserQuery.Data.FindTeamsByUser?]? {
+    
+    var teams: [TeamsByUserQuery.Data.TeamsByUser?]? {
+
         didSet {
             if isViewLoaded {
                 DispatchQueue.main.async {
