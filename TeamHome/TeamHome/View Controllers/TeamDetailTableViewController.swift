@@ -31,11 +31,8 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         
         guard let team = team else { return }
-        
         teamNameLabel.text = team.name
-        
         guard let apollo = apollo else { return }
-        
         loadUsers(with: apollo)
     }
 
@@ -162,7 +159,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             
             let when = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: when){
-                
                 alert.dismiss(animated: true, completion: nil)
             }
         }
@@ -258,21 +254,15 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.25]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     // MARK: - Properties
-    
     weak var delegate: TeamDetailCellDelegate?
     var users: [FindTeamByIdQuery.Data.FindTeam.User?]? {
         didSet {
@@ -288,8 +278,5 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
     var currentUser: CurrentUserQuery.Data.CurrentUser?
     var gradientLayer: CAGradientLayer!
-    
-    
     @IBOutlet weak var teamNameLabel: UILabel!
-    
 }

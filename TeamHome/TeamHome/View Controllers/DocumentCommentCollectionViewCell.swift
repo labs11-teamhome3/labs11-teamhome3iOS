@@ -20,9 +20,7 @@ protocol DocumentCommentCollectionCellDelegate: class {
 }
 
 class DocumentCommentCollectionViewCell: UICollectionViewCell {
-    
     @objc func clickedLikeButton(_ sender: IconButton) {
-     
         guard let hasLiked = hasLiked else { return }
         if hasLiked {
             delegate?.unlikeComment(cell: self)
@@ -36,18 +34,13 @@ class DocumentCommentCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Private Methods
-    
     private func updateViews() {
-        
         print(self.contentView)
-        
         guard let comment = comment,
             let dateString = comment.createdAt,
             let dateDouble = Double(dateString) else { return }
-        
         let dateDouble2 = dateDouble / 1000.0
         let date = dateDouble2.getDateStringFromUTC()
-
         prepareAvatarImage(for: comment)
         prepareDateLabel(with: date)
         prepareLikes(for: comment)

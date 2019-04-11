@@ -17,7 +17,6 @@ import UIKit
         
         // Sets basic theme for all of application
         Appearance.setTheme()
-        
         return true
     }
     

@@ -22,15 +22,11 @@ class CommentsCollectionViewController: UICollectionViewController, AddNewCommen
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewAppearance()
         collectionView.backgroundColor = .clear
-        
         guard let messageId = messageId,
             let apollo = apollo else { return }
-
         loadComments(from: messageId, with: apollo)
-        
     }
 
     // MARK: UICollectionViewDataSource

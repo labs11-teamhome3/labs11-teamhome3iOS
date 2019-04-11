@@ -22,13 +22,10 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     // Set up message collection view cell with message details
     private func updateViews() {
-        
         guard let message = message,
             let dateString = message.createdAt,
             let dateDouble = Double(dateString) else { return }
-        
         let dateDouble2 = dateDouble / 1000.0
-        
         let date = dateDouble2.getDateStringFromUTC()
         
         prepareAvatarImage(for: message)
@@ -65,7 +62,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.FindMessagesByTeam) {
-        
         tagLabel = UILabel()
         if let tag = message.tag {
             tagLabel.text = "#\(tag.name)"
@@ -156,20 +152,15 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareCard() {
-        
         card.toolbar = toolbar
         card.toolbarEdgeInsetsPreset = .square3
         card.toolbarEdgeInsets.bottom = 0
         card.toolbarEdgeInsets.right = 8
-        
         card.contentView = contentLabel
         card.contentViewEdgeInsetsPreset = .wideRectangle5
-        
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
-        
         card.backgroundColor = Appearance.plumColor
-        
     }
     
     // Set image for a given message.
@@ -184,7 +175,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
         // Use cloudinary to fetch image because using their image hosting service
         cloudinary.createDownloader().fetchImage(avatar, { (progress) in
             // Show progress bar for download
-            
         }) { (image, error) in
             if let error = error {
                 NSLog("Error: \(error)")
@@ -192,43 +182,32 @@ class MessageCollectionViewCell: UICollectionViewCell {
                 completion(image)
                 return
             }
-            
             guard let image = image else { return }
-            
-            
             completion(image)
         }
-
     }
     
     @objc func presentActionSheet(_ sender: IconButton) {
         let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
-        
         let viewAction = UIAlertAction(title: "View", style: .default)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
         optionMenu.addAction(viewAction)
         optionMenu.addAction(cancelAction)
-        
         delegate?.presentActionSheet(with: optionMenu)
     }
     
     @objc func presentDeleteActionSheet(_ sender: IconButton) {
         let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
-        
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive)
         let viewAction = UIAlertAction(title: "View", style: .default)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(viewAction)
         optionMenu.addAction(cancelAction)
-        
         delegate?.presentActionSheet(with: optionMenu)
     }
 
     // MARK: - Properties
-    
     weak var delegate: MessageCellDelegate?
     var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
     var currentUser: CurrentUserQuery.Data.CurrentUser?
@@ -252,7 +231,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     // All IBOutlets in message collection view cell.
     @IBOutlet weak var card: Card!
-    
 }
 
 

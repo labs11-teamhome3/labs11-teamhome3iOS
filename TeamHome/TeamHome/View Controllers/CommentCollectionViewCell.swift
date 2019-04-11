@@ -99,11 +99,9 @@ class CommentCollectionViewCell: UICollectionViewCell {
     
     private func prepareToolbar(comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
         toolbar = Toolbar(leftViews: [avatarImageView])
-        
         toolbar.title = "\(comment.user.firstName) \(comment.user.lastName)"
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = Appearance.darkMauveColor
-        
         toolbar.detail = ""
         toolbar.detailLabel.textAlignment = .left
         toolbar.detailLabel.textColor = .white
@@ -115,7 +113,6 @@ class CommentCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareContentView(with comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
-        
         contentLabel = UILabel()
         contentLabel.numberOfLines = 0
         contentLabel.text = comment.content
@@ -124,7 +121,6 @@ class CommentCollectionViewCell: UICollectionViewCell {
         contentLabel.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 20)
         
         if let image = comment.image {
-            
             cloudinary.createDownloader().fetchImage(image, { (progress) in
                 // Show progress
                 print(progress)
@@ -133,15 +129,12 @@ class CommentCollectionViewCell: UICollectionViewCell {
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let image = image else { return }
-                
                 DispatchQueue.main.async {
                     self.imageView = UIImageView(image: image.resize(toHeight: 50)!)
                     self.prepareCard()
                 }
             }
-            
         }
         
         imageView = UIImageView(frame: .zero)
@@ -158,30 +151,24 @@ class CommentCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareCard() {
-        
         card.toolbar = toolbar
         card.toolbarEdgeInsetsPreset = .square3
         card.toolbarEdgeInsets.bottom = 0
         card.toolbarEdgeInsets.right = 4
-        
         messageContentView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: contentLabel.frame.height + imageView.frame.height + 8))
         messageContentView.addSubview(contentLabel)
         messageContentView.addSubview(imageView)
-        
         card.contentView = contentLabel
         card.presenterView = imageView
         card.contentViewEdgeInsetsPreset = .wideRectangle4
-        
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
         card.backgroundColor = .white
     }
     
     private func prepareAvatarImage(for comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
-        
         setImage(for: comment) { (image) in
             DispatchQueue.main.async {
-                
                 let resizedImage = Toucan.init(image: image).resize(CGSize(width: 50, height: 50), fitMode: .crop).maskWithEllipse()
                 self.avatarImageView = UIImageView(image: resizedImage.image)
                 self.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.avatarImageView.frame.width, height: self.avatarImageView.frame.height)
@@ -212,19 +199,14 @@ class CommentCollectionViewCell: UICollectionViewCell {
                 completion(image)
                 return
             }
-            
             guard let image = image else { return }
-            
-            
             completion(image)
         }
-        
     }
     
     // MARK: - Properties
     
     private var hasLiked: Bool?
-    
     weak var delegate: CommentCollectionCellDelegate?
     var currentUser: CurrentUserQuery.Data.CurrentUser?
     var comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage? {
@@ -243,7 +225,5 @@ class CommentCollectionViewCell: UICollectionViewCell {
     private var likeCountLabel: UILabel!
     private var messageContentView: UIView!
     private var imageView: UIImageView!
-    
     @IBOutlet weak var card: PresenterCard!
-    
 }

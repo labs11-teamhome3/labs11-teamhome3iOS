@@ -25,14 +25,10 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         setUpViewAppearance()
         Appearance.styleOrange(button: sendCommentButton)
         documentTitleLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         dateLabel.font = RobotoFont.regular(with: 12)
-        
         setUpCommentTextView()
-        
         guard let apollo = apollo else { return }
         self.loadDocument(with: apollo)
-        
         self.updateViews()
         //  TODO:      loadMessageDetails(with: apollo)
         
@@ -45,6 +41,7 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
             watcherDocument.refetch()
         }
     }
+    
     //MARK: - IBActions
     @IBAction func backButton(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -63,19 +60,17 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         }
         commentTextView.text = ""
     }
+    
     @IBAction func clickedSubscribe(_ sender: Any) {
         guard let apollo = apollo,
             let documentID = documentID else {return}
-        
         isSubscribed
             ? unsubscribeFromDocument(apollo: apollo, documentID: documentID)
             : subscribeToDocument(apollo: apollo, documentID: documentID)
     }
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         guard let apollo = apollo else { return }
-        
         if segue.identifier == "EmbeddedComments" {
             guard let destinationVC = segue.destination as? DocumentsDetailCollectionViewController,
                 let documentID = document?.id,
@@ -96,23 +91,19 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
     }
     
     //MARK: - Private Function
-    
     private func loadDocument(with apollo: ApolloClient) {
-        
         guard let documentID = documentID else { return }
-        
         // Fetch messages using document id from previous VC
         watcherDocument = apollo.watch(query: FindDocumentInputQuery(docID: documentID)) { (result, error) in
             if let error = error {
                 NSLog("Error loading Documents\(error)")
             }
-            
             guard let result = result,
                 let document = result.data?.findDocument else { return }
-            
             self.document = document
         }
     }
+    
     private func setUpCommentTextView() {
         self.commentTextView.delegate = self
         commentTextView.maxLength = 140
@@ -127,7 +118,6 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
     
     //unsubscribes to document by performing a mutation
     private func unsubscribeFromDocument(apollo:ApolloClient, documentID: GraphQLID){
-
         apollo.perform(mutation: UnsubscribeFromDocumentMutation(documentID: documentID)) { (result, error) in
             if let error = error {
                 NSLog("Error unsubscribing: \(error)")
@@ -136,6 +126,7 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
             self.isSubscribed = false
         }
     }
+    
     //subscribes to document by performing a mutation
     private func subscribeToDocument(apollo:ApolloClient, documentID: GraphQLID){
         apollo.perform(mutation: SubscribeToDocumentMutation(documentID: documentID)) { (result, error) in
@@ -146,12 +137,12 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
             self.isSubscribed = true
         }
     }
+    
     //updates isSubscribe to make sure it is accurate to the current document
     private func updateIsSubscribed(){
         if let document = document,
             let currentUser = currentUser,
             let subscribers = document.subscribedUsers {
-            
             let names = subscribers.compactMap{
                 $0?.id
             }
@@ -160,23 +151,21 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
             isSubscribed = false
         }
     }
+    
     //udpates subscribe button title based on isSubscribed property
     private func updateSubscribeButton(){
         let subscribeText = isSubscribed
             ? "Unsubscribe"
             : "Subscribe"
-        
         subscribeButton.setTitle(subscribeText, for: .normal)
     }
+    
     private func updateViews() {
         guard let document = document,
             let dateString = document.createdAt,
             let dateDouble = Double(dateString) else { return }
-        
         let dateDouble2 = dateDouble / 1000.0
         let date = dateDouble2.getDateStringFromUTC()
-        
-        
         documentTitleLabel.text = document.title
         firstNameLabel.text = document.user.firstName
         lastNameLabel.text = document.user.lastName

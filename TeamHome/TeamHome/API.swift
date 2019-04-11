@@ -830,6 +830,95 @@ public final class CreateNewUserMutation: GraphQLMutation {
   }
 }
 
+public final class FindTeamByIdeQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query FindTeamByIde($id: ID!) {\n  findTeam(input: {id: $id}) {\n    __typename\n    _id\n    name\n  }\n}"
+
+  public var id: GraphQLID
+
+  public init(id: GraphQLID) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("findTeam", arguments: ["input": ["id": GraphQLVariable("id")]], type: .object(FindTeam.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(findTeam: FindTeam? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "findTeam": findTeam.flatMap { (value: FindTeam) -> ResultMap in value.resultMap }])
+    }
+
+    public var findTeam: FindTeam? {
+      get {
+        return (resultMap["findTeam"] as? ResultMap).flatMap { FindTeam(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "findTeam")
+      }
+    }
+
+    public struct FindTeam: GraphQLSelectionSet {
+      public static let possibleTypes = ["Team"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("_id", type: .scalar(GraphQLID.self)),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID? = nil, name: String) {
+        self.init(unsafeResultMap: ["__typename": "Team", "_id": id, "name": name])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID? {
+        get {
+          return resultMap["_id"] as? GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "_id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+    }
+  }
+}
+
 public final class FindDocumentsByTeamQuery: GraphQLQuery {
   public let operationDefinition =
     "query FindDocumentsByTeam($teamID: ID!) {\n  findDocumentsByTeam(input: {team: $teamID}) {\n    __typename\n    _id\n    doc_url\n    user {\n      __typename\n      firstName\n      lastName\n      avatar\n      _id\n    }\n    folder {\n      __typename\n      _id\n      title\n    }\n    title\n    textContent\n    tag {\n      __typename\n      _id\n      name\n      team {\n        __typename\n        _id\n      }\n    }\n    images\n    comments\n    subscribedUsers {\n      __typename\n      firstName\n      lastName\n      avatar\n    }\n    createdAt\n    updatedAt\n  }\n}"
