@@ -1,8 +1,8 @@
 //  This file was automatically generated and should not be edited.
 
 import Apollo
-
 public final class CreateNewUserMutation: GraphQLMutation {
+
   public let operationDefinition =
     "mutation CreateNewUser($name: String!, $email: String!) {\n  createUser(name: $name, email: $email) {\n    __typename\n    id\n  }\n}"
 

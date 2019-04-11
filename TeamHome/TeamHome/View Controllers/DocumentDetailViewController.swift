@@ -15,6 +15,7 @@
 //import Material
 //import Photos
 //
+
 //var watcherDocument: GraphQLQueryWatcher<FindDocumentInputQuery>?
 //
 //class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
@@ -265,6 +266,7 @@
 ////    }
 //    
 //    private var isSubscribed = false {
+
 //        didSet{
 //        updateSubscribeButton()
 //        }

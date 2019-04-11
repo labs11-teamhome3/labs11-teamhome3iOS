@@ -13,6 +13,7 @@
 //
 //typealias DocComment = FindCommentsByDocumentQuery.Data.FindDocCommentsByDocument
 //
+
 //protocol DocumentCommentCollectionCellDelegate: class {
 //    func likeComment(cell: DocumentCommentCollectionViewCell)
 //    func unlikeComment(cell: DocumentCommentCollectionViewCell)
@@ -249,3 +250,4 @@
 //    @IBOutlet weak var card: PresenterCard!
 //    
 //}
+
