@@ -5,7 +5,7 @@ query FindCommentsByDocument($documentID: ID!) {
         id
         user {
             name
-            profilePicture
+            profilePic
             id
         }
         content
@@ -21,7 +21,7 @@ query FindCommentsByDocument($documentID: ID!) {
 
 mutation likeDocumentComment($id: ID!, $userId: ID!) {
     likeDocumentComment(
-                   id: $id
+                   commentId: $id
                 userId: $userId
                    ) {
         id
@@ -29,8 +29,8 @@ mutation likeDocumentComment($id: ID!, $userId: ID!) {
 }
 
 mutation unlikeDocumentComment($id: ID!, $userId: ID!) {
-    unLikeDocumentComment(
-                     id: $id
+    unlikeDocumentComment(
+                     commentId: $id
                     userId:$userId
                      ) {
         id
