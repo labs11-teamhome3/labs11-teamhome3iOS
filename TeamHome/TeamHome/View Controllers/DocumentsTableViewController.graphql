@@ -23,7 +23,7 @@ query FindDocumentsByTeam($teamID: ID!){
             }
         }
         images
-        comments
+        comments{...}
         subscribedUsers{
             name
             profilePic
