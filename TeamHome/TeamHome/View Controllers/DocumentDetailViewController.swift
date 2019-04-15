@@ -256,9 +256,7 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         NSLayoutConstraint.activate([heightConstraint])
     }
     
-    //MARK: - Properties
-    
-//    private var isSubscribed: Bool = false {
+  
 //        didSet{
 //            updateSubscribeButton()
 //        }

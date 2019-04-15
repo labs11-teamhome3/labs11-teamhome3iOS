@@ -17,8 +17,10 @@ import UIKit
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Sets basic theme for all of application
-        //Appearance.setTheme()
+        Appearance.setTheme()
+
         //task.testData()
+
         return true
     }
     

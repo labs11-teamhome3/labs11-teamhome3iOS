@@ -11,6 +11,7 @@
 //import Material
 //import Toucan
 //
+
 //class ActivityCollectionViewCell: UICollectionViewCell {
 //    
 //    private func updateUI() {
@@ -37,6 +38,7 @@
 //        dateLabel.textColor = .white
 //        dateLabel.text = date
 //    }
+
 //    
 //    private func prepareToolbar(with activity: Activity) {
 //        
@@ -105,6 +107,7 @@
 //            toolbar.detail = "added a message: \(message.title)"
 //        }
 //        
+
 //        toolbar.backgroundColor = .clear
 //        toolbar.titleLabel.textColor = .white
 //        toolbar.detailLabel.textColor = .white
@@ -285,3 +288,4 @@
 //    
 //    @IBOutlet weak var card: Card!
 //}
+

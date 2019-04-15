@@ -13,6 +13,7 @@
 //
 //var teamWatcher: GraphQLQueryWatcher<FindTeamByIdQuery>?
 //
+
 //protocol TeamDetailCellDelegate: class {
 //    func presentAdminActionSheet(with optionMenu: UIAlertController)
 //}
