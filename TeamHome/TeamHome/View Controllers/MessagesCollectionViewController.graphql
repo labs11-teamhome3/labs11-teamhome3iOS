@@ -1,7 +1,6 @@
-#query FindMessagesByTeam($teamId: ID!) {
-    findMessagesByTeam(
-                       team: $teamId
-                       ) {
+#ERROR NUMBER: 01
+query FindMessagesByTeam($teamId: ID!) {
+#    findMessagesByTeam( team: $teamId) {
         _id
         title
         user {
@@ -27,10 +26,9 @@
     }
 }
 
+#ERROR NUMBER: 02
 query FindTagsByTeam($teamId: ID!) {
-    findTagsByTeam(
-                   team: $teamId
-                   ) {
+    findTagsByTeam(teamId: $teamId ) {
         id
         name
     }

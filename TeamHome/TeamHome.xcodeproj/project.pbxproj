@@ -21,8 +21,7 @@
 		2C24457222551BE700D104B2 /* TaskCreationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */; };
 		2C34E0B222507186001D3EB9 /* TodoCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */; };
 		2C34E0B322507186001D3EB9 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B122507186001D3EB9 /* TodoListViewController.swift */; };
-		2CD0C2CA225BC4A70015776B /* TodoCreationViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2CD0C2C9225BC4A10015776B /* TodoCreationViewController.graphql */; };
-		2CD0C2CC225BC4D00015776B /* TodoListViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2CD0C2CB225BC4D00015776B /* TodoListViewController.graphql */; };
+		2CFF1E4722607D4000809746 /* Pods_TeamHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFF1E4622607D4000809746 /* Pods_TeamHome.framework */; };
 		7B2C51EC220B2CF7004990BB /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C51EB220B2CF7004990BB /* TagCollectionViewCell.swift */; };
 		7B2C51F2220CB563004990BB /* CommentsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C51F1220CB563004990BB /* CommentsCollectionReusableView.swift */; };
 		7B6BE7D121E5733D0099E42C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6BE7D021E5733D0099E42C /* AppDelegate.swift */; };
@@ -79,7 +78,6 @@
 		7BF8735A21F7BA8400737729 /* MessageDetailViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8735921F7BA8400737729 /* MessageDetailViewController.graphql */; };
 		7BF8735C21F7D0F500737729 /* CommentsCollectionViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 7BF8735B21F7D0F500737729 /* CommentsCollectionViewController.graphql */; };
 		7BF8736221FA6B4B00737729 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF8736121FA6B4B00737729 /* Activity.swift */; };
-		C4D48ED210903108208DB396 /* Pods_TeamHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */; };
 		EB061D08224D8498006221D3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D07224D8498006221D3 /* Todo.swift */; };
 		EB061D0B224E7CCA006221D3 /* Query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB061D0A224E7CCA006221D3 /* Query.graphql */; };
 		EB061D0D225021AB006221D3 /* NewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D0C225021AB006221D3 /* NewTest.swift */; };
@@ -109,8 +107,7 @@
 		2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationTableViewCell.swift; sourceTree = "<group>"; };
 		2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCreationViewController.swift; sourceTree = "<group>"; };
 		2C34E0B122507186001D3EB9 /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
-		2CD0C2C9225BC4A10015776B /* TodoCreationViewController.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoCreationViewController.graphql; sourceTree = "<group>"; };
-		2CD0C2CB225BC4D00015776B /* TodoListViewController.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoListViewController.graphql; sourceTree = "<group>"; };
+		2CFF1E4622607D4000809746 /* Pods_TeamHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TeamHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		465546B36BE62E5867C66338 /* Pods-TeamHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamHome/Pods-TeamHome.release.xcconfig"; sourceTree = "<group>"; };
 		5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2C51EB220B2CF7004990BB /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -191,7 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4D48ED210903108208DB396 /* Pods_TeamHome.framework in Frameworks */,
+				2CFF1E4722607D4000809746 /* Pods_TeamHome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +207,7 @@
 		5F0CB1EC456F63FEAC3CAE85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CFF1E4622607D4000809746 /* Pods_TeamHome.framework */,
 				5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */,
 			);
 			name = Frameworks;
@@ -279,8 +277,8 @@
 				7BA77EB721E93CBA00C862C1 /* ActivityTimelineViewController.swift */,
 				10409403221E265F00EC4389 /* AddEditDocumentViewController.graphql */,
 				10E2A19B2216153F007EC662 /* AddEditDocumentViewController.swift */,
-				7BA77EAB21E9376E00C862C1 /* AddEditMessageViewController.swift */,
 				7BF8735721F7B4C500737729 /* AddNewMessageViewController.graphql */,
+				7BA77EAB21E9376E00C862C1 /* AddEditMessageViewController.swift */,
 				7BA77EB321E93B3400C862C1 /* CommentCollectionViewCell.swift */,
 				7B2C51F1220CB563004990BB /* CommentsCollectionReusableView.swift */,
 				7BF8735B21F7D0F500737729 /* CommentsCollectionViewController.graphql */,
@@ -288,9 +286,9 @@
 				7BE481CA2207871000F518F9 /* CreateNewUserViewController.graphql */,
 				7BE481C82206A89800F518F9 /* CreateNewUserViewController.swift */,
 				7BE481C522037B6200F518F9 /* DashboardCollectionReusableView.swift */,
+				7BD6589221EF8E99004FF34A /* DashboardTeamCollectionViewCell.swift */,
 				7BD6589F21F020ED004FF34A /* DashboardCollectionViewController.graphql */,
 				7BD6589021EF8E8B004FF34A /* DashboardCollectionViewController.swift */,
-				7BD6589221EF8E99004FF34A /* DashboardTeamCollectionViewCell.swift */,
 				103E72FE222DEE5E00F54B0F /* DocumentCommentCollectionViewCell.swift */,
 				103E72F62227A81000F54B0F /* DocumentDetailViewController.graphql */,
 				10295B6822274F92002C8940 /* DocumentDetailViewController.swift */,
@@ -307,8 +305,8 @@
 				F8BEA7F6222D03860003C352 /* FoldersTableViewController.swift */,
 				7BF8735121F6D37300737729 /* InviteToTeamViewController.graphql */,
 				7BA77EAD21E9385E00C862C1 /* InviteToTeamViewController.swift */,
-				7BA77E8021E797C200C862C1 /* LandingPageViewController.swift */,
 				7BF8734B21F6B4C200737729 /* LandingPageViewController.graphql */,
+				7BA77E8021E797C200C862C1 /* LandingPageViewController.swift */,
 				7BA77E9D21E807D200C862C1 /* MessageBoardViewController.swift */,
 				7BA77EA121E80E3E00C862C1 /* MessageCollectionViewCell.swift */,
 				7BF8735921F7BA8400737729 /* MessageDetailViewController.graphql */,
@@ -320,15 +318,12 @@
 				7BA77EBF21E950BB00C862C1 /* SubscriberCollectionViewCell.swift */,
 				7B2C51EB220B2CF7004990BB /* TagCollectionViewCell.swift */,
 				7BF8734F21F6D24400737729 /* TeamDetailTableViewController.graphql */,
+				7BA77EBB21E93D1300C862C1 /* TeamDetailTableViewController.swift */,
 				2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */,
-
 				EB6D344522552F9E002C92AC /* TodoCreation.graphql */,
-
 				2C34E0B122507186001D3EB9 /* TodoListViewController.swift */,
-				2CD0C2CB225BC4D00015776B /* TodoListViewController.graphql */,
 				2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */,
 				2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */,
-				7BA77EBB21E93D1300C862C1 /* TeamDetailTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -456,7 +451,6 @@
 				EB6D344622552F9E002C92AC /* TodoCreation.graphql in Resources */,
 				7BF8735621F6D50B00737729 /* SettingsViewController.graphql in Resources */,
 				7BF8735021F6D24400737729 /* TeamDetailTableViewController.graphql in Resources */,
-				2CD0C2CA225BC4A70015776B /* TodoCreationViewController.graphql in Resources */,
 				7BE481CB2207871000F518F9 /* CreateNewUserViewController.graphql in Resources */,
 				7BA77E9B21E8033C00C862C1 /* TagExample.json in Resources */,
 				7BF8735C21F7D0F500737729 /* CommentsCollectionViewController.graphql in Resources */,
@@ -465,7 +459,6 @@
 				F8E77CDA2214DB3B00E12C8B /* DocumentTabHome.storyboard in Resources */,
 				7B6BE7DB21E5733E0099E42C /* LaunchScreen.storyboard in Resources */,
 				7BA77EAA21E9177300C862C1 /* MessageDetailView.storyboard in Resources */,
-				2CD0C2CC225BC4D00015776B /* TodoListViewController.graphql in Resources */,
 				7BF8734C21F6B4C200737729 /* LandingPageViewController.graphql in Resources */,
 				7BF8735221F6D37300737729 /* InviteToTeamViewController.graphql in Resources */,
 				7B6BE7D821E5733E0099E42C /* Assets.xcassets in Resources */,
@@ -777,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivancaldwell.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -796,7 +789,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.iyinraphael.TeamHome;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ivancaldwell.TeamHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -6,23 +6,11 @@
 //  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 //
 
-
-//struct cellData {
-//    var opened = Bool()
-//    var title = String()
-//    var sectionData = [String]()
-//}
-
 import UIKit
 
 class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
     var todos: [String]?
-    let teamMemberArray: [String] = ["Nick", "Daniel", "Iyin", "Yanna", "Kevin", "Clint", "Me"]
-    var tableViewData: [cellData]!
-    @IBOutlet weak var taskTableView: UITableView!
-    @IBOutlet weak var listNameTextField: UITextField!
-    @IBOutlet weak var taskTextField: UITextField!
-    
+    let teamMemberArray: [String] = ["Tom", "Dick", "Harry", "Me"]
     
     @IBOutlet weak var assignTopLeftButton: UIButton!
     @IBOutlet weak var assignTopLeftTableView: UITableView!
@@ -35,12 +23,9 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
     @IBOutlet weak var ownerLeftButton: UIButton!
     @IBOutlet weak var ownerRightButton: UIButton!
     @IBOutlet weak var ownerRightTableView: UITableView!
-    @IBOutlet weak var ownerLeftTableView: UITableView!
-    @IBOutlet weak var saveButtonTapped: UIBarButtonItem!
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        tableViewData.append(cellData(opened: false, title: listNameTextField.text!, sectionData: [taskTextField.text!]))
-    }
+    @IBOutlet weak var taskTableView: UITableView!
     
+    @IBOutlet weak var ownerLeftTableView: UITableView!
     
     @IBAction func ownerLeftButtonTapped(_ sender: Any) {
         animateDropMenu(tableView: ownerLeftTableView)
@@ -96,9 +81,6 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
         assignTopRightTableView.isHidden = true
         assignBottomLeftTableView.isHidden = true
         assignBottomRightTableView.isHidden = true
-        ownerLeftTableView.isHidden = true
-        ownerRightTableView.isHidden = true
-        taskTableView.tableFooterView = UIView()
     }
     
     
@@ -111,6 +93,7 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
             return teamMemberArray.count
         }
         return 1
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,13 +102,14 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
             cell.textLabel?.text = teamMemberArray[indexPath.row]
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskItemCell", for: indexPath) //as! TaskTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamMemberCell", for: indexPath) as! TaskTableViewCell
             // cell.textLabel?.text = "Logical Error"
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if tableView == assignTopLeftTableView {
             assignTopLeftButton.setTitle("\(teamMemberArray[indexPath.row])", for: .normal)
             animateDropMenu(tableView: assignTopLeftTableView)
@@ -145,9 +129,6 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
             ownerRightButton.setTitle("\(teamMemberArray[indexPath.row])", for: .normal)
             animateDropMenu(tableView: ownerRightTableView)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
     }
     
@@ -158,18 +139,12 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        
+        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "UnwindSegue" {
-            let detailVC = segue.destination as! TodoListViewController
-            detailVC.tableViewData = tableViewData
-        }
     }
 }
