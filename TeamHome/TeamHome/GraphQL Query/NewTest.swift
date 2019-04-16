@@ -9,20 +9,20 @@
 import Foundation
 import Apollo
 
-class NewTest {
-    
-    let apollo = ApolloClient(url: URL(string: "https://manaje-be-8de8017c47.herokuapp.com/labs11-teamhome3BE-refactor/dev")!)
-    
-    func testData() {
-        
-        apollo.fetch(query: TodoListsQuery()) { (result, error) in
-            if let result = result {
-                NSLog("\(String(describing: result.data?.todoLists.description))")
-                return
-            }
-        }
-    }
-    
-    
-}
+//class NewTest {
+//
+//    let apollo = ApolloClient(url: URL(string: "https://manaje-be-8de8017c47.herokuapp.com/labs11-teamhome3BE-refactor/dev")!)
+//
+//    func testData() {
+//
+//        apollo.fetch(query: TodoListsQuery()) { (result, error) in
+//            if let result = result {
+//                NSLog("\(String(describing: result.data?.todoLists!.description))")
+//                return
+//            }
+//        }
+//    }
+//
+//
+//}
 

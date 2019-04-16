@@ -1,44 +1,41 @@
-#query FindActivityByTeam($teamId: ID!) {
-    findMessagesByTeam(input: {
-                       team: $teamId
-                       }) {
-        _id
+
+query FindActivityByTeam($teamId: ID!) {
+    messages( teamId: $teamId ) {
+        id
         title
-        user {
-            firstName
-            lastName
-            avatar
-            _id
+        creator {
+            name
+            profilePic
+            id
         }
         content
         images
         tag {
             name
         }
-        comments
+#comments
         createdAt
-        updatedAt
     }
 }
-#query FindDocumentActivityByTeam($teamId: ID!){
-    findDocumentsByTeam(input: {
-                        team: $teamId
-                        }) {
-        _id
+
+#findDocumentsByTeam is missing... no longer exists
+query FindDocumentActivityByTeam($teamId: ID!){
+    findDocumentsByTeam( teamId: $teamId ) {
+        id
         doc_url
         user{
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
         folder{
-            _id
+            id
             title
         }
         title
         textContent
-        comments
+#comments
         createdAt
     }
 }
+

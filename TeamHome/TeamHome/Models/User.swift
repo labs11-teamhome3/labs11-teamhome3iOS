@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct User {
-    let identifier: UUID
-    let firstName: String
-    let lastName: String
+struct User: Decodable {
+    let given_name: String
+    let family_name: String
+    let name:String
     let email: String
-    let phoneNumber: String
-    let avatar: String //or URL?
-    let receiveEmails: Bool
-    let receiveTexts: Bool
+    let sub: String
+    //let phoneNumber: String
+    //let picture: String //or URL?
+    //let receiveEmails: Bool
+    //let receiveTexts: Bool
 }

@@ -1,72 +1,64 @@
-#query FindDocumentsByTeam($teamID: ID!){
-    findDocumentsByTeam(input: {
-                        team: $teamID
-                        }){
-        _id
+query FindDocumentsByTeam($teamID: ID!){
+    findDocumentsByTeam(teamId: $teamID){
+        id
         doc_url
         user{
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
         folder{
-            _id
+            id
             title
         }
         title
         textContent
         tag {
-            _id
+            id
             name
             team{
-                _id
+                id
             }
         }
         images
-        comments
+        comments{...}
         subscribedUsers{
-            firstName
-            lastName
-            avatar
+            name
+            profilePic
         }
         createdAt
-        updatedAt
+#updatedAt
     }
 }
 
-#query FindFoldersByTeam($teamID: ID!){
-    findFoldersByTeam(input: {
-                        team: $teamID
-                        }){
-        _id
+query FindFoldersByTeam($teamID: ID!){
+    findFoldersByTeam( teamId: $teamID ){
+        id
         user{
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
         title
         createdAt
-        updatedAt
+#updatedAt
     }
 }
 
-#mutation DeleteDocument($docID: ID!){
-    deleteDocument(input: {
-                   id: $docID
-                   }){
-        _id
+mutation DeleteDocument($docID: ID!){
+    deleteDocument(documentId: $docID){
+        id
         title
     }
 }
 
-#mutation AddNewFolder($title: String!, $team: String!){
-    addFolder(input: {
-              title: $title
-              team: $team
-              }){
-        _id
+mutation AddNewFolder($title: String!, $userId: ID!, $teamId: ID!){
+    createFolder(
+            title: $title
+            userId: $userId
+            teamId: $teamId
+              ){
+        id
         title
     }
 }

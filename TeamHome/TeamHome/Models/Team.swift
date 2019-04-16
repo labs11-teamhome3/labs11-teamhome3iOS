@@ -19,5 +19,5 @@ class Team {
     init(teamName: String, members: [User], todoList: [TodoList], identifier: UUID = UUID(), messages: [Message]) {
        self.
     }
-    
+
 }

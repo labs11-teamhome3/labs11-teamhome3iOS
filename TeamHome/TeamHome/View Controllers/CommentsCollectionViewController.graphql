@@ -1,46 +1,43 @@
-#query FindCommentsByMessage($messageId: ID!) {
-    findMsgCommentsByMessage(input:  {
-                             message: $messageId
-                             }) {
-        _id
+query FindCommentsByMessage($messageId: ID!) {
+    findMessageCommentsByMessage( messageId: $messageId ) {
+        id
         user {
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
         content
         image
         likes {
-            _id
-            firstName
+            id
+            name
         }
         createdAt
-        updatedAt
+#updatedAt
     }
 }
 
-#mutation likeComment($id: ID!) {
-    likeMsgComment(input: {
-                   id: $id
-                   }) {
-        _id
+mutation likeComment($id: ID!, $userId: ID!) {
+    likeMessageComment(commentId: $id,
+                    userId:$userId
+                   ) {
+        id
     }
 }
 
-#mutation unlikeComment($id: ID!) {
-    unLikeMsgComment(input: {
-                     id: $id
-                     }) {
-        _id
+mutation unlikeComment($id: ID!, $userId: ID!) {
+    unlikeMessageComment(commentId: $id,
+                        userId: $userId
+                     ) {
+        id
     }
 }
 
-#mutation deleteComment($id: ID!) {
-    deleteMsgComment(input: {
-                     id: $id
-                     }) {
-        _id
+mutation deleteComment($id: ID!) {
+    deleteMessageComment(
+                     commentId: $id
+                     ) {
+        id
     }
 }
 

@@ -1,16 +1,16 @@
-#mutation UpdateUser($firstName: String, $lastName: String, $email: String, $phoneNumber: String, $avatar: String, $receiveEmails: Boolean, $receiveTexts: Boolean) {
-    updateUser(input: {
-               firstName: $firstName
-               lastName: $lastName
+mutation UpdateUser($name: String, $email: String, $phoneNumber: String, $avatar: String) {
+    updateUserContactInfo(
+               name
                email: $email
-               phoneNumber: $phoneNumber
-               avatar: $avatar
-               toggles: {
-               receiveEmails: $receiveEmails
-               receiveTexts: $receiveTexts
-               }
-               }) {
-        _id
+               phone: $phoneNumber
+               profilePic: $avatar
+                )
+#toggles {
+#receiveEmails: $receiveEmails
+#receiveTexts: $receiveTexts
+#}
+            {
+        id
     }
 }
 #mutation updateTeam(
