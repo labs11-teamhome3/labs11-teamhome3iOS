@@ -1,3 +1,4 @@
+#ERROR NUMBER: 01
 query FindMessagesByTeam($teamId: ID!) {
     team( id: $teamId ) {
         id
@@ -31,10 +32,9 @@ query FindMessagesByTeam($teamId: ID!) {
     }
 }
 
+#ERROR NUMBER: 02
 query FindTagsByTeam($teamId: ID!) {
-    findTagsByTeam(
-                   teamId: $teamId
-                   ) {
+    findTagsByTeam(teamId: $teamId ) {
         id
         name
     }

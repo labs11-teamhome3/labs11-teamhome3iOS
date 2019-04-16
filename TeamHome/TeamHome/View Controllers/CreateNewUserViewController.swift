@@ -1,11 +1,11 @@
-////
-////  CreateNewUserViewController.swift
-////  TeamHome
-////
-////  Created by Daniela Parra on 2/2/19.
-////  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
-////
 //
+//  CreateNewUserViewController.swift
+//  TeamHome
+//
+//  Created by Daniela Parra on 2/2/19.
+//  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
+//
+
 import UIKit
 import Auth0
 import Apollo

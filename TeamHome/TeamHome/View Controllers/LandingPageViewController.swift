@@ -185,10 +185,8 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                             self.performSegue(withIdentifier: "ShowDashboard", sender: self)
                         })
 
-
 //                        // Perform segue to Dashboard VC.
 //                        self.performSegue(withIdentifier: "ShowDashboard", sender: self)
-
 
                     case .failure(let error):
 
@@ -244,7 +242,6 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
                             // Perform segue to Dashboard VC.
                             self.performSegue(withIdentifier: "ShowDashboard", sender: self)
                         })
-
 
 //                        // Perform segue to Dashboard VC.
 //                        self.performSegue(withIdentifier: "ShowDashboard", sender: self)
@@ -318,7 +315,6 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
 
                     self.presentAlert(for: error)
                 }
-
             }
    }
 
@@ -330,7 +326,6 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
            guard let destinationVC = segue.destination as? DashboardCollectionViewController,
                //let topView = destinationVC.topViewController,
                 //let nextVC = topView as? DashboardCollectionViewController,
-
                 let apollo = apollo,
                 let currentUser = currentUser else { return }
 

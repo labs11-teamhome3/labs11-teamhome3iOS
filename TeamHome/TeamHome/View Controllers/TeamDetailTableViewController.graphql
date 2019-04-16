@@ -1,18 +1,15 @@
-#query FindTeamById($id: ID!) {
-    findTeam( id: $id
-             }) {
-        _id
-        name
-        users {
+query FindTeamById($id: ID!) {
+    team(id: $id ) {
+        id
+        teamName
+        members {
             user {
-                _id
-                firstName
-                lastName
+                id
+                name
                 email
-                phoneNumber
-                avatar
+                phone
+                profilePic
             }
-            admin
         }
     }
 }

@@ -60,7 +60,7 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
 //            ofKind: kind,
 //            withReuseIdentifier: "CommentsHeader",
 //            for: indexPath) as! CommentsCollectionReusableView
-//        
+//
 //        return headerView
 //    }
     

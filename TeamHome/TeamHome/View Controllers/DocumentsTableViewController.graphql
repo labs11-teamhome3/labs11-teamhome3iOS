@@ -1,7 +1,5 @@
 query FindDocumentsByTeam($teamID: ID!){
-    findDocumentsByTeam(
-                        teamId: $teamID
-                        ){
+    findDocumentsByTeam(teamId: $teamID){
         id
         doc_url
         user{
@@ -34,9 +32,7 @@ query FindDocumentsByTeam($teamID: ID!){
 }
 
 query FindFoldersByTeam($teamID: ID!){
-    findFoldersByTeam(
-                        teamId: $teamID
-                        ){
+    findFoldersByTeam( teamId: $teamID ){
         id
         user{
             name
@@ -50,9 +46,7 @@ query FindFoldersByTeam($teamID: ID!){
 }
 
 mutation DeleteDocument($docID: ID!){
-    deleteDocument(
-                   documentId: $docID
-                   ){
+    deleteDocument(documentId: $docID){
         id
         title
     }
