@@ -7,11 +7,23 @@
 //
 
 import UIKit
+import UIKit
+import Apollo
+import Cloudinary
+import GrowingTextView
+import Toucan
+import Material
+import Photos
+
+
 // This should be task
 struct cellData {
     var opened = Bool()
     var title = String()
     var sectionData = [String]()
+    var completed: Bool = false
+    var date = Date()
+    // var owner = self... user
 }
 // Todo should be composed of Tasks == Todo: [Task]
 // Todos should be composed of Todo == Todos: [Todos]
@@ -21,8 +33,11 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     let filterByArray: [String] = ["Active", "Complete", "Created by Me", "Assigned to Me", "All"]
     static var tasks: [String] = []
     var task: String?
-    var tableViewData = [cellData]()
+    var tableViewData: [cellData] = []
     
+    var apollo: ApolloClient?
+    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
     
     // Need to get the team members
     // Need to get todos
@@ -61,12 +76,12 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         createGradientLayer()
         filterByTableView.isHidden = true
         sortByTableView.isHidden = true
-        tableViewData = [cellData(opened: false, title: "TodoList_01", sectionData: ["Task1", "Task2", "Task3"]),
-                         cellData(opened: false, title: "TodoList_02", sectionData: ["Task1", "Task2", "Task3"]),
-                         cellData(opened: false, title: "TodoList_03", sectionData: ["Task1", "Task2", "Task3"]),
-                         cellData(opened: false, title: "TodoList_04", sectionData: ["Task1", "Task2", "Task3"])]
+        tableViewData.append(cellData(opened: false, title: "Front End", sectionData: ["Update Auth0", "Build activity view", "Build document view"]))
+        tableViewData.append(cellData(opened: false, title: "Back End", sectionData: ["Update API", "Auth0 Sign-In", "Payment Modal"]))
+        tableViewData.append(cellData(opened: false, title: "iOS", sectionData: ["Update UI", "Auth0 Sign-In"]))
         // This gets rid of the empty table cell in the tableView at the bottom.
         todosTableView.tableFooterView = UIView()
+        self.navigationItem.title = team?.name
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -118,7 +133,6 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if tableView == sortByTableView {
             sortByButton.setTitle("\(sortByArray[indexPath.row])", for: .normal)
             animateDropMenu(tableView: sortByTableView)
@@ -147,9 +161,14 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "TodoSegue" {
+            let detailVC = segue.destination as! TodoCreationViewController
+            detailVC.tableViewData = tableViewData
+        }
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
     }
     
     private var gradientLayer: CAGradientLayer!
@@ -157,16 +176,11 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     // Create gradient layer for view background.
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
