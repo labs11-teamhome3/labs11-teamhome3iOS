@@ -1,4 +1,4 @@
-query FindTeamByIde($id: ID!) {
+#query FindTeamByIde($id: ID!) {
     findTeam(input: {id: $id }) {
         _id
         name
