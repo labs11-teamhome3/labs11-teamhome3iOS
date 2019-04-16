@@ -10,7 +10,6 @@ query FindTeamById($id: ID!) {
                 phone
                 profilePic
             }
-            admin
         }
     }
 }

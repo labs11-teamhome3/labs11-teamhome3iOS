@@ -19,7 +19,7 @@ query FindCommentsByDocument($documentID: ID!) {
     }
 }
 
-mutation likeDocumentComment($id: ID!, $userId: ID!) {
+#mutation likeDocumentComment($id: ID!, $userId: ID!) {
     likeDocumentComment(
                    commentId: $id
                 userId: $userId
@@ -37,7 +37,7 @@ mutation unlikeDocumentComment($id: ID!, $userId: ID!) {
     }
 }
 
-mutation deleteDocumentComment($id: ID!) {
+#mutation deleteDocumentComment($id: ID!) {
     deleteDocumentComment(
                      documentCommentId: $id
                      ) {
