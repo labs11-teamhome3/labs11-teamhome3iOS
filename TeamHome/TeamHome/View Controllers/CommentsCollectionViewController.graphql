@@ -35,9 +35,4 @@ mutation deleteComment($id: ID!) {
     }
 }
 
-mutation deleteComment($id: ID!) {
-    deleteMessageComment(commentId: $id) {
-        id
-    }
-}
 
