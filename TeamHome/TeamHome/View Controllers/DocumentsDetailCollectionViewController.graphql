@@ -1,47 +1,92 @@
 query FindCommentsByDocument($documentID: ID!) {
-    findDocumentComment(
-                        id: $documentID
-                        ) {
-        id
-        user {
-            name
-            profilePicture
-            id
-        }
-        content
-        image
-        likes {
-            id
-            name
-        }
-        createdAt
-# updatedAt
-    }
+
+findDocumentComment(
+
+id: $documentID
+
+) {
+
+id
+
+user {
+
+name
+
+profilePic
+
+id
+
 }
+
+content
+
+image
+
+likes {
+
+id
+
+name
+
+}
+
+createdAt
+
+# updatedAt
+
+}
+
+}
+
+
 
 mutation likeDocumentComment($id: ID!, $userId: ID!) {
-    likeDocumentComment(
-                   id: $id
-                userId: $userId
-                   ) {
-        id
-    }
+
+likeDocumentComment(
+
+commentId: $id
+
+userId: $userId
+
+) {
+
+id
+
 }
+
+}
+
+
 
 mutation unlikeDocumentComment($id: ID!, $userId: ID!) {
-    unLikeDocumentComment(
-                     id: $id
-                    userId:$userId
-                     ) {
-        id
-    }
+
+unlikeDocumentComment(
+
+commentId: $id
+
+userId:$userId
+
+) {
+
+id
+
 }
 
+}
+
+
+
 mutation deleteDocumentComment($id: ID!) {
-    deleteDocumentComment(
-                     documentCommentId: $id
-                     ) {
-        id
-    }
+
+deleteDocumentComment(
+
+documentCommentId: $id
+
+) {
+
+id
+
+}
+
 }
 
