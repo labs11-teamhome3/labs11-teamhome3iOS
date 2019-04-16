@@ -585,6 +585,7 @@ public final class FindFoldersByTeamQuery: GraphQLQuery {
         }
       }
 
+
       public var title: String {
         get {
           return resultMap["title"]! as! String
