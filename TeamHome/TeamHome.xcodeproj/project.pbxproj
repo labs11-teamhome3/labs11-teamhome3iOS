@@ -21,6 +21,7 @@
 		2C24457222551BE700D104B2 /* TaskCreationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */; };
 		2C34E0B222507186001D3EB9 /* TodoCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */; };
 		2C34E0B322507186001D3EB9 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B122507186001D3EB9 /* TodoListViewController.swift */; };
+		2CF0EFA8226657A400150030 /* TodoListViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2CF0EFA7226657A400150030 /* TodoListViewController.graphql */; };
 		2CFF1E4722607D4000809746 /* Pods_TeamHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFF1E4622607D4000809746 /* Pods_TeamHome.framework */; };
 		7B2C51EC220B2CF7004990BB /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C51EB220B2CF7004990BB /* TagCollectionViewCell.swift */; };
 		7B2C51F2220CB563004990BB /* CommentsCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C51F1220CB563004990BB /* CommentsCollectionReusableView.swift */; };
@@ -107,6 +108,7 @@
 		2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationTableViewCell.swift; sourceTree = "<group>"; };
 		2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCreationViewController.swift; sourceTree = "<group>"; };
 		2C34E0B122507186001D3EB9 /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		2CF0EFA7226657A400150030 /* TodoListViewController.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoListViewController.graphql; sourceTree = "<group>"; };
 		2CFF1E4622607D4000809746 /* Pods_TeamHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_TeamHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		465546B36BE62E5867C66338 /* Pods-TeamHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamHome/Pods-TeamHome.release.xcconfig"; sourceTree = "<group>"; };
 		5E7A942D57C28DA6353E0A10 /* Pods_TeamHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +326,7 @@
 				2C34E0B122507186001D3EB9 /* TodoListViewController.swift */,
 				2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */,
 				2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */,
+				2CF0EFA7226657A400150030 /* TodoListViewController.graphql */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				7B6BE7D821E5733E0099E42C /* Assets.xcassets in Resources */,
 				7B6BE7D621E5733D0099E42C /* Main.storyboard in Resources */,
 				7BD658A021F020ED004FF34A /* DashboardCollectionViewController.graphql in Resources */,
+				2CF0EFA8226657A400150030 /* TodoListViewController.graphql in Resources */,
 				7BA77E9A21E8033C00C862C1 /* Comment.json in Resources */,
 				7BF336942208B3950083692E /* AddEditMessageView.storyboard in Resources */,
 				7BD6588921EE5A06004FF34A /* Auth0.plist in Resources */,
