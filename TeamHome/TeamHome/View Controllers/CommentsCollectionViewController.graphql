@@ -1,7 +1,5 @@
 query FindCommentsByMessage($messageId: ID!) {
-    findMessageCommentsByMessage(
-                             messageId: $messageId
-                            ) {
+    findMessageCommentsByMessage(messageId: $messageId) {
         id
         user {
             name
@@ -20,25 +18,25 @@ query FindCommentsByMessage($messageId: ID!) {
 }
 
 mutation likeComment($id: ID!, $userId: ID!) {
-    likeMessageComment(commentId: $id,
-                    userId:$userId
-                   ) {
+    likeMessageComment(commentId: $id, userId:$userId) {
         id
     }
 }
 
 mutation unlikeComment($id: ID!, $userId: ID!) {
-    unlikeMessageComment(commentId: $id,
-                        userId: $userId
-                     ) {
+    unlikeMessageComment(commentId: $id, userId: $userId) {
         id
     }
 }
 
 mutation deleteComment($id: ID!) {
-    deleteMessageComment(
-                     commentId: $id
-                     ) {
+    deleteMessageComment(commentId: $id) {
+        id
+    }
+}
+
+mutation deleteComment($id: ID!) {
+    deleteMessageComment(commentId: $id) {
         id
     }
 }

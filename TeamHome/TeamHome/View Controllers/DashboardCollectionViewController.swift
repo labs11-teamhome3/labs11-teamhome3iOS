@@ -15,8 +15,11 @@ import Apollo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpPage()
+        
         guard let apollo = apollo else { return }
+        
         loadTeams(with: apollo)
         
         guard let currentUser = currentUser else {
@@ -25,17 +28,16 @@ import Apollo
                     NSLog("\(error)")
                     return
                 }
+                
                 guard let result = result,
                     let data = result.data else { return }
                 let currentUser = data.user
                 self.currentUser = currentUser
-
             
                 
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Welcome \(String(describing: currentUser.name))", message: "Looks like you're already sign in. Pick a team to start.", preferredStyle: .alert)
                     
-
                     alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -44,9 +46,8 @@ import Apollo
         }
         
         DispatchQueue.main.async {
-
             let alert = UIAlertController(title: "Welcome \(currentUser.name)", message: "This is your team dashboard. Pick a team to start.", preferredStyle: .alert)
-
+            
             alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -55,7 +56,9 @@ import Apollo
     // MARK: - IBActions
 
    @IBAction func unwindToDashboard(segue:UIStoryboardSegue) { }
+
     // MARK: UICollectionViewDataSource
+
     // Return the number of teams that the current user belongs to or 0 if they don't belong to any
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return teams?.count ?? 0
@@ -65,11 +68,9 @@ import Apollo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! DashboardTeamCollectionViewCell
 
-
         guard let team = teams?[indexPath.row] else { return UICollectionViewCell()}
         cell.team = team
         cell.delegate = self
-
 
         return cell
     }
@@ -80,6 +81,7 @@ import Apollo
             withReuseIdentifier: "DashboardCollectionReusableView", for: indexPath) as?                                                  DashboardCollectionReusableView else { return UICollectionReusableView()}
         
         headerView.delegate = self
+        
         return headerView
     }
     
@@ -87,15 +89,18 @@ import Apollo
     
     func didClickAddTeam() {
         guard let apollo = apollo else { return }
+        
         presentCreateTeamAlert(with: apollo)
     }
     
     // MARK: - TeamCellDelegate
+    
     func presentActionSheet(with optionMenu: UIAlertController) {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         // Pass variable to all the views that branch off main tab bar
@@ -121,15 +126,14 @@ import Apollo
     }
     
     // MARK: - Private Methods
+    
     // Load all teams that the current user belongs to
     private func loadTeams(with apollo: ApolloClient) {
-
         
         guard let currentUser = currentUser else {return}
         let userId = currentUser.id
         
         watcher = apollo.watch(query: TeamsByUserQuery(userId: userId)) { (result, error) in
-
             if let error = error {
                 NSLog("\(error)")
             }
@@ -138,6 +142,7 @@ import Apollo
             guard let teams = result?.data?.teamsByUser else { return }
             if teams.count == 0 {
                 // Let user know they should create new team
+                
                 return
             }
             
@@ -148,20 +153,22 @@ import Apollo
     // Present alert with textfield to prompt user to create a new team
     private func presentCreateTeamAlert(with apollo: ApolloClient) {
         let alert = UIAlertController(title: "Create a team", message: "Looks like you're not part of a team at the moment, create your own team.", preferredStyle: .alert)
+        
         alert.addTextField { (textField) in
             textField.placeholder = "Name of team:"
         }
+        
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (alertAction) in
-
             guard let textField = alert.textFields?.first, let teamName = textField.text, let user = self.currentUser else { return }
             let userId = user.id
-
             // Create team based off textfield prompt. Teams are automatically set to "not premium" because advanced settings available on web application.
             apollo.perform(mutation: CreateTeamMutation(teamName: teamName, userId: userId), queue: DispatchQueue.global(), resultHandler: { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
                 }
+                
+                
                 guard let result = result else { return }
                 // Call water to reload teams and present them to user
                 self.watcher?.refetch()
@@ -169,6 +176,7 @@ import Apollo
             })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -179,18 +187,26 @@ import Apollo
     
     private func setUpPage() {
         self.setUpViewAppearance()
+        
         self.setNeedsStatusBarAppearanceUpdate()
         collectionView.backgroundColor = .clear
+        
         createGradientLayer()
     }
     
+    
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
+        
         gradientLayer.frame = self.view.bounds
+        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        
+        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
@@ -199,7 +215,6 @@ import Apollo
     }
     
     // MARK: - Properties
-
     
     private var watcher: GraphQLQueryWatcher<TeamsByUserQuery>?
     var apollo: ApolloClient?
@@ -208,7 +223,6 @@ import Apollo
     var gradientLayer: CAGradientLayer!
     
     var teams: [TeamsByUserQuery.Data.TeamsByUser?]? {
-
         didSet {
             if isViewLoaded {
                 DispatchQueue.main.async {
@@ -217,4 +231,5 @@ import Apollo
             }
         }
     }
+    
 }
