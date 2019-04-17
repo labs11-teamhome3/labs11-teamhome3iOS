@@ -1,4 +1,4 @@
-query FindDocumentsByTeam($teamID: ID!){
+query FindDocumentsByTeam($teamID: ID){
     findDocumentsByTeam(teamId: $teamID){
         id
         doc_url
@@ -21,13 +21,14 @@ query FindDocumentsByTeam($teamID: ID!){
             }
         }
         images
-        comments{...}
+        comments{
+            id
+        }
         subscribedUsers{
             name
             profilePic
         }
         createdAt
-#updatedAt
     }
 }
 

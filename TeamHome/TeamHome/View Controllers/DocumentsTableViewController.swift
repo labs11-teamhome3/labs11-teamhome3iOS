@@ -49,8 +49,8 @@ class DocumentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle:
         UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        guard let document = documents?[indexPath.row],
-            let id = document.id else {return}
+        guard let document = documents?[indexPath.row] else {return}
+        let id = document.id
         if editingStyle == .delete{
             apollo.perform(mutation: DeleteDocumentMutation(docID: id)) { (_, error) in
                 if let error = error {
@@ -81,8 +81,8 @@ class DocumentsTableViewController: UITableViewController {
     
     private func loadDocuments(with apollo: ApolloClient) {
         
-        guard let team = team,
-            let teamID  = team.id else { return }
+        guard let team = team else { return }
+         let teamID  = team.id
         
         // Fetch messages using team's id
         watcher = apollo.watch(query: FindDocumentsByTeamQuery(teamID: teamID)) { (result, error) in
@@ -118,7 +118,7 @@ class DocumentsTableViewController: UITableViewController {
     }
     
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
     var deleteIndexPath: IndexPath?
 }

@@ -65,7 +65,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareLikes(for comment:
-        FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
+        FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage) {
         
         guard let likes = comment.likes else { return }
         
@@ -98,10 +98,10 @@ class CommentCollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func prepareToolbar(comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
+    private func prepareToolbar(comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage) {
         toolbar = Toolbar(leftViews: [avatarImageView])
         
-        toolbar.title = "\(comment.user.firstName) \(comment.user.lastName)"
+        toolbar.title = "\(comment.user.name)"
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = Appearance.darkMauveColor
         
@@ -115,7 +115,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         delegate?.deleteComment(cell: self)
     }
     
-    private func prepareContentView(with comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
+    private func prepareContentView(with comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage) {
         
         contentLabel = UILabel()
         contentLabel.numberOfLines = 0
@@ -178,7 +178,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         card.backgroundColor = .white
     }
     
-    private func prepareAvatarImage(for comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage) {
+    private func prepareAvatarImage(for comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage) {
         
         setImage(for: comment) { (image) in
             DispatchQueue.main.async {
@@ -194,9 +194,9 @@ class CommentCollectionViewCell: UICollectionViewCell {
     }
     
     // Set image for a given message.
-    private func setImage(for comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage, completion: @escaping (UIImage) -> Void) {
+    private func setImage(for comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage, completion: @escaping (UIImage) -> Void) {
         // Download image and display as user avatar string of image url
-        guard let avatar = comment.user.avatar else {
+        guard let avatar = comment.user.profilePic else {
             let image = UIImage(named: "User Avatar Image")!
             completion(image)
             return
@@ -227,8 +227,8 @@ class CommentCollectionViewCell: UICollectionViewCell {
     private var hasLiked: Bool?
     
     weak var delegate: CommentCollectionCellDelegate?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
-    var comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage? {
+    var currentUser: CurrentUserQuery.Data.User?
+    var comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage? {
         didSet {
             self.updateViews()
         }
