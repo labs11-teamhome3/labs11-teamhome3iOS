@@ -142,17 +142,16 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     func deleteTeamMember(at indexPath: IndexPath) {
         guard let apollo = apollo,
             let team = team,
-            let teamId = team.id,
-            //let teamId = team.id,
             let currentUser = currentUser,
             let users = users,
             let kickedUser = users[indexPath.row] else { return }
+        let teamId = team.id
         
         let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.Team.Member in
             if user?.id == currentUser.id {
                 return user!
             }
-            return nil
+           // return nil
         }
         
         let user = userArray.first!
@@ -161,7 +160,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         if adminStatus == .admin {
 //            self.users?.remove(at: indexPath.row)
             
-            apollo.perform(mutation: KickUserMutation(teamId: teamId, userKickedId: kickedUser.user.id), queue: DispatchQueue.global()) { (result, error) in
+            apollo.perform(mutation: KickUserMutation(teamId: teamId, userId: user.id), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
@@ -246,9 +245,8 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         if segue.identifier == "InviteUser" {
             guard let destinationVC = segue.destination as? InviteToTeamViewController,
                 let apollo = apollo,
-                let team = team,
-                let teamId = team.id else { return }
-            
+                let team = team else { return }
+            let teamId = team.id
             destinationVC.apollo = apollo
             destinationVC.teamId = teamId
             
@@ -267,9 +265,9 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             }
             
             guard let result = result,
-                let data = result.data,
-                let team = data.team else { return }
-            self.users = team.users
+                let data = result.data else { return }
+            let team = data.team
+            self.users = team.members
         }
     }
     
