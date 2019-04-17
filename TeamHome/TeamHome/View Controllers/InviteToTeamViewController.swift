@@ -12,6 +12,16 @@ import Material
 
 class InviteToTeamViewController: UIViewController {
 
+    // MARK: - Properties
+    var apollo: ApolloClient?
+    var teamId: GraphQLID?
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var emailTextField: TextField!
+    @IBOutlet weak var phoneNumberTextField: TextField!
+    @IBOutlet weak var inviteButton: RaisedButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +35,10 @@ class InviteToTeamViewController: UIViewController {
         inviteButton.backgroundColor = Appearance.darkMauveColor
     }
 
+    /*
+     The previous mutation was deleted. Available team members are all list in on place
+     and the user picks and adds team members from a drop box, or search for additional team
+     members thru a  search box...
     @IBAction func inviteToTeam(_ sender: Any) {
 
         guard let apollo = apollo,
@@ -124,16 +138,8 @@ class InviteToTeamViewController: UIViewController {
             }
         }
     }
+     */
 
 
-    // MARK: - Properties
-
-    var apollo: ApolloClient?
-    var teamId: GraphQLID?
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var emailTextField: TextField!
-    @IBOutlet weak var phoneNumberTextField: TextField!
-    @IBOutlet weak var inviteButton: RaisedButton!
 
 }
