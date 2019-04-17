@@ -6,7 +6,7 @@
 //  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 //
 
-<<<<<<< HEAD
+
 import UIKit
 import Apollo
 

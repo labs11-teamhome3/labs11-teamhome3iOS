@@ -3,23 +3,20 @@ query FindTeamById($id: ID!) {
         id
         teamName
         members {
-            user {
                 id
                 name
                 email
                 phone
                 profilePic
-            }
+                role
         }
     }
 }
 
-#mutation kickUser($teamId: ID!, $userKickedId: ID!) {
-    kickUser(input: {
-             id: $teamId
-             user: $userKickedId
-             }) {
-        _id
+mutation kickUser($teamId: ID!, $userId: ID!) {
+    removeUserFromTeam(userId: $userId, teamId: $teamId) {
+        id
     }
 }
 
+#removeUserFromTeam(userId: ID!, teamId: ID!): Team

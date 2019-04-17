@@ -19,6 +19,24 @@ protocol TeamDetailCellDelegate: class {
 
 class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtocol {
 
+    // MARK: - Properties
+    var apollo: ApolloClient?
+    //var team: FindTeamByIdQuery.Data.Team?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
+    var gradientLayer: CAGradientLayer!
+    weak var delegate: TeamDetailCellDelegate?
+    var users: [FindTeamByIdQuery.Data.Team.Member?]? {
+        didSet {
+            if isViewLoaded {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    @IBOutlet weak var teamNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +50,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         
         guard let team = team else { return }
         
-        teamNameLabel.text = team.name
+        teamNameLabel.text = team.teamName
         
         guard let apollo = apollo else { return }
         
@@ -40,7 +58,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users?.count ?? 0
     }
@@ -50,20 +67,23 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
 
         guard let user = users?[indexPath.row] else { return UITableViewCell() }
         
-        let firstName = user.user.firstName
-        let lastName = user.user.lastName
+        let name = user.name
+        //let firstName = user.user.firstName
+        //let lastName = user.user.lastName
         var email = ""
         
-        if user.user.email == "" {
+        if user.email == "" {
             email = "no email"
         } else {
-            email = user.user.email
+            //email = user.user.email
+            email = user.email!
         }
         
-        cell.textLabel?.text = "\(firstName) \(lastName)"
+        //cell.textLabel?.text = "\(firstName) \(lastName)"
+        cell.textLabel?.text = name
         cell.detailTextLabel?.text = email
 
-        if let avatar = user.user.avatar {
+        if let avatar = user.profilePic {
             cloudinary.createDownloader().fetchImage(avatar, { (progress) in
                 // Progress
             }) { (image, error) in
@@ -119,26 +139,26 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         return action
     }
     
-    
     func deleteTeamMember(at indexPath: IndexPath) {
         guard let apollo = apollo,
             let team = team,
             let teamId = team.id,
+            //let teamId = team.id,
             let currentUser = currentUser,
             let users = users,
             let kickedUser = users[indexPath.row] else { return }
         
-        let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.FindTeam.User? in
-            if user?.user.id == currentUser.id {
-                return user
+        let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.Team.Member in
+            if user?.id == currentUser.id {
+                return user!
             }
             return nil
         }
         
         let user = userArray.first!
-        let adminStatus = user.admin
+        let adminStatus = user.role
         
-        if adminStatus {
+        if adminStatus == .admin {
 //            self.users?.remove(at: indexPath.row)
             
             apollo.perform(mutation: KickUserMutation(teamId: teamId, userKickedId: kickedUser.user.id), queue: DispatchQueue.global()) { (result, error) in
@@ -172,17 +192,17 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         guard let currentUser = currentUser,
             let users = users else { return }
         
-        let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.FindTeam.User? in
-            if user?.user.id == currentUser.id {
+        let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.Team.Member? in
+            if user?.id == currentUser.id {
                 return user
             }
             return nil
         }
         
         let user = userArray.first!
-        let adminStatus = user.admin
+        let adminStatus = user.role
         
-        if adminStatus {
+        if adminStatus == .admin {
             
             let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
             
@@ -213,7 +233,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             let users = users,
             let userEdited = users[indexPath.row] else { return }
         
-        if userEdited.admin {
+        if userEdited.role == .admin {
             // Present alert that explains user is already admin.
         } else {
             
@@ -238,8 +258,9 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     private func loadUsers(with apollo: ApolloClient) {
         // Get team's id
         guard let team = team,
-            let teamId = team.id else { return }
-        
+            //let teamId = team.id else { return }
+            let teamId = team.id as String? else { return }
+            
         teamWatcher = apollo.watch(query: FindTeamByIdQuery(id: teamId)) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
@@ -247,7 +268,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             
             guard let result = result,
                 let data = result.data,
-                let team = data.findTeam else { return }
+                let team = data.team else { return }
             self.users = team.users
         }
     }
@@ -258,38 +279,11 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.25]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
-    
-    // MARK: - Properties
-    
-    weak var delegate: TeamDetailCellDelegate?
-    var users: [FindTeamByIdQuery.Data.FindTeam.User?]? {
-        didSet {
-            if isViewLoaded {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-    
-    var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
-    var gradientLayer: CAGradientLayer!
-    
-    
-    @IBOutlet weak var teamNameLabel: UILabel!
-    
 }
