@@ -1,6 +1,6 @@
 
 query FindActivityByTeam($teamId: ID!) {
-    messages( teamId: $teamId ) {
+    messages(teamId: $teamId ) {
         id
         title
         creator {
