@@ -82,7 +82,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     private func displayTeamInfo() {
         guard let team = team else { return }
         
-        teamNameLabel.text = team.name
+        teamNameLabel.text = team.teamName
     }
     
     // Create gradient layer for view background.
@@ -106,8 +106,8 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     private var gradientLayer: CAGradientLayer!
     
     var apollo: ApolloClient?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
     var delegate: MessageBoardFilterDelegate?
     
     @IBOutlet weak var teamNameLabel: UILabel!
