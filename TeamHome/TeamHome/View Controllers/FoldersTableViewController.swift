@@ -112,8 +112,8 @@ class FoldersTableViewController: UITableViewController {
     }
     
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
     var deleteIndexPath: IndexPath?
 
 }
