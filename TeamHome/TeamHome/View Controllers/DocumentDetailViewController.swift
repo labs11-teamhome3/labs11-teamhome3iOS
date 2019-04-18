@@ -52,9 +52,10 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
     
     @IBAction func submitComment(_ sender: Any) {
         guard let apollo = apollo,
+            let currentUserId = currentUser?.id,
             let documentID = document?.id,
             let comment = commentTextView.text else {return}
-        apollo.perform(mutation: AddDocumentCommentMutation(document: documentID , comment: comment), queue: .global()) { (result, error) in
+        apollo.perform(mutation: AddDocumentCommentMutation(userId: currentUserId, documentId: documentID, comment: comment), queue: .global()) { (result, error) in
             if let error = error {
                 NSLog("Error adding comment: \(error)")
                 return
@@ -67,9 +68,9 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         guard let apollo = apollo,
             let documentID = documentID else {return}
         
-        isSubscribed
-            ? unsubscribeFromDocument(apollo: apollo, documentID: documentID)
-            : subscribeToDocument(apollo: apollo, documentID: documentID)
+//        isSubscribed
+//            ? unsubscribeFromDocument(apollo: apollo, documentID: documentID)
+//            : subscribeToDocument(apollo: apollo, documentID: documentID)
     }
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -102,7 +103,7 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         guard let documentID = documentID else { return }
         
         // Fetch messages using document id from previous VC
-        watcherDocument = apollo.watch(query: FindDocumentInputQuery(docID: documentID)) { (result, error) in
+        watcherDocument = apollo.watch(query: FindDocumentInputQuery(docId: documentID)) { (result, error) in
             if let error = error {
                 NSLog("Error loading Documents\(error)")
             }
@@ -126,26 +127,26 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
     }
     
     //unsubscribes to document by performing a mutation
-    private func unsubscribeFromDocument(apollo:ApolloClient, documentID: GraphQLID){
-
-        apollo.perform(mutation: UnsubscribeFromDocumentMutation(documentID: documentID)) { (result, error) in
-            if let error = error {
-                NSLog("Error unsubscribing: \(error)")
-                return
-            }
-            self.isSubscribed = false
-        }
-    }
+//    private func unsubscribeFromDocument(apollo:ApolloClient, documentID: GraphQLID){
+//
+//        apollo.perform(mutation: UnsubscribeFromDocumentMutation(documentID: documentID)) { (result, error) in
+//            if let error = error {
+//                NSLog("Error unsubscribing: \(error)")
+//                return
+//            }
+//            self.isSubscribed = false
+//        }
+//    }
     //subscribes to document by performing a mutation
-    private func subscribeToDocument(apollo:ApolloClient, documentID: GraphQLID){
-        apollo.perform(mutation: SubscribeToDocumentMutation(documentID: documentID)) { (result, error) in
-            if let error = error {
-                NSLog("Error unsubscribing: \(error)")
-                return
-            }
-            self.isSubscribed = true
-        }
-    }
+//    private func subscribeToDocument(apollo:ApolloClient, documentID: GraphQLID){
+//        apollo.perform(mutation: SubscribeToDocumentMutation(documentID: documentID)) { (result, error) in
+//            if let error = error {
+//                NSLog("Error unsubscribing: \(error)")
+//                return
+//            }
+//            self.isSubscribed = true
+//        }
+//    }
     //updates isSubscribe to make sure it is accurate to the current document
     private func updateIsSubscribed(){
         if let document = document,
@@ -178,8 +179,8 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         
         
         documentTitleLabel.text = document.title
-        firstNameLabel.text = document.user.firstName
-        lastNameLabel.text = document.user.lastName
+        firstNameLabel.text = document.user.name
+//        lastNameLabel.text = document.user.lastName
         dateLabel.text = date
         documentURLLabel.text = document.docUrl
         documentNotesLabel.text = document.textContent
@@ -191,7 +192,7 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         updateIsSubscribed()
         updateSubscribeButton()
         // Download image and display as user avatar
-        guard let avatar = document.user.avatar else { return }
+        guard let avatar = document.user.profilePic else { return }
         
         let downloader = cloudinary.createDownloader()
         
@@ -281,8 +282,8 @@ class DocumentDetailViewController: UIViewController, GrowingTextViewDelegate {
         }
     }
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
     
     //    var imageData: Data?
     //    var delegate: AddNewCommentDelegate?

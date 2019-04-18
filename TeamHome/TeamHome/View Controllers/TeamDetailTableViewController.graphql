@@ -1,4 +1,4 @@
-#query FindTeamById($id: ID!) {
+query FindTeamById($id: ID!) {
     team(id: $id ) {
         id
         teamName
@@ -13,10 +13,10 @@
     }
 }
 
-#mutation kickUser($teamId: ID!, $userId: ID!) {
+mutation kickUser($teamId: ID!, $userId: ID!) {
     removeUserFromTeam(userId: $userId, teamId: $teamId) {
         id
     }
 }
 
-#removeUserFromTeam(userId: ID!, teamId: ID!): Team
+
