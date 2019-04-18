@@ -44,14 +44,14 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
         
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (alertAction) in
             guard let apollo = self.apollo, let team = self.team, let textField = alert.textFields?.first, let folderTitle = textField.text else { return }
+           guard  let currentUserId = self.currentUser?.id else {return}
             
-            
-            apollo.perform(mutation: AddNewFolderMutation(title: folderTitle, team: team.id!)) { (result, error) in
+            apollo.perform(mutation: AddNewFolderMutation(title: folderTitle, userId: currentUserId,teamId: team.id)) { (result, error) in
                 if let error = error{
                     NSLog("Error creating new folder: \(error)")
                     return
                 }
-                print("Add Folder Successful: \(result?.data?.addFolder?.title ?? "No Title")")
+                print("Add Folder Successful: \(result?.data?.createFolder?.title ?? "No Title")")
             }
             
         }))
@@ -80,7 +80,7 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
     private func displayTeamInfo() {
         guard let team = team else { return }
         
-        teamNameLabel.text = team.name
+        teamNameLabel.text = team.teamName
     }
     
     @objc func changeDisplay(_ sender: UISegmentedControl) {
@@ -142,8 +142,8 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
     private var gradientLayer: CAGradientLayer!
     
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
     
     @IBOutlet weak var newFolderButton: UIButton!
     @IBOutlet weak var documentsFoldersSegmentedIndex: UISegmentedControl!

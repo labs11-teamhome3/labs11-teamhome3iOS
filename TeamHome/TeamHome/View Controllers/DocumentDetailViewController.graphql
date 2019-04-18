@@ -24,10 +24,8 @@ mutation AddDocumentComment($userId: ID, $documentId: ID!, $comment: String!){
     }
 }
 
-query FindDocumentInput($docID: ID!){
-    findDocument(
-                 id:$docID
-                 ) {
+query FindDocumentInput($docId: ID!) {
+    findDocument(id:$docId) {
         id
         doc_url
         user{
@@ -46,13 +44,16 @@ query FindDocumentInput($docID: ID!){
             name
         }
         images
-        comments
+        comments{
+            id
+            content
+        }
         subscribedUsers{
             id
             name
-            profilepic
+            profilePic
         }
         createdAt
-#updatedAt
+
     }
 }

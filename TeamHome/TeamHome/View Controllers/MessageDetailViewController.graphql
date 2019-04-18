@@ -1,4 +1,4 @@
-query FindMessageById($id: ID!) {
+query FindMessageById($id: ID!, userId: String) {
         message(id: $id) {
                 id
                 createdAt
@@ -10,15 +10,14 @@ query FindMessageById($id: ID!) {
         }
 }
 
-fragment messageComment on addMessageComment(messageId: $messageId, userId:$userId, content: $content, image:$image) {
-    id
-}
 mutation CreateImageComment($messageId: ID!, $userId: ID! $content: String!, $image: String) {
-    ...messageComment
+    addMessageComment(messageId: $messageId, userId:$userId, content: $content, image:$image) {
+        id
+    }
 }
 
 
-mutation CreateComment($message: String!,$userId: ID! $content: String!) {
+#mutation CreateComment($message: String!,$userId: ID! $content: String!) {
     ...messageComent
 }
 
