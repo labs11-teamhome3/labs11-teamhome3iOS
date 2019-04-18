@@ -10,9 +10,18 @@ query FindMessagesByTeam($teamId: ID!) {
         }
         messages {
             content
+            title
             images
             id
-
+            tag {
+                name
+                id
+            }
+            creator{
+                id
+                profilePic
+                name
+                }
             comments{
                 createdAt
                 id

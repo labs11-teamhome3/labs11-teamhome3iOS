@@ -42,7 +42,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func prepareAvatarImage(for message: FindMessagesByTeamQuery.Data.FindMessagesByTeam) {
+    private func prepareAvatarImage(for message: FindMessagesByTeamQuery.Data.Team.Message) {
         
         setImage(for: message) { (image) in
             DispatchQueue.main.async {
@@ -51,7 +51,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
                 self.avatarImageView = UIImageView(image: resizedImage.image)
                 self.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.avatarImageView.frame.width, height: self.avatarImageView.frame.height)
                 self.avatarImageView.contentMode = .scaleAspectFit
-                self.prepareToolbar(firstName: message.user.firstName, lastName: message.user.lastName, messageTitle: message.title, message: message)
+                
+                //IYIN Come back and parse the name string (Important!!)
+                self.prepareToolbar(firstName: message.creator.name!, lastName: message.creator.name!, messageTitle: message.title, message: message)
                 self.prepareCard()
             }
         }
@@ -64,7 +66,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         dateLabel.text = date
     }
     
-    private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.FindMessagesByTeam) {
+    private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.Team.Message) {
         
         tagLabel = UILabel()
         if let tag = message.tag {
@@ -89,7 +91,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func prepareComments(for message: FindMessagesByTeamQuery.Data.FindMessagesByTeam) {
+    private func prepareComments(for message: FindMessagesByTeamQuery.Data.Team.Message) {
         
         commentIcon = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let commentImage = UIImage(named: "Comments")!
@@ -123,12 +125,12 @@ class MessageCollectionViewCell: UICollectionViewCell {
         guard let currentUser = currentUser,
             let message = message else { return }
         
-        if message.user.id == currentUser.id {
+        if message.creator.id == currentUser.id {
             moreButton.addTarget(self, action: #selector(presentDeleteActionSheet(_:)), for: .touchUpInside)
         }
     }
     
-    private func prepareToolbar(firstName: String, lastName: String, messageTitle: String, message: FindMessagesByTeamQuery.Data.FindMessagesByTeam ) {
+    private func prepareToolbar(firstName: String, lastName: String, messageTitle: String, message: FindMessagesByTeamQuery.Data.Team.Message) {
         toolbar = Toolbar(leftViews: [avatarImageView], rightViews: [commentsCountLabel, commentIcon, moreButton])
         
         toolbar.title = messageTitle
@@ -173,9 +175,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     // Set image for a given message.
-    private func setImage(for message: FindMessagesByTeamQuery.Data.FindMessagesByTeam, completion: @escaping (UIImage) -> Void) {
+    private func setImage(for message: FindMessagesByTeamQuery.Data.Team.Message, completion: @escaping (UIImage) -> Void) {
         // Download image and display as user avatar string of image url
-        guard let avatar = message.user.avatar else {
+        guard let avatar = message.creator.profilePic else {
             let image = UIImage(named: "User Avatar Image")!
             completion(image)
             return
@@ -230,9 +232,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     weak var delegate: MessageCellDelegate?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
-    var message: FindMessagesByTeamQuery.Data.FindMessagesByTeam? {
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
+    var message: FindMessagesByTeamQuery.Data.Team.Message? {
         didSet {
             self.updateViews()
         }
