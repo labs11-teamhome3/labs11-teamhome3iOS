@@ -47,8 +47,8 @@ class FolderContentsTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let document = documents?[indexPath.row],
-            let id = document.id else {return}
+        guard let document = documents?[indexPath.row] else {return}
+        let id = document.id
         if editingStyle == .delete {
             apollo.perform(mutation: DeleteDocumentMutation(docID: id)) { (_, error) in
                 if let error = error {
@@ -83,8 +83,8 @@ class FolderContentsTableViewController: UITableViewController {
     
     private func loadDocuments(with apollo: ApolloClient) {
         
-        guard let folder = folder,
-            let folderID = folder.id else { return }
+        guard let folder = folder else { return }
+        let folderID = folder.id
         
         // Fetch messages using team's id
         watcherFolderContents = apollo.watch(query: FindDocumentsByFolderQuery(folderID: folderID)) { (result, error) in
@@ -127,7 +127,7 @@ class FolderContentsTableViewController: UITableViewController {
     
     var folder: FindFoldersByTeamQuery.Data.FindFoldersByTeam?
     
-    var documents: [FindDocumentsByFolderQuery.Data.FindDocumentsByFolder?]?{
+    var documents: [FindDocumentsByFolderQuery.Data.FindFolder.Document?]?{
         didSet{
             if isViewLoaded {
                 DispatchQueue.main.async {
@@ -145,8 +145,8 @@ class FolderContentsTableViewController: UITableViewController {
     private var gradientLayer: CAGradientLayer!
     
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
     var deleteIndexPath: IndexPath?
 
 

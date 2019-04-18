@@ -13,7 +13,7 @@ class SubscriberCollectionViewCell: UICollectionViewCell {
     
     private func updateViews() {
         guard let subscriber = subscriber,
-            let avatar = subscriber.avatar
+            let avatar = subscriber.profilePic
         else { return }
         
         
@@ -36,7 +36,7 @@ class SubscriberCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var subscriber: FindMessageByIdQuery.Data.FindMessage.SubscribedUser? {
+    var subscriber: FindMessageByIdQuery.Data.Message.SubscribedUser? {
         didSet {
             self.updateViews()
         }
