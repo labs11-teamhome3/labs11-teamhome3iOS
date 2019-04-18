@@ -1,31 +1,13 @@
 query FindMessageById($id: ID!) {
-    message(id: $id) {
-        id
-        title
-        creator {
-            name
-            profilePic
+        message(id: $id) {
+                id
+                createdAt
+                title
+                creator {
+                    name
+                    profilePic
+                }
         }
-        inTeam {
-            teamName
-            id
-        }
-        content
-        images
-        tag {
-            name
-            id
-        }
-        comments{
-            id
-        }
-        subscribedUsers {
-            name
-            profilePic
-            id
-        }
-        createdAt
-    }
 }
 
 fragment messageComment on addMessageComment(messageId: $messageId, userId:$userId, content: $content, image:$image) {

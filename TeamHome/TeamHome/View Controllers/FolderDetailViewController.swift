@@ -42,7 +42,7 @@ class FolderDetailViewController: UIViewController, TabBarChildrenProtocol {
     private func displayTeamInfo() {
         guard let team = team else { return }
         
-        teamNameLabel.text = team.name
+        teamNameLabel.text = team.teamName
     }
 
     // MARK: - Navigation
@@ -61,8 +61,8 @@ class FolderDetailViewController: UIViewController, TabBarChildrenProtocol {
     @IBOutlet weak var teamNameLabel: UILabel!
     
     
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
+    var team:TeamsByUserQuery.Data.TeamsByUser?
     var apollo: ApolloClient?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var currentUser: CurrentUserQuery.Data.User?
 
 }
