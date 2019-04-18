@@ -1938,6 +1938,97 @@ public final class FindTagsByTeamQuery: GraphQLQuery {
   }
 }
 
+public final class MoveToFolderMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation MoveToFolder($id: ID!, $title: String) {\n  updateFolderTitle(folderId: $id, title: $title) {\n    __typename\n    id\n    title\n  }\n}"
+
+  public var id: GraphQLID
+  public var title: String?
+
+  public init(id: GraphQLID, title: String? = nil) {
+    self.id = id
+    self.title = title
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id, "title": title]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("updateFolderTitle", arguments: ["folderId": GraphQLVariable("id"), "title": GraphQLVariable("title")], type: .object(UpdateFolderTitle.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(updateFolderTitle: UpdateFolderTitle? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "updateFolderTitle": updateFolderTitle.flatMap { (value: UpdateFolderTitle) -> ResultMap in value.resultMap }])
+    }
+
+    public var updateFolderTitle: UpdateFolderTitle? {
+      get {
+        return (resultMap["updateFolderTitle"] as? ResultMap).flatMap { UpdateFolderTitle(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "updateFolderTitle")
+      }
+    }
+
+    public struct UpdateFolderTitle: GraphQLSelectionSet {
+      public static let possibleTypes = ["Folder"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("title", type: .nonNull(.scalar(String.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, title: String) {
+        self.init(unsafeResultMap: ["__typename": "Folder", "id": id, "title": title])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var title: String {
+        get {
+          return resultMap["title"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "title")
+        }
+      }
+    }
+  }
+}
+
 public final class FindCommentsByMessageQuery: GraphQLQuery {
   public let operationDefinition =
     "query FindCommentsByMessage($messageId: ID!) {\n  findMessageCommentsByMessage(messageId: $messageId) {\n    __typename\n    id\n    user {\n      __typename\n      name\n      profilePic\n      id\n    }\n    content\n    image\n    likes {\n      __typename\n      id\n      name\n    }\n    createdAt\n  }\n}"
