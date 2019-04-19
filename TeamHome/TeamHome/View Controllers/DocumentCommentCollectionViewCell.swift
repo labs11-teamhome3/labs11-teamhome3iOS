@@ -12,7 +12,7 @@ import Cloudinary
 import Material
 import Toucan
 
-typealias DocComment = FindCommentsByDocumentQuery.Data.FindDocCommentsByDocument
+typealias DocComment = FindCommentsByDocumentQuery.Data.FindDocumentComment
 
 protocol DocumentCommentCollectionCellDelegate: class {
     func likeComment(cell: DocumentCommentCollectionViewCell)
@@ -103,7 +103,7 @@ class DocumentCommentCollectionViewCell: UICollectionViewCell {
     private func prepareToolbar(comment: DocComment) {
         toolbar = Toolbar(leftViews: [avatarImageView])
         
-        toolbar.title = "\(comment.user.firstName) \(comment.user.lastName)"
+        toolbar.title = "\(comment.user.name)"
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = Appearance.darkMauveColor
         
@@ -198,7 +198,7 @@ class DocumentCommentCollectionViewCell: UICollectionViewCell {
     // Set image for a given message.
     private func setImage(for comment: DocComment, completion: @escaping (UIImage) -> Void) {
         // Download image and display as user avatar string of image url
-        guard let avatar = comment.user.avatar else {
+        guard let avatar = comment.user.profilePic else {
             let image = UIImage(named: "User Avatar Image")!
             completion(image)
             return
@@ -229,7 +229,7 @@ class DocumentCommentCollectionViewCell: UICollectionViewCell {
     private var hasLiked: Bool?
     
     weak var delegate: DocumentCommentCollectionCellDelegate?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var currentUser: CurrentUserQuery.Data.User?
     var comment: DocComment? {
         didSet {
             self.updateViews()
