@@ -70,11 +70,12 @@ class CommentsCollectionViewController: UICollectionViewController, AddNewCommen
     
     func likeComment(cell: CommentCollectionViewCell) {
         guard let apollo = apollo,
-            let comment = cell.comment,
-            let commentId = comment.id else { return }
+            let currentUserId = currentUser?.id,
+            let comment = cell.comment  else { return }
+         let commentId = comment.id
         
         // Check if already liked
-        apollo.perform(mutation: LikeCommentMutation(id: commentId), queue: DispatchQueue.global()) { (result, error) in
+        apollo.perform(mutation: LikeCommentMutation(id: commentId, userId: currentUserId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }
@@ -88,11 +89,12 @@ class CommentsCollectionViewController: UICollectionViewController, AddNewCommen
     
     func unlikeComment(cell: CommentCollectionViewCell) {
         guard let apollo = apollo,
-            let comment = cell.comment,
-            let commentId = comment.id else { return }
+            let currentUserId = currentUser?.id,
+            let comment = cell.comment else { return }
+         let commentId = comment.id
         
         // Check if already liked
-        apollo.perform(mutation: UnlikeCommentMutation(id: commentId), queue: DispatchQueue.global()) { (result, error) in
+        apollo.perform(mutation: UnlikeCommentMutation(id: commentId, userId: currentUserId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }
@@ -106,10 +108,10 @@ class CommentsCollectionViewController: UICollectionViewController, AddNewCommen
     
     func deleteComment(cell: CommentCollectionViewCell) {
         guard let apollo = apollo,
-            let comment = cell.comment,
-            let id = comment.id else { return }
+            let comment = cell.comment else { return }
+         let commentId = comment.id
         
-        apollo.perform(mutation: DeleteCommentMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+        apollo.perform(mutation: DeleteCommentMutation(id: commentId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }

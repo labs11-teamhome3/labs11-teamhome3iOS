@@ -57,8 +57,8 @@ class FoldersTableViewController: UITableViewController {
     
     private func loadFolders(with apollo: ApolloClient) {
         
-        guard let team = team,
-            let teamID = team.id else { return }
+        guard let team = team else { return }
+        let teamID = team.id
         
         watcherFolder = apollo.watch(query: FindFoldersByTeamQuery(teamID: teamID)) { (result, error) in
             if let error = error {
@@ -112,8 +112,8 @@ class FoldersTableViewController: UITableViewController {
     }
     
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
     var deleteIndexPath: IndexPath?
 
 }

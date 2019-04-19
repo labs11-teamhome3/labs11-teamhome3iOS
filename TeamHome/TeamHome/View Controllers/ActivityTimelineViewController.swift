@@ -82,11 +82,10 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     
     // MARK: - Private Methods
     
-    private func loadActivity(with apollo: ApolloClient, team: FindTeamsByUserQuery.Data.FindTeamsByUser) {
+    private func loadActivity(with apollo: ApolloClient, team: TeamsByUserQuery.Data.TeamsByUser) {
         
-        teamNameLabel.text = team.name
-        
-        guard let teamId = team.id else { return }
+        teamNameLabel.text = team.teamName
+        let teamId = team.id
         
         _ = apollo.watch(query: FindActivityByTeamQuery(teamId: teamId), resultHandler: { (result, error) in
             if let error = error {
@@ -94,7 +93,7 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
                 return
             }
             
-            guard let messages = result?.data?.findMessagesByTeam else { return }
+            guard let messages = result?.data?.messages else { return }
             
             self.messages = messages.reversed()
             
@@ -118,7 +117,7 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
                     }
                     
                     guard let result = result,
-                        let comments = result.data?.findMsgCommentsByMessage else { return }
+                        let comments = result.data?.findMessageCommentsByMessage else { return }
                     self.appendMessageActivity(with: comments)
                     dispatchGroup.leave()
                 })
@@ -140,9 +139,8 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
                 return
             }
             
-            guard let result = result,
-                let data = result.data,
-                let user = data.currentUser else { return }
+            guard let result = result, let data = result.data else { return }
+            let user = data.user
             
             self.currentUser = user
         }
@@ -166,7 +164,7 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
             }
         })
     }
-    private func appendMessageActivity(with comments: [FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage?]) {
+    private func appendMessageActivity(with comments: [FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage?]) {
         
         for comment in comments {
             let activity = Activity(message: nil, comment: comment, document: nil, date: comment?.createdAt)
@@ -186,8 +184,8 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     // MARK: - Properties
     private var label: UILabel!
     
-    private var messages: [FindActivityByTeamQuery.Data.FindMessagesByTeam?]?
-    private var comments: [FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage?] = []
+    private var messages: [FindActivityByTeamQuery.Data.Message?]?
+    private var comments: [FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage?] = []
     private var activityTimeline: [Activity]?
     private var sortedActivity: [Activity]? {
         didSet {
@@ -198,8 +196,8 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     }
     
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
     var gradientLayer: CAGradientLayer!
     
     @IBOutlet weak var teamNameLabel: UILabel!

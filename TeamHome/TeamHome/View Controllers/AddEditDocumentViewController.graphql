@@ -1,4 +1,4 @@
-#mutation AddNewDocument($title: String!, $doc_url: String!, $teamId: ID, $folderId:ID, $textContent: String!,$tagId: ID) {
+mutation AddNewDocument($title: String!, $doc_url: String!,userId:ID!, $teamId: ID!, $folderId:ID, $textContent: String!,$tagId: ID) {
     addDocument(
                 title: $title
                 doc_url: $doc_url
@@ -12,14 +12,14 @@
     }
 }
 
-#mutation UpdateDocument($id: ID!, $title: String, $doc_url: String, $folder: String, $textContent: String,$tag: String) {
+mutation UpdateDocument($id: ID!, $title: String, $doc_url: String, $folder: ID, $textContent: String,$tag: ID) {
     updateDocument(
                 documentId: $id
                 title: $title
                 doc_url: $doc_url
                 folderId: $folderId
                 textContent: $textContent
-                tag: $tag
+                tagId: $tag
                 ) {
         title
         id

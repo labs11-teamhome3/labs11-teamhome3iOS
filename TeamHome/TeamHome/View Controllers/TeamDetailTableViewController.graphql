@@ -19,3 +19,4 @@ mutation kickUser($teamId: ID!, $userId: ID!) {
     }
 }
 
+

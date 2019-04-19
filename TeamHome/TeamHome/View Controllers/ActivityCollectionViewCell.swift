@@ -60,7 +60,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(comment.user.firstName) \(comment.user.lastName)"
+            toolbar.title = "\(comment.user.name)"
             toolbar.detail = "added a comment"
             
         }
@@ -80,14 +80,14 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(document.user.firstName) \(document.user.lastName)"
+            toolbar.title = "\(document.user.name)"
             toolbar.detail = "added a document"
         }
         
         if activity.message != nil {
             guard let message = activity.message else { return }
             
-            if message.user.id == currentUser.id {
+            if message.creator.id == currentUser.id {
                 toolbar = Toolbar(rightViews: [avatarImageView])
                 
                 toolbar.titleLabel.textAlignment = .right
@@ -101,7 +101,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(message.user.firstName) \(message.user.lastName)"
+            toolbar.title = "\(message.creator.name)"
             toolbar.detail = "added a message: \(message.title)"
         }
         
@@ -216,7 +216,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         
         if activity.comment != nil {
             guard let comment = activity.comment,
-                let avatar = comment.user.avatar else {
+                let avatar = comment.user.profilePic else {
                 let image = UIImage(named: "User Avatar Image")!
                 completion(image)
                 return
@@ -241,7 +241,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
             }
         } else {
             guard let message = activity.message,
-                let avatar = message.user.avatar else {
+                let avatar = message.creator.profilePic else {
                     let image = UIImage(named: "User Avatar Image")!
                     completion(image)
                     return
@@ -269,7 +269,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var currentUser: CurrentUserQuery.Data.User?
     var activity: Activity? {
         didSet {
             self.updateViews()

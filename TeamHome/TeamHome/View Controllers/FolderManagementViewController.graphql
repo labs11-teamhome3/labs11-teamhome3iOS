@@ -1,9 +1,5 @@
 mutation MoveToFolder($id: ID!, $title: String){
-    updateFolderTitle(
-                  folderId: $id
-                  title: $title
-                  
-                  }) {
+    updateFolderTitle(folderId: $id, title: $title) {
         id
         title
     }

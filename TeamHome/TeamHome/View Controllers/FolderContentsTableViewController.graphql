@@ -1,59 +1,22 @@
 query FindDocumentsByFolder($folderID: ID!){
-    findFolder( id: $folderID ){
+    findFolder(id: $folderID){
         id
-        createdAt
-        documents {
+        documents{
             id
-            createdAt
             doc_url
-            user
-            folder
-            team
             title
             textContent
-            tag
             images
-            comments {
+            comments{
                 id
-                createdAt
-                user
-                document
                 content
-                image
-                likes
             }
+            createdAt
         }
-        updatedAt
-    }
-}
-
-#Old Query
-#query FindDocumentsByFolder($folderID: ID!){
-    findDocumentsByFolder(input: {
-        folder: $folderID
-    }){
-        _id
-        doc_url
         user{
-            firstName
-            lastName
-            avatar
-            _id
+            name
+            profilePic
+            id
         }
-        folder{
-            _id
-            title
-        }
-        title
-        textContent
-        images
-        comments
-        subscribedUsers{
-            firstName
-            lastName
-            avatar
-        }
-        createdAt
-        updatedAt
     }
 }

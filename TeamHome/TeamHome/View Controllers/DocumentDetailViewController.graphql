@@ -1,33 +1,13 @@
-mutation AddDocumentComment($userId: ID, $documentId: ID!, $comment: String!){
+mutation AddDocumentComment($userId: ID!, $documentId: ID!, $comment: String!){
     addDocumentComment(
-        userId: $userId
-        document:$document
-        content: $comment
-            ) {
-        id
-        content
+        userId: $userId, documentId:$documentId, content: $comment) {
+                id
+                content
     }
 }
 
-#mutation SubscribeToDocument($documentID: ID!){
-    subcribeDocument(input: {
-                 id: $documentID
-                 }){
-        _id
-    }
-}
-#mutation UnsubscribeFromDocument($documentID: ID!){
-    unsubscribeDoc(input: {
-                 id: $documentID
-                 }){
-        _id
-    }
-}
-
-query FindDocumentInput($docID: ID!){
-    findDocument(
-                 id:$docID
-                 ) {
+query FindDocumentInput($docId: ID!) {
+    findDocument(id:$docId) {
         id
         doc_url
         user{
@@ -46,13 +26,16 @@ query FindDocumentInput($docID: ID!){
             name
         }
         images
-        comments
+        comments{
+            id
+            content
+        }
         subscribedUsers{
             id
             name
-            profilepic
+            profilePic
         }
         createdAt
-#updatedAt
+
     }
 }

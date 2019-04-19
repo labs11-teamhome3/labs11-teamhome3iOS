@@ -1,17 +1,9 @@
-#query GetAllUsers(){
-    users {
-        id
-        name
-        authId
-    }
-}
-
-#mutation AddUserToTeam($userId: ID!, $teamId: ID!) {
+#mutation InviteUserToTeamWithEmail($id: ID!, $email: String) {
     addUserToTeam(input: {
-               userId: $userId
-               teamId: $teamId
+               id: $id
+               email: $email
                }) {
-        id
+        _id
     }
 }
 
@@ -23,14 +15,3 @@
         _id
     }
 }
-
-#mutation InviteUserToTeamWithEmail($id: ID!, $email: String) {
-    addUserToTeam(input: {
-            id: $id
-            email: $email
-        }) {
-        _id
-    }
-}
-
-#addUserToTeam(userId:ID!, teamId:ID!) : Team

@@ -63,51 +63,52 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             let apollo = apollo else { return }
         let id = currentUser.id
         
-        if isSubscribed {
-            apollo.perform(mutation: UnsubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
-                if let error = error {
-                    NSLog("\(error)")
-                    return
-                }
-
-                guard let result = result else { return }
-
-                print(result)
-
-                DispatchQueue.main.async {
-                    self.isSubscribed = false
-                    self.subscribeButton.setTitle("Subscribe", for: .normal)
-                }
-            }
-        } else {
-            apollo.perform(mutation: SubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
-                if let error = error {
-                    NSLog("\(error)")
-                    return
-                }
-                
-                guard let result = result else { return }
-                
-                print(result)
-                
-                DispatchQueue.main.async {
-                    self.isSubscribed = true
-                    self.subscribeButton.setTitle("Unsubscribe", for: .normal)
-                }
-            }
-        }
+//        if isSubscribed {
+//            apollo.perform(mutation: UnsubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+//                if let error = error {
+//                    NSLog("\(error)")
+//                    return
+//                }
+//
+//                guard let result = result else { return }
+//
+//                print(result)
+//
+//                DispatchQueue.main.async {
+//                    self.isSubscribed = false
+//                    self.subscribeButton.setTitle("Subscribe", for: .normal)
+//                }
+//            }
+//        } else {
+//            apollo.perform(mutation: SubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+//                if let error = error {
+//                    NSLog("\(error)")
+//                    return
+//                }
+//
+//                guard let result = result else { return }
+//
+//                print(result)
+//
+//                DispatchQueue.main.async {
+//                    self.isSubscribed = true
+//                    self.subscribeButton.setTitle("Unsubscribe", for: .normal)
+//                }
+//            }
+//        }
     }
     
     @IBAction func submitCommit(_ sender: Any) {
         
         guard let apollo = apollo,
             let message = message,
-            let messageId = message.id,
+            let userId = currentUser?.id,
             let commentContent = commentTextView.text else { return }
+        let messageId = message.id
         
         guard let imageData = imageData else {
             
-            apollo.perform(mutation: CreateCommentMutation(message: messageId, content: commentContent), queue: DispatchQueue.global()) { (result, error) in
+            apollo.perform(mutation: CreateCommentMutation(messageId: messageId, userId: userId, content: commentContent), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
@@ -145,9 +146,10 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             
             // Unwrap image url.
             guard let result = result,
+                let userId = self.currentUser?.id,
                 let url = result.url else { return }
             
-            apollo.perform(mutation: CreateImageCommentMutation(message: messageId, content: commentContent, image: url), queue: DispatchQueue.global()) { (result, error) in
+            apollo.perform(mutation: CreateImageCommentMutation( messageId: messageId, userId: userId, content: commentContent, image: url), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
@@ -318,8 +320,8 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             
             guard let result = result,
                 let data = result.data,
-                let message = data.findMessage,
-                let id = message.id else { return }
+                let message = data.message else { return }
+             let id = message.id
             
             self.message = message
             self.messageId = id
@@ -339,8 +341,8 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         
         
         messageTitleLabel.text = message.title
-        firstNameLabel.text = message.user.firstName
-        lastNameLabel.text = message.user.lastName
+        firstNameLabel.text = message.creator.name
+        //lastNameLabel.text = message.user.lastName
         dateLabel.text = date
         messageBodyLabel.text = message.content
         
@@ -352,7 +354,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         // Download image and display as user avatar
-        guard let avatar = message.user.avatar else { return }
+        guard let avatar = message.user.profilePic else { return }
         
         let downloader = cloudinary.createDownloader()
         
@@ -427,7 +429,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             
             guard let result = result,
                 let data = result.data,
-                let message = data.findMessage else { return }
+                let message = data.message else { return }
             
             self.message = message
         })
@@ -461,7 +463,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     // MARK: - Properties
     
     private var isSubscribed: Bool = false
-    private var message: FindMessageByIdQuery.Data.FindMessage? {
+    private var message: FindMessageByIdQuery.Data.Message? {
         didSet {
             DispatchQueue.main.async {
                 if self.isViewLoaded {
@@ -470,7 +472,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             }
         }
     }
-    private var subscribers: [FindMessageByIdQuery.Data.FindMessage.SubscribedUser?]? {
+    private var subscribers: [FindMessageByIdQuery.Data.Message.SubscribedUser?]? {
         didSet {
             DispatchQueue.main.async {
                 self.figureOutIfSubscribed()
@@ -480,8 +482,8 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
 
     var messageId: GraphQLID?
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
     var imageData: Data?
     var delegate: AddNewCommentDelegate?
     

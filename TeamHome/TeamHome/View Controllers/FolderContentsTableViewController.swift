@@ -47,8 +47,8 @@ class FolderContentsTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let document = documents?[indexPath.row],
-            let id = document.id else {return}
+        guard let document = documents?[indexPath.row] else {return}
+        let id = document.id
         if editingStyle == .delete {
             apollo.perform(mutation: DeleteDocumentMutation(docID: id)) { (_, error) in
                 if let error = error {
@@ -110,8 +110,12 @@ class FolderContentsTableViewController: UITableViewController {
     
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
+        
         gradientLayer.frame = self.view.bounds
+        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        
+        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
@@ -119,8 +123,10 @@ class FolderContentsTableViewController: UITableViewController {
     }
     
     // MARK: - Properties
+    
     var folder: FindFoldersByTeamQuery.Data.FindFoldersByTeam?
-    var documents: [FindDocumentsByFolderQuery.Data.FindDocumentsByFolder?]?{
+    
+    var documents: [FindDocumentsByFolderQuery.Data.FindFolder.Document?]?{
         didSet{
             if isViewLoaded {
                 DispatchQueue.main.async {
@@ -136,9 +142,10 @@ class FolderContentsTableViewController: UITableViewController {
     }
     
     private var gradientLayer: CAGradientLayer!
+    
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
     var deleteIndexPath: IndexPath?
 
 

@@ -10,8 +10,8 @@ import Foundation
 import Apollo
 
 struct Activity {
-    let message: FindActivityByTeamQuery.Data.FindMessagesByTeam?
-    let comment: FindCommentsByMessageQuery.Data.FindMsgCommentsByMessage?
+    let message: FindActivityByTeamQuery.Data.Message?
+    let comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage?
     let document: FindDocumentsByTeamQuery.Data.FindDocumentsByTeam?
     let date: String?
 }
