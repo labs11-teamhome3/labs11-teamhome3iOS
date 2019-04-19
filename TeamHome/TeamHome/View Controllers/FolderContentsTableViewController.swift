@@ -119,7 +119,6 @@ class FolderContentsTableViewController: UITableViewController {
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
