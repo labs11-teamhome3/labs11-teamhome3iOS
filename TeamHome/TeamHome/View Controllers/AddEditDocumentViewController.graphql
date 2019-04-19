@@ -1,27 +1,25 @@
-mutation AddNewDocument($title: String!, $doc_url: String!,userId:ID!, $teamId: ID!, $folderId:ID, $textContent: String!,$tagId: ID) {
-    addDocument(
-                title: $title
-                doc_url: $doc_url
-                teamId: $teamId
-                folderId: $folderId
-                textContent: $textContent
-                tagId: $tagId
-                ) {
-        title
-        id
+mutation AddNewDocument($title: String!, $doc_url: String!,$userId:ID!, $teamId: ID!, $textContent: String!,$tagId: ID) {
+    addDocument(title: $title, doc_url: $doc_url,teamId: $teamId, userId: $userId, textContent: $textContent, tagId: $tagId) {
+            title
+            id
     }
 }
 
-mutation UpdateDocument($id: ID!, $title: String, $doc_url: String, $folder: ID, $textContent: String,$tag: ID) {
-    updateDocument(
-                documentId: $id
-                title: $title
-                doc_url: $doc_url
-                folderId: $folderId
-                textContent: $textContent
-                tagId: $tag
-                ) {
-        title
+mutation UpdateDocument($id: ID!, $title: String, $doc_url: String, $folderId: ID, $textContent: String,$tag: ID) {
+    updateDocument(documentId: $id, title: $title, doc_url: $doc_url, folderId: $folderId, textContent: $textContent, tagId: $tag) {
+            title
+            id
+    }
+}
+
+mutation CreateNewTag($name: String!, $teamId: ID!) {
+    addTag(name: $name, teamId: $teamId){
         id
+        createdAt
+        name
+        team{
+            id
+            teamName
+        }
     }
 }

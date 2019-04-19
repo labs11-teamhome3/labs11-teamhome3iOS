@@ -33,8 +33,8 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         }
         
         guard let apollo = apollo,
-            let team = team,
-            let teamId = team.id else { return }
+            let team = team else { return }
+        let teamId = team.id
         
         fetchAllTags(with: apollo, for: teamId)
     }
@@ -42,16 +42,16 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
     //MARK: - IBActions
     @IBAction func submitDocument(_ sender: Any) {
         guard let title = documentTitleTextField.text,
-            let link = documentLinkTextField.text
+            let link = documentLinkTextField.text,
             //            ,
             //        let tagID = findSelectedTag()
-            else { return}
+        let userId = currentUser?.id else { return}
         let note = documentNotesTextView.text ?? ""
         
         if let document = document {
             performEditMutation(document: document, title: title, doc_url: link, textContent: note, tagID: findSelectedTag())
         } else {
-            performAddMutation(title: title, doc_url: link, team: team.id!, textContent: note, tagID:  findSelectedTag())
+            performAddMutation(title: title, doc_url: link, teamId: team.id, textContent: note, tagID: findSelectedTag(), userId: userId)
         }
         
         watcher?.refetch()
@@ -66,8 +66,8 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
     @IBAction func createTag(_ sender: Any) {
         guard let apollo = apollo,
             let team = team,
-            let teamId = team.id,
             let tag = tagsTextField.text else { return }
+        let teamId = team.id
         
         apollo.perform(mutation: CreateNewTagMutation(name: tag, teamId: teamId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
@@ -169,18 +169,19 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
     
     private func performEditMutation(document: Document, title: String, doc_url: String, textContent: String, tagID: String?){
         if let tagID = tagID {
-            apollo.perform(mutation: UpdateDocumentMutation(id: document.id!, title: title, doc_url: doc_url, textContent: textContent, tag: tagID))
+            apollo.perform(mutation: UpdateDocumentMutation(id: document.id, title: title, doc_url: doc_url, textContent: textContent, tag: tagID))
             
         } else {
-            apollo.perform(mutation: UpdateDocumentMutation(id: document.id!, title: title, doc_url: doc_url, textContent: textContent))
+            apollo.perform(mutation: UpdateDocumentMutation(id: document.id, title: title, doc_url: doc_url, textContent: textContent))
         }
     }
     
-    private func performAddMutation(title: String, doc_url: String, team: String, textContent: String, tagID: String?){
+    private func performAddMutation(title: String, doc_url: String, teamId: String, textContent: String, tagID: String?, userId: String){
+        
         if let tagID = tagID {
-            apollo.perform(mutation: AddNewDocumentMutation(title: title, doc_url: doc_url, team: team, textContent: textContent, tag: tagID))
+            apollo.perform(mutation: AddNewDocumentMutation(title: title, doc_url: doc_url, userId: userId, teamId: tagID, textContent: textContent, tagId: tagID))
         } else {
-            apollo.perform(mutation: AddNewDocumentMutation(title: title, doc_url: doc_url, team: team, textContent: textContent))
+            apollo.perform(mutation: AddNewDocumentMutation(title: title, doc_url: doc_url, userId: userId, teamId: teamId, textContent: textContent))
         }
     }
     
@@ -240,10 +241,11 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
     }
     //MARK: - Properties
     var apollo: ApolloClient!
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
+    var team: TeamsByUserQuery.Data.TeamsByUser!
     
     var document: Document?
     
+    private var currentUser: CurrentUserQuery.Data.User?
     private var tagSelected: String?
     private var tagSelectedId: GraphQLID?
     private var tags: [FindTagsByTeamQuery.Data.FindTagsByTeam?]?

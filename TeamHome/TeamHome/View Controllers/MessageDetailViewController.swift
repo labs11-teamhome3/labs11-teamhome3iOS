@@ -354,7 +354,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         // Download image and display as user avatar
-        guard let avatar = message.user.profilePic else { return }
+        guard let avatar = message.creator.profilePic else { return }
         
         let downloader = cloudinary.createDownloader()
         
