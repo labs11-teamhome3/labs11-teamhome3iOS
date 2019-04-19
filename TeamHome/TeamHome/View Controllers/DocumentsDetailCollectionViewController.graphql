@@ -1,7 +1,5 @@
 query FindCommentsByDocument($documentID: ID!) {
-    findDocumentComment(
-                        id: $documentID
-                        ) {
+    findDocumentComment(id: $documentID) {
         id
         user {
             name
@@ -15,32 +13,23 @@ query FindCommentsByDocument($documentID: ID!) {
             name
         }
         createdAt
-# updatedAt
     }
 }
 
-#mutation likeDocumentComment($id: ID!, $userId: ID!) {
-    likeDocumentComment(
-                   commentId: $id
-                userId: $userId
-                   ) {
+mutation likeDocumentComment($id: ID!, $userId: ID!) {
+    likeDocumentComment(commentId: $id, userId: $userId) {
         id
     }
 }
 
 mutation unlikeDocumentComment($id: ID!, $userId: ID!) {
-    unlikeDocumentComment(
-                     commentId: $id
-                    userId:$userId
-                     ) {
+    unlikeDocumentComment(commentId: $id, userId:$userId) {
         id
     }
 }
 
-#mutation deleteDocumentComment($id: ID!) {
-    deleteDocumentComment(
-                     documentCommentId: $id
-                     ) {
+mutation deleteDocumentComment($id: ID!) {
+    deleteDocumentComment(documentCommentId: $id) {
         id
     }
 }

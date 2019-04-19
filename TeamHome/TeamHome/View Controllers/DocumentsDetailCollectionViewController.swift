@@ -126,9 +126,8 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
                 NSLog("\(error)")
             }
             
-            guard let result = result,
-                let comments = result.data?.findDocCommentsByDocument else { return }
-            
+            guard let result = result?.data else { return }
+             let comments = [result.findDocumentComment]
             self.comments = comments
         })
     }
@@ -158,10 +157,10 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
     
     var apollo: ApolloClient?
     var documentID: GraphQLID?
-    var currentUser: CurrentUserQuery.Data.CurrentUser?
+    var currentUser: CurrentUserQuery.Data.User?
     var label: UILabel!
     
-    var comments: [FindCommentsByDocumentQuery.Data.FindDocCommentsByDocument?]? {
+    var comments:[FindCommentsByDocumentQuery.Data.FindDocumentComment?]? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
