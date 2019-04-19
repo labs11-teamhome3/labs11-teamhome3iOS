@@ -48,8 +48,8 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         updateViews()
         
         guard let apollo = apollo,
-            let team = team,
-            let teamId = team.id else { return }
+            let team = team else { return }
+        let teamId = team.id
         
         fetchAllTags(with: apollo, for: teamId)
     }
@@ -98,8 +98,8 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     @IBAction func createTag(_ sender: Any) {
         guard let apollo = apollo,
             let team = team,
-            let teamId = team.id,
             let tag = tagsTextField.text else { return }
+        let teamId = team.id
         
         apollo.perform(mutation: CreateNewTagMutation(name: tag, teamId: teamId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
@@ -129,23 +129,25 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         // Unwrap apollo client and other message details.
         guard let apollo = apollo,
             let team = team,
-            let teamId = team.id,
+            let userId = currentUser?.id,
             let messageTitle = messageTitleTextField.text,
             let content = messageContentTextView.text,
             let tagId = findSelectedTag() else { return }
+        let teamId = team.id
         
         // Check if message already exists.
-        guard let message = message,
-            let messageId = message.id else {
+        guard let message = message else {
+            
+            
                 
             // Create a new message.
-            createNewMessage(with: apollo, messageTitle: messageTitle, teamId: teamId, content: content, tagId: tagId)
+            createNewMessage(with: apollo, messageTitle: messageTitle, teamId: teamId, userId: userId, content: content)
             return
         }
-        
+        let messageId = message.id
         // Update message.
-        updateMessage(with: apollo, messageId: messageId, messageTitle: messageTitle, teamId: teamId, content: content, tagId: tagId)
         
+        updateMessage(with: apollo, messageId: messageId, messageTitle: messageTitle, teamId: teamId, content: content, tagId: tagId)
     }
     
     // Cancel create new message and return to message board.
@@ -352,13 +354,13 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         return nil
     }
     
-    private func createNewMessage(with apollo: ApolloClient, messageTitle: String, teamId: GraphQLID, content: String, tagId: String) {
+    private func createNewMessage(with apollo: ApolloClient, messageTitle: String, teamId: GraphQLID, userId: String, content: String) {
         
         // Check to see if user selected image.
         guard let imageData = imageData else {
             
             // If no photo is selected, create message without images attached.
-            apollo.perform(mutation: AddNewMessageMutation(title: messageTitle, team: teamId, content: content, tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
+            apollo.perform(mutation: AddNewMessageMutation(title: messageTitle, teamId: teamId,  userId: userId, content: content), queue: DispatchQueue.global()) { (result, error) in
                 // Check for errors.
                 if let error = error {
                     NSLog("\(error)")
@@ -367,7 +369,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 
                 guard let result = result,
                     let data = result.data,
-                    let message = data.addMessage else { return }
+                    let message = data.createMessage else { return }
                 
                 print(message.title)
                 
@@ -403,27 +405,27 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 let url = result.url else { return }
             
             // Pass image url to Apollo client to create message.
-            apollo.perform(mutation: AddNewImagesMessageMutation(title: messageTitle, team: teamId, content: content, images: [url], tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
-                // Check for errors.
-                if let error = error {
-                    NSLog("\(error)")
-                    return
-                }
-                
-                guard let result = result,
-                    let data = result.data,
-                    let message = data.addMessage else { return }
-                
-                print(message.title)
-                
-                DispatchQueue.main.async {
-                    // Call messages watcher to refetch all messages.
-                    messagesWatcher?.refetch()
-                    
-                    // Go back to previous view controller.
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
+//            apollo.perform(mutation: AddNewImagesMessageMutation(title: messageTitle, team: teamId, content: content, images: [url], tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
+//                // Check for errors.
+//                if let error = error {
+//                    NSLog("\(error)")
+//                    return
+//                }
+//
+//                guard let result = result,
+//                    let data = result.data,
+//                    let message = data.addMessage else { return }
+//
+//                print(message.title)
+//
+//                DispatchQueue.main.async {
+//                    // Call messages watcher to refetch all messages.
+//                    messagesWatcher?.refetch()
+//
+//                    // Go back to previous view controller.
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
         }
     }
     
@@ -432,15 +434,18 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         // Check to see if user selected image.
         guard let imageData = imageData else {
             
+            //COMEBACK To this is Very Important
             if let imageURL = imageURL {
                 
-                apollo.perform(mutation: UpdateMessageMutation(id: messageId, title: messageTitle, teamId: teamId, content: content, images: [imageURL], tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
+                apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()) { (result, error) in
                     // Check for errors.
+                    
+                    
                     if let error = error {
                         NSLog("\(error)")
                         return
                     }
-                    
+            
                     guard let result = result,
                         let data = result.data,
                         let message = data.updateMessage else { return }
@@ -460,7 +465,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 }
                 
             } else {
-                apollo.perform(mutation: UpdateMessageMutation(id: messageId, title: messageTitle, teamId: teamId, content: content, tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
+                apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()){ (result, error) in
                     // Check for errors.
                     if let error = error {
                         NSLog("\(error)")
@@ -508,7 +513,9 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             guard let result = result,
                 let url = result.url else { return }
             
-            apollo.perform(mutation: UpdateMessageMutation(id: messageId, title: messageTitle, teamId: teamId, content: content, images: [url], tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
+            //apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId))
+            
+            apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()) { (result, error) in
                 // Check for errors.
                 if let error = error {
                     NSLog("\(error)")
@@ -542,10 +549,11 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     private var tags: [FindTagsByTeamQuery.Data.FindTagsByTeam?]?
     private var tagsWatcher: GraphQLQueryWatcher<FindTagsByTeamQuery>?
     
+    private var currentUser: CurrentUserQuery.Data.User?
     weak var delegate: EditMessageDelegate?
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
-    var message: FindMessageByIdQuery.Data.FindMessage? {
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var message: FindMessageByIdQuery.Data.Message? {
         didSet {
             DispatchQueue.main.async {
                 self.updateViews()

@@ -1,46 +1,31 @@
 mutation AddNewMessage($title: String!, $teamId: ID!, $userId: ID!, $content: String!) {
     createMessage(
                title: $title
-               teamId: $team
+               teamId: $teamId
                 userId:$userId
                content: $content
               ) {
         title
         id
-    }
-}
-
-#mutation AddNewImagesMessage($title: String!, $teamId: ID!, $content: String!, $images: [String], $tagId: String) {
-    addMessage(
-               title: $title
-               teamId: $teamId
-               content: $content
-               ) {
-        title
         images
-
+        tag {
+            id
+        }
     }
 }
 
-mutation UpdateMessage($id: ID!, $title: String) {
-    updateMessage(input: {
-                  messageId: $id
-                  title: $title
-                ) {
+
+mutation UpdateMessage($title: String, $content: String, $id: ID!) {
+updateMessage(messageId: $id, content: $content, title: $title) {
         title
-        team
+        inTeam{
+            teamName
+        }
         content
         images
-        tag
+        tag{
+            id
+        }
     }
 }
 
-mutation CreateNewTag($name: String!, $teamId: ID!) {
-    addTag(input: {
-           name: $name
-           teamId: $teamId
-           }) {
-        _id
-        name
-    }
-}
