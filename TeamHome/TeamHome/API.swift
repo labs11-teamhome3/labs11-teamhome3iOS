@@ -3139,6 +3139,362 @@ public final class MoveToFolderMutation: GraphQLMutation {
   }
 }
 
+public final class AddNewDocumentMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation AddNewDocument($title: String!, $doc_url: String!, $userId: ID!, $teamId: ID!, $textContent: String!, $tagId: ID) {\n  addDocument(title: $title, doc_url: $doc_url, teamId: $teamId, userId: $userId, textContent: $textContent, tagId: $tagId) {\n    __typename\n    title\n    id\n  }\n}"
+
+  public var title: String
+  public var doc_url: String
+  public var userId: GraphQLID
+  public var teamId: GraphQLID
+  public var textContent: String
+  public var tagId: GraphQLID?
+
+  public init(title: String, doc_url: String, userId: GraphQLID, teamId: GraphQLID, textContent: String, tagId: GraphQLID? = nil) {
+    self.title = title
+    self.doc_url = doc_url
+    self.userId = userId
+    self.teamId = teamId
+    self.textContent = textContent
+    self.tagId = tagId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["title": title, "doc_url": doc_url, "userId": userId, "teamId": teamId, "textContent": textContent, "tagId": tagId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("addDocument", arguments: ["title": GraphQLVariable("title"), "doc_url": GraphQLVariable("doc_url"), "teamId": GraphQLVariable("teamId"), "userId": GraphQLVariable("userId"), "textContent": GraphQLVariable("textContent"), "tagId": GraphQLVariable("tagId")], type: .object(AddDocument.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(addDocument: AddDocument? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "addDocument": addDocument.flatMap { (value: AddDocument) -> ResultMap in value.resultMap }])
+    }
+
+    public var addDocument: AddDocument? {
+      get {
+        return (resultMap["addDocument"] as? ResultMap).flatMap { AddDocument(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "addDocument")
+      }
+    }
+
+    public struct AddDocument: GraphQLSelectionSet {
+      public static let possibleTypes = ["Document"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("title", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(title: String, id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "Document", "title": title, "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var title: String {
+        get {
+          return resultMap["title"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "title")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class UpdateDocumentMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation UpdateDocument($id: ID!, $title: String, $doc_url: String, $folderId: ID, $textContent: String, $tag: ID) {\n  updateDocument(documentId: $id, title: $title, doc_url: $doc_url, folderId: $folderId, textContent: $textContent, tagId: $tag) {\n    __typename\n    title\n    id\n  }\n}"
+
+  public var id: GraphQLID
+  public var title: String?
+  public var doc_url: String?
+  public var folderId: GraphQLID?
+  public var textContent: String?
+  public var tag: GraphQLID?
+
+  public init(id: GraphQLID, title: String? = nil, doc_url: String? = nil, folderId: GraphQLID? = nil, textContent: String? = nil, tag: GraphQLID? = nil) {
+    self.id = id
+    self.title = title
+    self.doc_url = doc_url
+    self.folderId = folderId
+    self.textContent = textContent
+    self.tag = tag
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id, "title": title, "doc_url": doc_url, "folderId": folderId, "textContent": textContent, "tag": tag]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("updateDocument", arguments: ["documentId": GraphQLVariable("id"), "title": GraphQLVariable("title"), "doc_url": GraphQLVariable("doc_url"), "folderId": GraphQLVariable("folderId"), "textContent": GraphQLVariable("textContent"), "tagId": GraphQLVariable("tag")], type: .object(UpdateDocument.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(updateDocument: UpdateDocument? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "updateDocument": updateDocument.flatMap { (value: UpdateDocument) -> ResultMap in value.resultMap }])
+    }
+
+    public var updateDocument: UpdateDocument? {
+      get {
+        return (resultMap["updateDocument"] as? ResultMap).flatMap { UpdateDocument(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "updateDocument")
+      }
+    }
+
+    public struct UpdateDocument: GraphQLSelectionSet {
+      public static let possibleTypes = ["Document"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("title", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(title: String, id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "Document", "title": title, "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var title: String {
+        get {
+          return resultMap["title"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "title")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class CreateNewTagMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation CreateNewTag($name: String!, $teamId: ID!) {\n  addTag(name: $name, teamId: $teamId) {\n    __typename\n    id\n    createdAt\n    name\n    team {\n      __typename\n      id\n      teamName\n    }\n  }\n}"
+
+  public var name: String
+  public var teamId: GraphQLID
+
+  public init(name: String, teamId: GraphQLID) {
+    self.name = name
+    self.teamId = teamId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["name": name, "teamId": teamId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("addTag", arguments: ["name": GraphQLVariable("name"), "teamId": GraphQLVariable("teamId")], type: .object(AddTag.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(addTag: AddTag? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "addTag": addTag.flatMap { (value: AddTag) -> ResultMap in value.resultMap }])
+    }
+
+    public var addTag: AddTag? {
+      get {
+        return (resultMap["addTag"] as? ResultMap).flatMap { AddTag(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "addTag")
+      }
+    }
+
+    public struct AddTag: GraphQLSelectionSet {
+      public static let possibleTypes = ["Tag"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("team", type: .object(Team.selections)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, createdAt: String? = nil, name: String, team: Team? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Tag", "id": id, "createdAt": createdAt, "name": name, "team": team.flatMap { (value: Team) -> ResultMap in value.resultMap }])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var createdAt: String? {
+        get {
+          return resultMap["createdAt"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var team: Team? {
+        get {
+          return (resultMap["team"] as? ResultMap).flatMap { Team(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "team")
+        }
+      }
+
+      public struct Team: GraphQLSelectionSet {
+        public static let possibleTypes = ["Team"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("teamName", type: .nonNull(.scalar(String.self))),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: GraphQLID, teamName: String) {
+          self.init(unsafeResultMap: ["__typename": "Team", "id": id, "teamName": teamName])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: GraphQLID {
+          get {
+            return resultMap["id"]! as! GraphQLID
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        public var teamName: String {
+          get {
+            return resultMap["teamName"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "teamName")
+          }
+        }
+      }
+    }
+  }
+}
+
 public final class FindCommentsByMessageQuery: GraphQLQuery {
   public let operationDefinition =
     "query FindCommentsByMessage($messageId: ID!) {\n  findMessageCommentsByMessage(messageId: $messageId) {\n    __typename\n    id\n    user {\n      __typename\n      name\n      profilePic\n      id\n    }\n    content\n    image\n    likes {\n      __typename\n      id\n      name\n    }\n    createdAt\n  }\n}"
@@ -3907,6 +4263,480 @@ public final class FindDocumentsByFolderQuery: GraphQLQuery {
           set {
             resultMap.updateValue(newValue, forKey: "id")
           }
+        }
+      }
+    }
+  }
+}
+
+public final class FindCommentsByDocumentQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query FindCommentsByDocument($documentID: ID!) {\n  findDocumentComment(id: $documentID) {\n    __typename\n    id\n    user {\n      __typename\n      name\n      profilePic\n      id\n    }\n    content\n    image\n    likes {\n      __typename\n      id\n      name\n    }\n    createdAt\n  }\n}"
+
+  public var documentID: GraphQLID
+
+  public init(documentID: GraphQLID) {
+    self.documentID = documentID
+  }
+
+  public var variables: GraphQLMap? {
+    return ["documentID": documentID]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("findDocumentComment", arguments: ["id": GraphQLVariable("documentID")], type: .object(FindDocumentComment.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(findDocumentComment: FindDocumentComment? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "findDocumentComment": findDocumentComment.flatMap { (value: FindDocumentComment) -> ResultMap in value.resultMap }])
+    }
+
+    public var findDocumentComment: FindDocumentComment? {
+      get {
+        return (resultMap["findDocumentComment"] as? ResultMap).flatMap { FindDocumentComment(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "findDocumentComment")
+      }
+    }
+
+    public struct FindDocumentComment: GraphQLSelectionSet {
+      public static let possibleTypes = ["DocumentComment"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("user", type: .nonNull(.object(User.selections))),
+        GraphQLField("content", type: .nonNull(.scalar(String.self))),
+        GraphQLField("image", type: .scalar(String.self)),
+        GraphQLField("likes", type: .list(.object(Like.selections))),
+        GraphQLField("createdAt", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, user: User, content: String, image: String? = nil, likes: [Like?]? = nil, createdAt: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "DocumentComment", "id": id, "user": user.resultMap, "content": content, "image": image, "likes": likes.flatMap { (value: [Like?]) -> [ResultMap?] in value.map { (value: Like?) -> ResultMap? in value.flatMap { (value: Like) -> ResultMap in value.resultMap } } }, "createdAt": createdAt])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var user: User {
+        get {
+          return User(unsafeResultMap: resultMap["user"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "user")
+        }
+      }
+
+      public var content: String {
+        get {
+          return resultMap["content"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "content")
+        }
+      }
+
+      public var image: String? {
+        get {
+          return resultMap["image"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "image")
+        }
+      }
+
+      public var likes: [Like?]? {
+        get {
+          return (resultMap["likes"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Like?] in value.map { (value: ResultMap?) -> Like? in value.flatMap { (value: ResultMap) -> Like in Like(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [Like?]) -> [ResultMap?] in value.map { (value: Like?) -> ResultMap? in value.flatMap { (value: Like) -> ResultMap in value.resultMap } } }, forKey: "likes")
+        }
+      }
+
+      public var createdAt: String? {
+        get {
+          return resultMap["createdAt"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public struct User: GraphQLSelectionSet {
+        public static let possibleTypes = ["User"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("profilePic", type: .scalar(String.self)),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(name: String? = nil, profilePic: String? = nil, id: GraphQLID) {
+          self.init(unsafeResultMap: ["__typename": "User", "name": name, "profilePic": profilePic, "id": id])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return resultMap["name"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var profilePic: String? {
+          get {
+            return resultMap["profilePic"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "profilePic")
+          }
+        }
+
+        public var id: GraphQLID {
+          get {
+            return resultMap["id"]! as! GraphQLID
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+      }
+
+      public struct Like: GraphQLSelectionSet {
+        public static let possibleTypes = ["User"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("name", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: GraphQLID, name: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "User", "id": id, "name": name])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: GraphQLID {
+          get {
+            return resultMap["id"]! as! GraphQLID
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return resultMap["name"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class LikeDocumentCommentMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation likeDocumentComment($id: ID!, $userId: ID!) {\n  likeDocumentComment(commentId: $id, userId: $userId) {\n    __typename\n    id\n  }\n}"
+
+  public var id: GraphQLID
+  public var userId: GraphQLID
+
+  public init(id: GraphQLID, userId: GraphQLID) {
+    self.id = id
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id, "userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("likeDocumentComment", arguments: ["commentId": GraphQLVariable("id"), "userId": GraphQLVariable("userId")], type: .object(LikeDocumentComment.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(likeDocumentComment: LikeDocumentComment? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "likeDocumentComment": likeDocumentComment.flatMap { (value: LikeDocumentComment) -> ResultMap in value.resultMap }])
+    }
+
+    public var likeDocumentComment: LikeDocumentComment? {
+      get {
+        return (resultMap["likeDocumentComment"] as? ResultMap).flatMap { LikeDocumentComment(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "likeDocumentComment")
+      }
+    }
+
+    public struct LikeDocumentComment: GraphQLSelectionSet {
+      public static let possibleTypes = ["DocumentComment"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "DocumentComment", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class UnlikeDocumentCommentMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation unlikeDocumentComment($id: ID!, $userId: ID!) {\n  unlikeDocumentComment(commentId: $id, userId: $userId) {\n    __typename\n    id\n  }\n}"
+
+  public var id: GraphQLID
+  public var userId: GraphQLID
+
+  public init(id: GraphQLID, userId: GraphQLID) {
+    self.id = id
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id, "userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("unlikeDocumentComment", arguments: ["commentId": GraphQLVariable("id"), "userId": GraphQLVariable("userId")], type: .object(UnlikeDocumentComment.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(unlikeDocumentComment: UnlikeDocumentComment? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "unlikeDocumentComment": unlikeDocumentComment.flatMap { (value: UnlikeDocumentComment) -> ResultMap in value.resultMap }])
+    }
+
+    public var unlikeDocumentComment: UnlikeDocumentComment? {
+      get {
+        return (resultMap["unlikeDocumentComment"] as? ResultMap).flatMap { UnlikeDocumentComment(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "unlikeDocumentComment")
+      }
+    }
+
+    public struct UnlikeDocumentComment: GraphQLSelectionSet {
+      public static let possibleTypes = ["DocumentComment"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "DocumentComment", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
+public final class DeleteDocumentCommentMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation deleteDocumentComment($id: ID!) {\n  deleteDocumentComment(documentCommentId: $id) {\n    __typename\n    id\n  }\n}"
+
+  public var id: GraphQLID
+
+  public init(id: GraphQLID) {
+    self.id = id
+  }
+
+  public var variables: GraphQLMap? {
+    return ["id": id]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("deleteDocumentComment", arguments: ["documentCommentId": GraphQLVariable("id")], type: .object(DeleteDocumentComment.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(deleteDocumentComment: DeleteDocumentComment? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "deleteDocumentComment": deleteDocumentComment.flatMap { (value: DeleteDocumentComment) -> ResultMap in value.resultMap }])
+    }
+
+    public var deleteDocumentComment: DeleteDocumentComment? {
+      get {
+        return (resultMap["deleteDocumentComment"] as? ResultMap).flatMap { DeleteDocumentComment(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "deleteDocumentComment")
+      }
+    }
+
+    public struct DeleteDocumentComment: GraphQLSelectionSet {
+      public static let possibleTypes = ["DocumentComment"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "DocumentComment", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
         }
       }
     }
