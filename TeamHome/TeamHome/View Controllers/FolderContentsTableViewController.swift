@@ -83,8 +83,8 @@ class FolderContentsTableViewController: UITableViewController {
     
     private func loadDocuments(with apollo: ApolloClient) {
         
-        guard let folder = folder,
-            let folderID = folder.id else { return }
+        guard let folder = folder else { return }
+        let folderID = folder.id
         
         // Fetch messages using team's id
         watcherFolderContents = apollo.watch(query: FindDocumentsByFolderQuery(folderID: folderID)) { (result, error) in
@@ -110,23 +110,16 @@ class FolderContentsTableViewController: UITableViewController {
     
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     // MARK: - Properties
-    
     var folder: FindFoldersByTeamQuery.Data.FindFoldersByTeam?
-    
     var documents: [FindDocumentsByFolderQuery.Data.FindDocumentsByFolder?]?{
         didSet{
             if isViewLoaded {
@@ -143,7 +136,6 @@ class FolderContentsTableViewController: UITableViewController {
     }
     
     private var gradientLayer: CAGradientLayer!
-    
     var apollo: ApolloClient!
     var team: FindTeamsByUserQuery.Data.FindTeamsByUser!
     var currentUser: CurrentUserQuery.Data.CurrentUser?

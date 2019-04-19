@@ -33,14 +33,17 @@ class InviteToTeamViewController: UIViewController {
             phoneNumberTextField.placeholderActiveColor = Appearance.yellowColor
         phoneNumberTextField.textColor = .white
         inviteButton.backgroundColor = Appearance.darkMauveColor
+        print()
     }
 
     /*
      The previous mutation was deleted. Available team members are all list in on place
      and the user picks and adds team members from a drop box, or search for additional team
      members thru a  search box...
+     */
+    
+    /*
     @IBAction func inviteToTeam(_ sender: Any) {
-
         guard let apollo = apollo,
             let teamId = teamId,
             let email = emailTextField.text,
@@ -80,12 +83,9 @@ class InviteToTeamViewController: UIViewController {
 
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Invitation Sent", message: "The team is getting bigger!", preferredStyle: .alert)
-
                     self.present(alert, animated: true, completion: nil)
-
                     let when = DispatchTime.now() + 2
                     DispatchQueue.main.asyncAfter(deadline: when){
-
                         alert.dismiss(animated: true, completion: nil)
                     }
                 }
@@ -111,15 +111,12 @@ class InviteToTeamViewController: UIViewController {
 
                         let when = DispatchTime.now() + 2
                         DispatchQueue.main.asyncAfter(deadline: when){
-
                             alert.dismiss(animated: true, completion: nil)
                         }
                     }
                 }
-
                 guard let data = result.data,
                     let user = data.inviteUser else { return }
-
                 print(user)
 
                 DispatchQueue.main.async {
@@ -133,13 +130,9 @@ class InviteToTeamViewController: UIViewController {
                         alert.dismiss(animated: true, completion: nil)
                     }
                 }
-
                 teamWatcher?.refetch()
             }
         }
     }
-     */
-
-
-
+*/
 }

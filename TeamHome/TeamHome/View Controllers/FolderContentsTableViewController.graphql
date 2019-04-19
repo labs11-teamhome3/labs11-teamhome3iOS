@@ -1,3 +1,33 @@
+query FindDocumentsByFolder($folderID: ID!){
+    findFolder( id: $folderID ){
+        id
+        createdAt
+        documents {
+            id
+            createdAt
+            doc_url
+            user
+            folder
+            team
+            title
+            textContent
+            tag
+            images
+            comments {
+                id
+                createdAt
+                user
+                document
+                content
+                image
+                likes
+            }
+        }
+        updatedAt
+    }
+}
+
+#Old Query
 #query FindDocumentsByFolder($folderID: ID!){
     findDocumentsByFolder(input: {
         folder: $folderID

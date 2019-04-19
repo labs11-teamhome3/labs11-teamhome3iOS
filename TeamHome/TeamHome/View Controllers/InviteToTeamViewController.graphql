@@ -1,13 +1,21 @@
-mutation InviteUserToTeamWithEmail($id: ID!, $email: String) {
-    addUserToTeam(input: {
-               id: $id
-               email: $email
-               }) {
-        _id
+#query GetAllUsers(){
+    users {
+        id
+        name
+        authId
     }
 }
 
-mutation InviteUserToTeamWithPhone($id: ID!, $phoneNumber: String) {
+#mutation AddUserToTeam($userId: ID!, $teamId: ID!) {
+    addUserToTeam(input: {
+               userId: $userId
+               teamId: $teamId
+               }) {
+        id
+    }
+}
+
+#mutation InviteUserToTeamWithPhone($id: ID!, $phoneNumber: String) {
     inviteUser(input: {
                id: $id
                phoneNumber: $phoneNumber
@@ -15,3 +23,14 @@ mutation InviteUserToTeamWithPhone($id: ID!, $phoneNumber: String) {
         _id
     }
 }
+
+#mutation InviteUserToTeamWithEmail($id: ID!, $email: String) {
+    addUserToTeam(input: {
+            id: $id
+            email: $email
+        }) {
+        _id
+    }
+}
+
+#addUserToTeam(userId:ID!, teamId:ID!) : Team
