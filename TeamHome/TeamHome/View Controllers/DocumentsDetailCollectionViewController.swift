@@ -69,10 +69,11 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
     func likeComment(cell: DocumentCommentCollectionViewCell) {
         guard let apollo = apollo,
             let comment = cell.comment,
-            let id = comment.id else { return }
+        let userId = currentUser?.id else { return }
+        let id = comment.id
         
         // Check if already liked
-        apollo.perform(mutation: LikeDocumentCommentMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+        apollo.perform(mutation: LikeDocumentCommentMutation(id: id, userId: userId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }
@@ -86,10 +87,11 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
     func unlikeComment(cell: DocumentCommentCollectionViewCell) {
         guard let apollo = apollo,
             let comment = cell.comment,
-            let commentId = comment.id else { return }
+            let userId = currentUser?.id else { return }
+        let commentId = comment.id
         
         // Check if already liked
-        apollo.perform(mutation: UnlikeDocumentCommentMutation(id: commentId), queue: DispatchQueue.global()) { (result, error) in
+        apollo.perform(mutation: UnlikeDocumentCommentMutation(id: commentId, userId: userId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }
@@ -103,8 +105,8 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
     
     func deleteComment(cell: DocumentCommentCollectionViewCell) {
         guard let apollo = apollo,
-            let comment = cell.comment,
-            let id = comment.id else { return }
+            let comment = cell.comment else { return }
+        let id = comment.id
         
         apollo.perform(mutation: DeleteDocumentCommentMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {

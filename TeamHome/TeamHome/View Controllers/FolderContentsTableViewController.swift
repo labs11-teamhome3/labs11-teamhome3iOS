@@ -92,9 +92,8 @@ class FolderContentsTableViewController: UITableViewController {
                 NSLog("Error loading Documents\(error)")
             }
             
-            guard let result = result,
-                let documents = result.data?.findDocumentsByFolder else { return }
-            
+            guard let result = result?.data else { return }
+            let documents = result.findFolder?.documents
             self.documents = documents
             
             //prevents extra call to reload data if deleting is called
