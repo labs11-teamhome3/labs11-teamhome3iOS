@@ -99,26 +99,26 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
         
         guard let apollo = apollo,
             let currentUser = currentUser,
-            let avatar = currentUser.avatar,
+            let avatar = currentUser.profilePic,
             let firstName = firstNameTextField.text,
-            let lastName = lastNameTextField.text,
+            //let lastName = lastNameTextField.text,
             let email = emailTextField.text,
             let phoneNumber = phoneTextField.text else { return }
         
-        let receiveEmails = emailSwitch.isOn
-        let receiveTexts = textSMSSwitch.isOn
+        //let receiveEmails = emailSwitch.isOn
+        //let receiveTexts = textSMSSwitch.isOn
         
         // The case where no new avatar image was selected.
         guard let imageData = imageData else {
             
-            apollo.perform(mutation: UpdateUserMutation(firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, avatar: avatar, receiveEmails: receiveEmails, receiveTexts: receiveTexts), queue: DispatchQueue.global()) { (result, error) in
+            apollo.perform(mutation: UpdateUserMutation(id: currentUser.id, name: firstName, email: email, phoneNumber: phoneNumber, avatar: avatar), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                     return
                 }
                 
                 guard let result = result,
-                    let user = result.data?.updateUser else { return }
+                    let user = result.data?.updateUserContactInfo else { return }
                 print(user)
                 
                 DispatchQueue.main.async {
@@ -153,13 +153,14 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
             guard let result = result,
                 let imageUrl = result.url else { return }
             
-            apollo.perform(mutation: UpdateUserMutation(firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber, avatar: imageUrl, receiveEmails: receiveEmails, receiveTexts: receiveTexts), queue: DispatchQueue.global()) { (result, error) in
+            
+            apollo.perform(mutation: UpdateUserMutation(id: currentUser.id, name: firstName, email: email, phoneNumber: phoneNumber, avatar: imageUrl), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
                 }
                 
                 guard let result = result,
-                    let user = result.data?.updateUser else { return }
+                    let user = result.data?.updateUserContactInfo else { return }
                 print(user)
                 
                 DispatchQueue.main.async {
@@ -215,7 +216,7 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
             }
             
             guard let result = result,
-                let currentUser = result.data?.currentUser else { return }
+                let currentUser = result.data?.user else { return }
             
             self.currentUser = currentUser
         }
@@ -225,16 +226,16 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
         
         guard let currentUser = currentUser,
             let team = team else { return }
-        teamNameLabel.text = team.name
-        firstNameTextField.text = currentUser.firstName
-        lastNameTextField.text = currentUser.lastName
+        teamNameLabel.text = team.teamName
+        firstNameTextField.text = currentUser.name
+        //lastNameTextField.text = currentUser.lastName
         emailTextField.text = currentUser.email
-        phoneTextField.text = currentUser.phoneNumber
-        emailSwitch.isOn = currentUser.toggles?.receiveEmails ?? false
-        textSMSSwitch.isOn = currentUser.toggles?.receiveTexts ?? false
+        phoneTextField.text = currentUser.phone
+        //emailSwitch.isOn = currentUser.toggles?.receiveEmails ?? false
+        //textSMSSwitch.isOn = currentUser.toggles?.receiveTexts ?? false
         
         // Download image and display as user avatar
-        guard let avatar = currentUser.avatar else { return }
+        guard let avatar = currentUser.profilePic else { return }
         
         cloudinary.createDownloader().fetchImage(avatar, { (progress) in
             // Show progress
@@ -282,12 +283,12 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
     // MARK - Properties
     
     var apollo: ApolloClient?
-    var team: FindTeamsByUserQuery.Data.FindTeamsByUser?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
     private var imageData: Data?
     private var watcher: GraphQLQueryWatcher<CurrentUserQuery>?
     
     
-    var currentUser: CurrentUserQuery.Data.CurrentUser? {
+    var currentUser: CurrentUserQuery.Data.User? {
         didSet {
             DispatchQueue.main.async {
                 if self.isViewLoaded {

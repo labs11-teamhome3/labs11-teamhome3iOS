@@ -147,11 +147,12 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             let kickedUser = users[indexPath.row] else { return }
         let teamId = team.id
         
+        //IVAN SIR
         let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.Team.Member in
             if user?.id == currentUser.id {
                 return user!
             }
-           // return nil
+            return user!
         }
         
         let user = userArray.first!

@@ -4,5 +4,26 @@ user(authId: $authId){
         createdAt
         authId
         name
+        todoListsOwned {
+            id
+            description
+            todos {
+                id
+                createdAt
+                description
+                completed
+            }
+        }
+        todoListsAssigned {
+            description
+        }
+        inTeam {
+            id
+            teamName
+        }
+        role 
+        email
+        phone
+        profilePic
     }
 }
