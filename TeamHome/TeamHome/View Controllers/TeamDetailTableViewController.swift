@@ -49,12 +49,10 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         
         guard let team = team else { return }
-        
         teamNameLabel.text = team.teamName
-        
         guard let apollo = apollo else { return }
-        
         loadUsers(with: apollo)
+        self.tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
@@ -241,7 +239,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     }
 
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InviteUser" {
             guard let destinationVC = segue.destination as? InviteToTeamViewController,

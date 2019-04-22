@@ -136,8 +136,9 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     fileprivate func prepareBottomBar() {
         bottomBar = Bar()
-        
-        bottomBar.rightViews = [dateLabel]
+        // I comment this out to stop the Activity tab from crashing wh
+        // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
+        //bottomBar.rightViews = [dateLabel]
         bottomBar.backgroundColor = .clear
     }
     

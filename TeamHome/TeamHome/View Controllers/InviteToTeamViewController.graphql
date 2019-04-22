@@ -1,17 +1,13 @@
-#mutation InviteUserToTeamWithEmail($id: ID!, $email: String) {
-    addUserToTeam(input: {
-               id: $id
-               email: $email
-               }) {
-        _id
+query FetchAllUsers {
+    users {
+        id
+        name
+        role
+        email
+        profilePic
+        phone
     }
 }
 
-#mutation InviteUserToTeamWithPhone($id: ID!, $phoneNumber: String) {
-    inviteUser(input: {
-               id: $id
-               phoneNumber: $phoneNumber
-               }) {
-        _id
-    }
-}
+
+
