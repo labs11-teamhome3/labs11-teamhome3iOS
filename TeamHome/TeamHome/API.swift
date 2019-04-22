@@ -3417,6 +3417,128 @@ public final class MoveToFolderMutation: GraphQLMutation {
   }
 }
 
+public final class FetchAllUsersQuery: GraphQLQuery {
+  public let operationDefinition =
+    "query FetchAllUsers {\n  users {\n    __typename\n    id\n    name\n    role\n    email\n    profilePic\n    phone\n  }\n}"
+
+  public init() {
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("users", type: .list(.object(User.selections))),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(users: [User?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "users": users.flatMap { (value: [User?]) -> [ResultMap?] in value.map { (value: User?) -> ResultMap? in value.flatMap { (value: User) -> ResultMap in value.resultMap } } }])
+    }
+
+    public var users: [User?]? {
+      get {
+        return (resultMap["users"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [User?] in value.map { (value: ResultMap?) -> User? in value.flatMap { (value: ResultMap) -> User in User(unsafeResultMap: value) } } }
+      }
+      set {
+        resultMap.updateValue(newValue.flatMap { (value: [User?]) -> [ResultMap?] in value.map { (value: User?) -> ResultMap? in value.flatMap { (value: User) -> ResultMap in value.resultMap } } }, forKey: "users")
+      }
+    }
+
+    public struct User: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("name", type: .scalar(String.self)),
+        GraphQLField("role", type: .scalar(Role.self)),
+        GraphQLField("email", type: .scalar(String.self)),
+        GraphQLField("profilePic", type: .scalar(String.self)),
+        GraphQLField("phone", type: .scalar(String.self)),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID, name: String? = nil, role: Role? = nil, email: String? = nil, profilePic: String? = nil, phone: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "User", "id": id, "name": name, "role": role, "email": email, "profilePic": profilePic, "phone": phone])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String? {
+        get {
+          return resultMap["name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var role: Role? {
+        get {
+          return resultMap["role"] as? Role
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "role")
+        }
+      }
+
+      public var email: String? {
+        get {
+          return resultMap["email"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "email")
+        }
+      }
+
+      public var profilePic: String? {
+        get {
+          return resultMap["profilePic"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "profilePic")
+        }
+      }
+
+      public var phone: String? {
+        get {
+          return resultMap["phone"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "phone")
+        }
+      }
+    }
+  }
+}
+
 public final class AddNewDocumentMutation: GraphQLMutation {
   public let operationDefinition =
     "mutation AddNewDocument($title: String!, $doc_url: String!, $userId: ID!, $teamId: ID!, $textContent: String!, $tagId: ID) {\n  addDocument(title: $title, doc_url: $doc_url, teamId: $teamId, userId: $userId, textContent: $textContent, tagId: $tagId) {\n    __typename\n    title\n    id\n  }\n}"

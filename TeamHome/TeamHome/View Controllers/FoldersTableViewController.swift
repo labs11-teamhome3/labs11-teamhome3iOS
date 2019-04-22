@@ -16,7 +16,8 @@ class FoldersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = .clear
-        loadFolders(with: apollo!)
+        guard let apollo = apollo else { return }
+        loadFolders(with: apollo)
     }
     
     override func viewWillAppear(_ animated: Bool) {

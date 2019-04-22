@@ -11,21 +11,30 @@ import Apollo
 
 class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
 
+    // MARK: - Properties
+    private var gradientLayer: CAGradientLayer!
+    var apollo: ApolloClient?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
+    
+    @IBOutlet weak var newFolderButton: UIButton!
+    @IBOutlet weak var documentsFoldersSegmentedIndex: UISegmentedControl!
+    @IBOutlet weak var documentsContainerView: UIView!
+    @IBOutlet weak var foldersContainerView: UIView!
+    @IBOutlet weak var teamNameLabel: UILabel!
+    @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpViewAppearance()
-        createGradientLayer()
+        //setUpViewAppearance()
+        //createGradientLayer()
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         // Show team name on label
         displayTeamInfo()
-        
         // Set this view controller as delegate for all cells.
-        
         // Segmented Control action pattern
         setupEmbeddedViews()
         documentsFoldersSegmentedIndex.addTarget(self, action: #selector(changeDisplay(_:)), for: .valueChanged)
@@ -33,9 +42,7 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
     }
 
     // MARK: - IBActions
-    
     @IBAction func createNewFolder(_ sender: Any) {
-        
         let alert = UIAlertController(title: "Add New Folder", message: "Enter the title of your new folder.", preferredStyle: .alert)
         
         alert.addTextField { (textField) in
@@ -65,21 +72,16 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
     // Create gradient layer for view background.
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
+    
     private func displayTeamInfo() {
         guard let team = team else { return }
-        
         teamNameLabel.text = team.teamName
     }
     
@@ -109,15 +111,12 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
     }
     
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddDocument"{
             let destinationVC = segue.destination as! AddEditDocumentViewController
             destinationVC.apollo = apollo
             destinationVC.team = team
-
-            
         }
         if segue.identifier == "EmbeddedTable"{
             let destinationVC = segue.destination as! DocumentsTableViewController
@@ -135,23 +134,4 @@ class DocumentsViewController: UIViewController, TabBarChildrenProtocol {
                 destinationVC.team = team
         }
     }
-    
-
-    // MARK: - Properties
-
-    private var gradientLayer: CAGradientLayer!
-    
-    var apollo: ApolloClient?
-    var team: TeamsByUserQuery.Data.TeamsByUser?
-    var currentUser: CurrentUserQuery.Data.User?
-    
-    @IBOutlet weak var newFolderButton: UIButton!
-    @IBOutlet weak var documentsFoldersSegmentedIndex: UISegmentedControl!
-
-    @IBOutlet weak var documentsContainerView: UIView!
-    @IBOutlet weak var foldersContainerView: UIView!
-    
-    @IBOutlet weak var teamNameLabel: UILabel!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var containerView: UIView!
 }

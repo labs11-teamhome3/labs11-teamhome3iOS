@@ -16,11 +16,20 @@ protocol MessageBoardFilterDelegate: class {
 
 class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     
+    // MARK: - Properties
+    private var gradientLayer: CAGradientLayer!
+    var apollo: ApolloClient?
+    var currentUser: CurrentUserQuery.Data.User?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var delegate: MessageBoardFilterDelegate?
+    
+    @IBOutlet weak var teamNameLabel: UILabel!
+    @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
+    
     // MARK: - Lifecycle Methods
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewAppearance()
         createGradientLayer()
         teamNameLabel.textColor = .white
@@ -28,9 +37,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
         
         // Show team name on label
         displayTeamInfo()
-        
         // Set this view controller as delegate for all cells.
-        
     }
     
     // Filter messages by date.
@@ -48,12 +55,9 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
             let image = UIImage(named: "Arrow Up")!
             filterButton.setImage(image, for: .normal)
         }
-        
-        
     }
     
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let apollo = apollo,
@@ -77,41 +81,20 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     }
     
     // MARK: - Private Methods
-    
     // Display team name at the top of the view.
     private func displayTeamInfo() {
         guard let team = team else { return }
-        
         teamNameLabel.text = team.teamName
     }
     
     // Create gradient layer for view background.
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
-    
-    // MARK: - Properties
-    
-    private var gradientLayer: CAGradientLayer!
-    
-    var apollo: ApolloClient?
-    var currentUser: CurrentUserQuery.Data.User?
-    var team: TeamsByUserQuery.Data.TeamsByUser?
-    var delegate: MessageBoardFilterDelegate?
-    
-    @IBOutlet weak var teamNameLabel: UILabel!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var containerView: UIView!
-    
 }

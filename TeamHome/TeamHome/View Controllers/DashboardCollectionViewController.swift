@@ -47,7 +47,7 @@ import Apollo
         }
         
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Welcome \(currentUser.name)", message: "This is your team dashboard. Pick a team to start.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Welcome \(currentUser.name!)", message: "This is your team dashboard. Pick a team to start.", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Get started", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

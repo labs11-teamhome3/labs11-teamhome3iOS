@@ -12,11 +12,16 @@ import Apollo
 var watcher: GraphQLQueryWatcher<FindDocumentsByTeamQuery>?
 
 class DocumentsTableViewController: UITableViewController {
-    
+    var apollo: ApolloClient!
+    var team: TeamsByUserQuery.Data.TeamsByUser!
+    var currentUser: CurrentUserQuery.Data.User?
+    var deleteIndexPath: IndexPath?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = .clear
-        loadDocuments(with: apollo!)
+        guard let apollo = apollo else { return }
+        loadDocuments(with: apollo)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,11 +32,10 @@ class DocumentsTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return documents?.count ?? 0
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell"),
@@ -78,9 +82,7 @@ class DocumentsTableViewController: UITableViewController {
         }
     }
     //MARK: - Private Functions
-    
     private func loadDocuments(with apollo: ApolloClient) {
-        
         guard let team = team else { return }
          let teamID  = team.id
         
@@ -116,9 +118,4 @@ class DocumentsTableViewController: UITableViewController {
             }
         }
     }
-    
-    var apollo: ApolloClient!
-    var team: TeamsByUserQuery.Data.TeamsByUser!
-    var currentUser: CurrentUserQuery.Data.User?
-    var deleteIndexPath: IndexPath?
 }

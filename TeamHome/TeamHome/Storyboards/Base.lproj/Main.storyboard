@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kyj-50-e8Q">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -451,7 +451,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfF-9L-1dO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3196" y="-1110"/>
+            <point key="canvasLocation" x="3215" y="-1094"/>
         </scene>
         <!--Account Settings-->
         <scene sceneID="2hl-rM-nbJ">
@@ -717,7 +717,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLE-TO-RkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391" y="794"/>
+            <point key="canvasLocation" x="-391" y="812"/>
         </scene>
         <!--Message Board-->
         <scene sceneID="cNf-P6-4iS">
@@ -844,7 +844,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKi-I9-fVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662" y="-1110"/>
+            <point key="canvasLocation" x="2661" y="-1094"/>
         </scene>
         <!--AddEditMessageView-->
         <scene sceneID="Zyj-ri-IPj">
@@ -980,18 +980,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vHa-BJ-Uhd" userLabel="Invite Stack">
-                                <rect key="frame" x="16" y="156" width="382" height="37"/>
+                                <rect key="frame" x="16" y="156" width="382" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-qX-2Qd">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8f-UA-Ewp">
-                                                <rect key="frame" x="0.0" y="0.0" width="41" height="37"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                                 <state key="normal" title="Button" image="Add Team Member"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJu-DM-5ai">
-                                                <rect key="frame" x="49" y="0.0" width="139" height="37"/>
+                                                <rect key="frame" x="62" y="0.0" width="139" height="50"/>
                                                 <color key="backgroundColor" red="0.2400799096" green="0.19025737049999999" blue="0.26877105239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title=" Invite Some People ">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1002,7 +1002,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygl-Oo-Hee">
-                                <rect key="frame" x="16" y="201" width="98" height="35"/>
+                                <rect key="frame" x="16" y="214" width="98" height="35"/>
                                 <color key="backgroundColor" red="0.2400799096" green="0.19025737049999999" blue="0.26877105239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="EXV-wI-THd"/>
@@ -1015,7 +1015,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2nv-2d-tgv">
-                                <rect key="frame" x="122" y="201" width="276" height="210"/>
+                                <rect key="frame" x="122" y="214" width="276" height="210"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-eF-nwr" userLabel="Sort Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="175"/>
@@ -1129,7 +1129,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-Jg-TE9">
-                                <rect key="frame" x="16" y="427" width="382" height="370"/>
+                                <rect key="frame" x="16" y="440" width="382" height="357"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" textLabel="XkL-I6-51b" rowHeight="35" style="IBUITableViewCellStyleDefault" id="Q0Y-3d-bJc">
@@ -1158,13 +1158,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so7-yy-kJV">
-                                                    <rect key="frame" x="101" y="14.666666666666666" width="80" height="5.3333333333333339"/>
+                                                    <rect key="frame" x="114" y="14.666666666666666" width="80" height="5.3333333333333339"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFq-Hd-6p9">
-                                                    <rect key="frame" x="56" y="6.6666666666666661" width="37" height="21.333333333333336"/>
+                                                    <rect key="frame" x="56" y="6.6666666666666661" width="50" height="21.333333333333336"/>
                                                     <state key="normal" image="Unchecked Checkbox"/>
                                                     <connections>
                                                         <action selector="taskCheckBoxButtonTapped:" destination="nDN-np-Lhq" eventType="touchUpInside" id="x3V-NJ-Q9z"/>
@@ -1663,21 +1663,21 @@
                                                             <rect key="frame" x="8" y="0.0" width="366" height="43.666666666666664"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1k-D7-INB">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="72.666666666666671" height="43.666666666666664"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="43.666666666666664"/>
                                                                     <state key="normal" image="Trash"/>
                                                                     <connections>
                                                                         <action selector="trashButtonTapped:" destination="JQ9-6d-yrP" eventType="touchUpInside" id="Vcq-sh-k2K"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXg-Jf-uPs">
-                                                                    <rect key="frame" x="73.666666666666671" y="0.0" width="73.000000000000014" height="43.666666666666664"/>
+                                                                    <rect key="frame" x="87.333333333333343" y="0.0" width="86.333333333333343" height="43.666666666666664"/>
                                                                     <state key="normal" image="Edit"/>
                                                                     <connections>
                                                                         <action selector="editButtonTapped:" destination="JQ9-6d-yrP" eventType="touchUpInside" id="AK0-0N-1R4"/>
                                                                     </connections>
                                                                 </button>
                                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="754" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Task List Item" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uwD-Te-LGE">
-                                                                    <rect key="frame" x="147.66666666666663" y="0.0" width="218.33333333333337" height="43.666666666666664"/>
+                                                                    <rect key="frame" x="174.66666666666663" y="0.0" width="191.33333333333337" height="43.666666666666664"/>
                                                                     <nil key="textColor"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
@@ -1824,7 +1824,7 @@
         <!--Team View Controller-->
         <scene sceneID="pQr-xY-Rp6">
             <objects>
-                <viewController id="iVb-ec-LgR" customClass="TeamViewController" customModule="Checklist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iVb-ec-LgR" customClass="TeamViewController" customModule="TeamHome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rcx-Uw-BTc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1884,18 +1884,18 @@
         <!--Title-->
         <scene sceneID="8Ka-7d-Fiw">
             <objects>
-                <tableViewController id="Q6q-un-WpI" customClass="SearchUserTableViewController" customModule="Checklist" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Q6q-un-WpI" customClass="SearchUserTableViewController" customModule="TeamHome" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NPw-c6-Oxa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="4tY-6T-chn">
+                        <searchBar key="tableHeaderView" contentMode="redraw" misplaced="YES" id="4tY-6T-chn">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="80" id="us7-Ls-PBq" customClass="SearchUserTableViewCell" customModule="Checklist" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="80" id="us7-Ls-PBq" customClass="SearchUserTableViewCell" customModule="TeamHome" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="us7-Ls-PBq" id="viP-dl-ZS9">
@@ -1948,23 +1948,23 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Activity Tab" width="56.347827911376953" height="56.347827911376953"/>
-        <image name="Add" width="37.5" height="37.5"/>
-        <image name="Add Team Member" width="37.5" height="37.5"/>
-        <image name="Arrow Down" width="13.60629940032959" height="13.60629940032959"/>
-        <image name="Change Team" width="50.823528289794922" height="50.823528289794922"/>
+        <image name="Activity Tab" width="24" height="24"/>
+        <image name="Add" width="50" height="50"/>
+        <image name="Add Team Member" width="50" height="50"/>
+        <image name="Arrow Down" width="24" height="24"/>
+        <image name="Change Team" width="24" height="24"/>
         <image name="Checklist" width="20" height="20"/>
-        <image name="Documents" width="54" height="54"/>
-        <image name="Edit" width="37.5" height="37.5"/>
-        <image name="Logo With Nodes" width="246" height="245"/>
-        <image name="Messages Tab" width="46.285713195800781" height="46.285713195800781"/>
-        <image name="Settings Tab" width="94.254547119140625" height="94.254547119140625"/>
-        <image name="Team Tab" width="54" height="54"/>
-        <image name="Trash" width="37.5" height="37.5"/>
-        <image name="Unchecked Checkbox" width="37.5" height="37.5"/>
-        <image name="User Avatar Image" width="233.31645202636719" height="233.31645202636719"/>
-        <image name="facebook" width="365" height="365"/>
-        <image name="google-plus" width="365" height="365"/>
+        <image name="Documents" width="24" height="24"/>
+        <image name="Edit" width="50" height="50"/>
+        <image name="Logo With Nodes" width="123" height="122.5"/>
+        <image name="Messages Tab" width="24" height="24"/>
+        <image name="Settings Tab" width="24" height="24"/>
+        <image name="Team Tab" width="24" height="24"/>
+        <image name="Trash" width="50" height="50"/>
+        <image name="Unchecked Checkbox" width="50" height="50"/>
+        <image name="User Avatar Image" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="facebook" width="512" height="512"/>
+        <image name="google-plus" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9db-bK-rdS"/>
