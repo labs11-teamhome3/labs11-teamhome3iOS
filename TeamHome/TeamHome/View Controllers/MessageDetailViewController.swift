@@ -273,6 +273,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     
     @objc func clickedEditButton() {
         performSegue(withIdentifier: "EditMessage", sender: self)
+        
     }
     
     // MARK: - UIImagePickerControllerDelegate
