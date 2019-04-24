@@ -980,7 +980,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vHa-BJ-Uhd" userLabel="Invite Stack">
-                                <rect key="frame" x="16" y="156" width="382" height="50"/>
+                                <rect key="frame" x="16" y="104" width="382" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xg5-qX-2Qd">
                                         <rect key="frame" x="0.0" y="0.0" width="201" height="50"/>
@@ -1002,7 +1002,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygl-Oo-Hee">
-                                <rect key="frame" x="16" y="214" width="98" height="35"/>
+                                <rect key="frame" x="16" y="162" width="98" height="35"/>
                                 <color key="backgroundColor" red="0.2400799096" green="0.19025737049999999" blue="0.26877105239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="EXV-wI-THd"/>
@@ -1015,7 +1015,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2nv-2d-tgv">
-                                <rect key="frame" x="122" y="214" width="276" height="210"/>
+                                <rect key="frame" x="122" y="162" width="276" height="210"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-eF-nwr" userLabel="Sort Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="175"/>
@@ -1129,7 +1129,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-Jg-TE9">
-                                <rect key="frame" x="16" y="440" width="382" height="357"/>
+                                <rect key="frame" x="16" y="388" width="382" height="409"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" textLabel="XkL-I6-51b" rowHeight="35" style="IBUITableViewCellStyleDefault" id="Q0Y-3d-bJc">
@@ -1223,7 +1223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xum-Nn-ZWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2481" y="398"/>
+            <point key="canvasLocation" x="2555" y="398"/>
         </scene>
         <!--Todo-->
         <scene sceneID="WA3-3Y-nVl">
@@ -1231,8 +1231,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G6C-Wx-sfD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Todo" image="Checklist" id="1bx-eB-U64"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="XR9-b1-QYm">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XR9-b1-QYm">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1253,7 +1253,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6IB-5J-W52">
-                                <rect key="frame" x="16" y="156" width="382" height="68"/>
+                                <rect key="frame" x="16" y="104" width="382" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is the name of this List?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ0-TP-pE2">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
@@ -1270,7 +1270,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dsf-Li-MM1">
-                                <rect key="frame" x="16" y="232" width="100" height="68"/>
+                                <rect key="frame" x="16" y="180" width="100" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Assigned To:  " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZr-5H-deo">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
@@ -1290,7 +1290,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="j9w-vm-oP8">
-                                <rect key="frame" x="124" y="232" width="274" height="150"/>
+                                <rect key="frame" x="124" y="180" width="274" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Fx-C5-3sW" userLabel=" Top Left Team Member Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="150"/>
@@ -1401,7 +1401,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7cq-zb-hIG">
-                                <rect key="frame" x="124" y="390" width="274" height="150"/>
+                                <rect key="frame" x="124" y="338" width="274" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ThK-MT-QHS" userLabel="Bottom Left Team Member Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="150"/>
@@ -1512,7 +1512,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Vf-fA-gWP">
-                                <rect key="frame" x="16" y="548" width="100" height="68"/>
+                                <rect key="frame" x="16" y="496" width="100" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Owners:  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnz-lH-sqq">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
@@ -1529,7 +1529,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mAo-xL-GCb">
-                                <rect key="frame" x="124" y="548" width="274" height="150"/>
+                                <rect key="frame" x="124" y="496" width="274" height="150"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YeV-Ro-4uz" userLabel="Left Owner Team Member Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="150"/>
@@ -1643,7 +1643,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tUh-jH-xPo">
-                                <rect key="frame" x="16" y="706" width="382" height="210"/>
+                                <rect key="frame" x="16" y="654" width="382" height="210"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iqU-3z-zwR">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="180"/>
@@ -1773,7 +1773,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hel-yL-Nqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WlE-zy-HFR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3197" y="398"/>
+            <point key="canvasLocation" x="3343" y="398"/>
         </scene>
         <!--Team-->
         <scene sceneID="Dm5-rO-8uU">

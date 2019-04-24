@@ -60,7 +60,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(comment.user.name)"
+            toolbar.title = "\(comment.user.name!)"
             toolbar.detail = "added a comment"
             
         }
@@ -80,7 +80,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(document.user.name)"
+            toolbar.title = "\(document.user.name!)"
             toolbar.detail = "added a document"
         }
         
@@ -101,7 +101,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 
             }
             
-            toolbar.title = "\(message.creator.name)"
+            toolbar.title = "\(message.creator.name!)"
             toolbar.detail = "added a message: \(message.title)"
         }
         
