@@ -12,7 +12,6 @@ import Cloudinary
 import Toucan
 
 var teamWatcher: GraphQLQueryWatcher<FindTeamByIdQuery>?
-
 protocol TeamDetailCellDelegate: class {
     func presentAdminActionSheet(with optionMenu: UIAlertController)
 }
@@ -39,7 +38,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewAppearance()
         view.backgroundColor = Appearance.plumColor
         UILabel.appearance().tintColor = .white
@@ -47,7 +45,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         navigationItem.rightBarButtonItem = inviteBarButton
         navigationItem.title = "Team Detail"
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         guard let team = team else { return }
         teamNameLabel.text = team.teamName
         guard let apollo = apollo else { return }
@@ -62,21 +59,17 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamMemberCell", for: indexPath)
-
         guard let user = users?[indexPath.row] else { return UITableViewCell() }
-        
         let name = user.name
         //let firstName = user.user.firstName
         //let lastName = user.user.lastName
         var email = ""
-        
         if user.email == "" {
             email = "no email"
         } else {
             //email = user.user.email
             email = user.email!
         }
-        
         //cell.textLabel?.text = "\(firstName) \(lastName)"
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = email
@@ -91,22 +84,18 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
                 }
                 
                 guard let image = image else { return }
-                
                 let resizedImage = Toucan.init(image: image).resize(CGSize(width: 50, height: 50), fitMode: .crop).maskWithEllipse()
                 DispatchQueue.main.async {
                     cell.imageView?.image = resizedImage.image
                 }
             }
         }
-        
         return cell
     }
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let edit = editAction(at: indexPath)
         let delete = deleteAction(at: indexPath)
-        
         return UISwipeActionsConfiguration(actions: [delete, edit])
     }
 
@@ -116,24 +105,19 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
             self.updateAdminStatus(at: indexPath)
             completion(true)
         }
-        
         action.backgroundColor = Appearance.beigeColor
         action.title = "Edit"
-        
         return action
     }
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
-
         let action = UIContextualAction(style: .destructive, title: "delete") { (action, view, completion) in
             // Delete member if admin
             self.deleteTeamMember(at: indexPath)
             completion(true)
         }
-        
         action.backgroundColor = .red
         action.title = "Delete"
-        
         return action
     }
     
@@ -164,23 +148,16 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let result = result else { return }
-                
                 print(result)
-                
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 teamWatcher?.refetch()
             }
-            
         } else {
             let alert = UIAlertController(title: "Not authorized", message: "Looks like your not an admin and you can't delete members", preferredStyle: .alert)
-            
             self.present(alert, animated: true, completion: nil)
-            
             let when = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: when){
-                
                 alert.dismiss(animated: true, completion: nil)
             }
         }
@@ -189,38 +166,28 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     func updateAdminStatus(at indexPath: IndexPath) {
         guard let currentUser = currentUser,
             let users = users else { return }
-        
         let userArray = users.compactMap { (user) -> FindTeamByIdQuery.Data.Team.Member? in
             if user?.id == currentUser.id {
                 return user
             }
             return nil
         }
-        
         let user = userArray.first!
         let adminStatus = user.role
-        
         if adminStatus == .admin {
-            
             let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
-            
             let makeAdminAction = UIAlertAction(title: "Make admin", style: .default) { (action) in
                 self.makeUserAdmin(at: indexPath)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            
             optionMenu.addAction(makeAdminAction)
             optionMenu.addAction(cancelAction)
-            
             delegate?.presentAdminActionSheet(with: optionMenu)
         } else {
             let alert = UIAlertController(title: "Not authorized", message: "Looks like your not an admin and you can't edit members", preferredStyle: .alert)
-            
             self.present(alert, animated: true, completion: nil)
-            
             let when = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: when){
-                
                 alert.dismiss(animated: true, completion: nil)
             }
         }
@@ -230,24 +197,21 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         guard let apollo = apollo,
             let users = users,
             let userEdited = users[indexPath.row] else { return }
-        
         if userEdited.role == .admin {
             // Present alert that explains user is already admin.
         } else {
-            
         }
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InviteUser" {
-            guard let destinationVC = segue.destination as? InviteToTeamViewController,
+            guard let destinationVC = segue.destination as? InviteToTeamTableViewController,
                 let apollo = apollo,
                 let team = team else { return }
             let teamId = team.id
             destinationVC.apollo = apollo
             destinationVC.teamId = teamId
-            
         }
     }
     
@@ -256,12 +220,10 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         guard let team = team,
             //let teamId = team.id else { return }
             let teamId = team.id as String? else { return }
-            
         teamWatcher = apollo.watch(query: FindTeamByIdQuery(id: teamId)) { (result, error) in
             if let error = error {
                 NSLog("\(error)")
             }
-            
             guard let result = result,
                 let data = result.data else { return }
             let team = data.team
