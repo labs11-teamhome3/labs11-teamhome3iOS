@@ -3539,6 +3539,87 @@ public final class FetchAllUsersQuery: GraphQLQuery {
   }
 }
 
+public final class AddUserToTeamMutation: GraphQLMutation {
+  public let operationDefinition =
+    "mutation AddUserToTeam($teamId: ID!, $userId: ID!) {\n  addUserToTeam(teamId: $teamId, userId: $userId) {\n    __typename\n    id\n  }\n}"
+
+  public var teamId: GraphQLID
+  public var userId: GraphQLID
+
+  public init(teamId: GraphQLID, userId: GraphQLID) {
+    self.teamId = teamId
+    self.userId = userId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["teamId": teamId, "userId": userId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("addUserToTeam", arguments: ["teamId": GraphQLVariable("teamId"), "userId": GraphQLVariable("userId")], type: .object(AddUserToTeam.selections)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(addUserToTeam: AddUserToTeam? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "addUserToTeam": addUserToTeam.flatMap { (value: AddUserToTeam) -> ResultMap in value.resultMap }])
+    }
+
+    public var addUserToTeam: AddUserToTeam? {
+      get {
+        return (resultMap["addUserToTeam"] as? ResultMap).flatMap { AddUserToTeam(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "addUserToTeam")
+      }
+    }
+
+    public struct AddUserToTeam: GraphQLSelectionSet {
+      public static let possibleTypes = ["Team"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "Team", "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return resultMap["id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+    }
+  }
+}
+
 public final class AddNewDocumentMutation: GraphQLMutation {
   public let operationDefinition =
     "mutation AddNewDocument($title: String!, $doc_url: String!, $userId: ID!, $teamId: ID!, $textContent: String!, $tagId: ID) {\n  addDocument(title: $title, doc_url: $doc_url, teamId: $teamId, userId: $userId, textContent: $textContent, tagId: $tagId) {\n    __typename\n    title\n    id\n  }\n}"

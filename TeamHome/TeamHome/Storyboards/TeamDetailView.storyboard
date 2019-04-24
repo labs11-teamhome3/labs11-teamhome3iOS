@@ -86,12 +86,12 @@
                     </tableView>
                     <connections>
                         <outlet property="teamNameLabel" destination="qvn-0r-rCZ" id="2wk-2M-Zeg"/>
-                        <segue destination="QlA-nI-FAk" kind="show" identifier="InviteUser" id="kBD-V1-BdY"/>
+                        <segue destination="LzE-eM-CGC" kind="show" identifier="InviteUser" id="h1o-bT-GTp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Za-vx-XPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2613.5999999999999" y="-367.46626686656674"/>
+            <point key="canvasLocation" x="2918" y="-955"/>
         </scene>
         <!--Invite To Team View Controller-->
         <scene sceneID="J0L-bm-S4P">
@@ -110,7 +110,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="doz-0M-SRT">
+                                    <searchBar contentMode="redraw" placeholder="Search for team member" translatesAutoresizingMaskIntoConstraints="NO" id="doz-0M-SRT">
                                         <rect key="frame" x="0.0" y="27" width="311" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
@@ -158,6 +158,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVX-qH-dfO">
                                         <rect key="frame" x="0.0" y="642" width="311" height="30"/>
                                         <state key="normal" title="Add Team Members"/>
+                                        <connections>
+                                            <action selector="addTeamMembersButtonTapped:" destination="QlA-nI-FAk" eventType="touchUpInside" id="pjs-hs-Oq3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -181,7 +184,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDP-xL-JZc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3538" y="-368"/>
+            <point key="canvasLocation" x="3718" y="-249"/>
+        </scene>
+        <!--Invite To Team Table View Controller-->
+        <scene sceneID="Cn7-GP-STh">
+            <objects>
+                <tableViewController id="LzE-eM-CGC" customClass="InviteToTeamTableViewController" customModule="TeamHome" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="eg5-VV-Fov">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for team member" id="DmM-68-Pjl">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamCell" textLabel="fju-Nv-BQI" detailTextLabel="Ii8-2S-atb" imageView="Czf-VC-9cr" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="SOq-gm-DlO">
+                                <rect key="frame" x="0.0" y="72" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SOq-gm-DlO" id="UW9-cH-9rd">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fju-Nv-BQI">
+                                            <rect key="frame" x="91" y="9.9999999999999982" width="33.333333333333336" height="20.333333333333332"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ii8-2S-atb">
+                                            <rect key="frame" x="91" y="33.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="User Avatar Image" id="Czf-VC-9cr">
+                                            <rect key="frame" x="16" y="0.0" width="60" height="59.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LzE-eM-CGC" id="Zxm-It-BCL"/>
+                            <outlet property="delegate" destination="LzE-eM-CGC" id="dEJ-Eh-lJF"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="searchBar" destination="DmM-68-Pjl" id="Ajy-jy-vUr"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zop-Jc-Kid" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3718" y="-955"/>
         </scene>
         <!--Invite To Team View Controller-->
         <scene sceneID="El7-PX-lmQ">
