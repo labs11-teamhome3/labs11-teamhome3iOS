@@ -22,6 +22,7 @@
 		2C34E0B222507186001D3EB9 /* TodoCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */; };
 		2C34E0B322507186001D3EB9 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B122507186001D3EB9 /* TodoListViewController.swift */; };
 		2CA8032B226E7E5C00FAD703 /* InviteToTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA8032A226E7E5C00FAD703 /* InviteToTeamTableViewController.swift */; };
+		2CA8034B2270D5CD00FAD703 /* TodoCreationViewController.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2CA8034A2270D5CD00FAD703 /* TodoCreationViewController.graphql */; };
 		2CF0EFD5226A2D0A00150030 /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0EFD1226A2D0800150030 /* TeamTableViewController.swift */; };
 		2CF0EFD6226A2D0A00150030 /* SearchUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0EFD2226A2D0800150030 /* SearchUserTableViewController.swift */; };
 		2CF0EFD7226A2D0A00150030 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0EFD3226A2D0A00150030 /* TeamViewController.swift */; };
@@ -86,7 +87,6 @@
 		EB061D08224D8498006221D3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D07224D8498006221D3 /* Todo.swift */; };
 		EB061D0B224E7CCA006221D3 /* Query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB061D0A224E7CCA006221D3 /* Query.graphql */; };
 		EB061D0D225021AB006221D3 /* NewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB061D0C225021AB006221D3 /* NewTest.swift */; };
-		EB6D344622552F9E002C92AC /* TodoCreation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EB6D344522552F9E002C92AC /* TodoCreation.graphql */; };
 		F877E0B8221F859A00A78D08 /* FolderConcept.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */; };
 		F877E0BA221F873A00A78D08 /* FolderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */; };
 		F8A527812230861900E715E8 /* FolderContentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */; };
@@ -113,6 +113,7 @@
 		2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCreationViewController.swift; sourceTree = "<group>"; };
 		2C34E0B122507186001D3EB9 /* TodoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		2CA8032A226E7E5C00FAD703 /* InviteToTeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteToTeamTableViewController.swift; sourceTree = "<group>"; };
+		2CA8034A2270D5CD00FAD703 /* TodoCreationViewController.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoCreationViewController.graphql; sourceTree = "<group>"; };
 		2CF0EFD1226A2D0800150030 /* TeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
 		2CF0EFD2226A2D0800150030 /* SearchUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserTableViewController.swift; sourceTree = "<group>"; };
 		2CF0EFD3226A2D0A00150030 /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +183,6 @@
 		EB061D07224D8498006221D3 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EB061D0A224E7CCA006221D3 /* Query.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Query.graphql; sourceTree = "<group>"; };
 		EB061D0C225021AB006221D3 /* NewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTest.swift; sourceTree = "<group>"; };
-		EB6D344522552F9E002C92AC /* TodoCreation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = TodoCreation.graphql; sourceTree = "<group>"; };
 		F877E0B7221F859A00A78D08 /* FolderConcept.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FolderConcept.storyboard; sourceTree = "<group>"; };
 		F877E0B9221F873A00A78D08 /* FolderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManagementViewController.swift; sourceTree = "<group>"; };
 		F8A527802230861900E715E8 /* FolderContentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderContentsTableViewController.swift; sourceTree = "<group>"; };
@@ -331,7 +331,7 @@
 				2CA8032A226E7E5C00FAD703 /* InviteToTeamTableViewController.swift */,
 				7BA77EAD21E9385E00C862C1 /* InviteToTeamViewController.swift */,
 				2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */,
-				EB6D344522552F9E002C92AC /* TodoCreation.graphql */,
+				2CA8034A2270D5CD00FAD703 /* TodoCreationViewController.graphql */,
 				2C34E0B122507186001D3EB9 /* TodoListViewController.swift */,
 				2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */,
 				2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */,
@@ -463,7 +463,7 @@
 				7BF8735A21F7BA8400737729 /* MessageDetailViewController.graphql in Resources */,
 				7BA77E9921E8033C00C862C1 /* TeamExample.json in Resources */,
 				7BA77E9821E8033C00C862C1 /* MessageExample.json in Resources */,
-				EB6D344622552F9E002C92AC /* TodoCreation.graphql in Resources */,
+				2CA8034B2270D5CD00FAD703 /* TodoCreationViewController.graphql in Resources */,
 				7BF8735621F6D50B00737729 /* SettingsViewController.graphql in Resources */,
 				7BF8735021F6D24400737729 /* TeamDetailTableViewController.graphql in Resources */,
 				7BE481CB2207871000F518F9 /* CreateNewUserViewController.graphql in Resources */,
