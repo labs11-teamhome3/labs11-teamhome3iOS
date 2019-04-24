@@ -1,0 +1,27 @@
+query FetchAllTodoList {
+todoLists {
+id
+createdAt
+description
+completed
+todos {
+id
+createdAt
+description
+}
+}
+}
+
+query OtherFetchAllTodoList($teamId: ID) {
+todoLists (teamId: $teamId) {
+id
+createdAt
+description
+completed
+todos {
+id
+createdAt
+description
+}
+}
+}
