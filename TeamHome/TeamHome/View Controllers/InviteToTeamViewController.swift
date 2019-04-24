@@ -1,4 +1,4 @@
-//
+// COULD DELETE THIS FILE ALL TOGETHER... BUT HAVEN'T PULLED THE TRIGGER YET.
 //  InviteToTeamViewController.swift
 //  TeamHome
 //
@@ -12,7 +12,7 @@ import Material
 import Toucan
 
 class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Properties
     var apollo: ApolloClient?
     var teamId: GraphQLID?
@@ -31,10 +31,12 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
     @IBOutlet weak var inviteButton: RaisedButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBAction func addTeamMembersButtonTapped(_ sender: Any) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         guard let apollo = apollo else { return }
         loadUsers(with: apollo)
         setUpViewAppearance()
@@ -42,15 +44,16 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
         //emailTextField.placeholderActiveColor = Appearance.yellowColor
         //emailTextField.textColor = .white
         //phoneNumberTextField.dividerActiveColor = Appearance.yellowColor
-            //phoneNumberTextField.placeholderActiveColor = Appearance.yellowColor
+        //phoneNumberTextField.placeholderActiveColor = Appearance.yellowColor
         //phoneNumberTextField.textColor = .white
         //inviteButton.backgroundColor = Appearance.darkMauveColor
-        
-
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(clickedCancelButton))
+        navigationItem.leftBarButtonItem = cancelBarButton
+        navigationItem.title = "Add Team Members"
         searchBar.delegate = self
+        //tableView.allowsMultipleSelection = false
         self.tableView.tableFooterView = UIView()
     }
-
     
     private func loadUsers(with apollo: ApolloClient) {
         apollo.fetch(query: FetchAllUsersQuery()) { (result, error) in
@@ -90,11 +93,11 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
     }
     
     // MARK: - Table view data source
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if filtering {
             return filterUsers?.count ?? users!.count
         } else {
@@ -102,13 +105,11 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
         }
     }
     
-    
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell", for: indexPath)
         cell.textLabel?.text = users?[indexPath.row]?.name
-        print(users![indexPath.row]!.name)
+        print(users![indexPath.row]!.name!)
         cell.detailTextLabel?.text = users?[indexPath.row]?.email
-        
         if let avatar = users?[indexPath.row]?.profilePic {
             cloudinary.createDownloader().fetchImage(avatar, { (progress) in
             }) { (image, error) in
@@ -123,10 +124,51 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
                 }
             }
         }
+        
+        
+//        if cell.accessoryType != .checkmark {
+//            cell.accessoryType = .checkmark
+//            tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.bottom)
+//        } else {
+//            cell.accessoryType = .none
+//        }
+        
         return cell
     }
     
+//    func setSelected(_ selected: Bool, animated: Bool) {
+//
+//    }
     
+    func prepareForReuse() {
+    
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+//        if cell.accessoryType != UITableViewCell.AccessoryType.checkmark {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+            
+        }
+    }
+    
+    @objc func clickedCancelButton() {
+        navigationController?.popViewController(animated: true)
+    }
     /*
      The previous mutation was deleted. Available team members are all list in on place
      and the user picks and adds team members from a drop box, or search for additional team

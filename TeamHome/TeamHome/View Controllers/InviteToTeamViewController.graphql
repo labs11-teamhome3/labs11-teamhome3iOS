@@ -9,5 +9,8 @@ query FetchAllUsers {
     }
 }
 
-
-
+mutation AddUserToTeam ($teamId: ID!, $userId: ID!) {
+    addUserToTeam(teamId: $teamId, userId: $userId) {
+        id
+    }
+}
