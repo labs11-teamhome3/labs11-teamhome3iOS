@@ -27,7 +27,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
     func setTheme() {
         
         guard let team = team else { return }
-        
+
         prepareFavoriteButton()
         prepareBottomBar()
         
@@ -64,7 +64,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
         card.toolbarEdgeInsetsPreset = .square3
         card.toolbarEdgeInsets.bottom = 0
         card.toolbarEdgeInsets.right = 8
-        card.backgroundColor = Appearance.buttonBackgroundColor
+        card.backgroundColor = Appearance.darkBlueColor
         
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
