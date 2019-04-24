@@ -31,7 +31,9 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewAppearance()
-        createGradientLayer()
+        
+        //createGradientLayer()
+        
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         

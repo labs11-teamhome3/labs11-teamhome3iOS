@@ -13,32 +13,26 @@ import Material
 enum Appearance {
     
     //New Theme
-    static let darkBackgroundColor = UIColor(red: 0/255.0, green: 10/255.0, blue: 18/255.0, alpha: 1.0)
+    static let darkBackgroundColor = UIColor(red: 2/255.0, green: 29/255.0, blue: 18/255.0, alpha: 1.0)
     static let buttonBackgroundColor = UIColor(red: 79/255.0, green: 195/255.0, blue: 247/255.0, alpha: 1.0)
-    //static let lightGrayColor = UIColor(red: 79/255.0, green: 91/255.0, blue: 98/255.0, alpha: 1.0)
-    //static let boldGrayColor = UIColor(red: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1.0)
-    //static let ligthBlueColor = UIColor(red: 139/255.0, green: 246/255.0, blue: 255/255, alpha: 1.0)
-    //static let darkBlueColor = UIColor(red: 0/255.0, green: 147/255.0, blue: 196/255.0 , alpha: 1.0)
     static let redLikeColor = UIColor(red: 229/255.0, green: 115/255.0, blue: 115/255.0, alpha: 1.0)
-    
-    //static let darkBackgroundColor = UIColor(red: 23/255.0, green: 19/255.0, blue: 27/255.0, alpha: 1.0)
-    //static let buttonBackgroundColor = UIColor(red: 121/255.0, green: 46/255.0, blue: 74/255.0, alpha: 1.0)
+ 
     static let ligthBlueColor = UIColor(red: 139/255.0, green: 246/255.0, blue: 255/255, alpha: 1.0)
     static let boldGrayColor = UIColor(red: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1.0)
     static let darkGrayPrimary = UIColor(red: 0/255.0, green: 10/255.0, blue: 18/255.0, alpha: 1.0)
     static let yellowColor = UIColor(red: 250/255.0, green: 237/255.0, blue: 38/255.0, alpha: 1.0)
-    static let darkBlueColor = UIColor(red: 0/255.0, green: 147/255.0, blue: 196/255.0 , alpha: 1.0)
+    static let darkBlueColor = UIColor(red: 16/255.0, green: 87/255.0, blue: 213/255.0 , alpha: 1.0)
     static let grayColor = UIColor(red: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1.0)
     static let beigeColor = UIColor(red: 157/255.0, green: 141/255.0, blue: 143/255.0, alpha: 1.0)
     static let lightGrayColor = UIColor(red: 79/255.0, green: 91/255.0, blue: 98/255.0, alpha: 1.0)
     
     static func setTheme() {
-        UIButton.appearance().tintColor = Appearance.yellowColor
+        UIButton.appearance().tintColor = .white
         
-        UINavigationBar.appearance().barTintColor = Appearance.darkGrayPrimary
-        UINavigationBar.appearance().isTranslucent = false
+        
+        UINavigationBar.appearance().backgroundColor = Appearance.darkBackgroundColor
+        UINavigationBar.appearance().isTranslucent = false 
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        UIBarButtonItem.appearance().tintColor = .white
         let titleFont = Appearance.setTitleFont(with: .title1, pointSize: 20)
         let titleAttributes = [NSAttributedString.Key.font: titleFont, NSAttributedString.Key.foregroundColor: Appearance.yellowColor]
         let titleLargeFont = Appearance.setTitleFont(with: .title1, pointSize: 30)
@@ -47,7 +41,7 @@ enum Appearance {
         UINavigationBar.appearance().titleTextAttributes = titleAttributes
         UINavigationBar.appearance().largeTitleTextAttributes = titleLargeAttributes
         
-        UITabBar.appearance().barTintColor = Appearance.grayColor
+        UITabBar.appearance().barTintColor = Appearance.darkBackgroundColor
         UITabBar.appearance().tintColor = Appearance.yellowColor
         UITabBar.appearance().unselectedItemTintColor = .white
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Color.white], for: .normal)
@@ -95,7 +89,7 @@ enum Appearance {
 
 extension UIViewController {
     func setUpViewAppearance() {
-        view.backgroundColor = Appearance.darkBlueColor
+        view.backgroundColor = Appearance.lightGrayColor
         
         UILabel.appearance().textColor = .white
         

@@ -192,7 +192,7 @@ import Apollo
         self.setNeedsStatusBarAppearanceUpdate()
         collectionView.backgroundColor = .clear
         
-        createGradientLayer()
+        //createGradientLayer()
     }
     
     

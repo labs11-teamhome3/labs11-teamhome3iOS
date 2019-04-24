@@ -383,12 +383,12 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
 
         gradientLayer.frame = self.view.bounds
 
-        gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
+        gradientLayer.colors = [Appearance.darkGrayPrimary, Appearance.darkBackgroundColor]
 
 
-        gradientLayer.locations = [0.0, 0.5]
+        //gradientLayer.locations = [0.0, 0.0]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0)
 
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }

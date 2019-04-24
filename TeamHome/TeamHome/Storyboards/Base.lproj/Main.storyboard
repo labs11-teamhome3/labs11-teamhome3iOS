@@ -157,6 +157,7 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZnP-xo-OHO">
                                     <rect key="frame" x="368" y="28" width="22" height="22"/>
+                                    <color key="tintColor" red="0.19437581940000001" green="0.56953295770000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
                                         <action selector="addTeam:" destination="yEZ-jf-9kf" eventType="touchUpInside" id="xYg-TB-ukf"/>
                                     </connections>
