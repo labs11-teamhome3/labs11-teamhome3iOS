@@ -16,7 +16,7 @@ mutation AddNewMessage($title: String!, $teamId: ID!, $userId: ID!, $content: St
 
 
 mutation UpdateMessage($title: String, $content: String, $id: ID!) {
-updateMessage(messageId: $id, content: $content, title: $title) {
+    updateMessage(messageId: $id, content: $content, title: $title) {
         title
         inTeam{
             teamName

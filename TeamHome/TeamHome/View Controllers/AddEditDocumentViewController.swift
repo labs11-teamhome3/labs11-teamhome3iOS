@@ -104,7 +104,7 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         
         guard let tag = tags?[indexPath.row] else { return UICollectionViewCell() }
         cell.tagLabel.text = tag.name
-        cell.backgroundColor = Appearance.darkMauveColor
+        cell.backgroundColor = Appearance.darkGrayPrimary
         cell.layer.cornerRadius = cell.frame.height / 2
         
         if let document = self.document {
@@ -114,7 +114,7 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
                 
                 if tag.name == this {
                     self.tagSelected = documentTag.name
-                    cell.backgroundColor = Appearance.mauveColor
+                    cell.backgroundColor = Appearance.boldGrayColor
                 }
             }
         }
@@ -127,15 +127,15 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         self.tagSelected = tag.name
         let cell = collectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = Appearance.mauveColor
+        cell?.backgroundColor = Appearance.boldGrayColor
     }
     
     //MARK: - Private Properties
     private func setupViews(){
         setUpViewAppearance()
-        newDocumentView.backgroundColor = Appearance.plumColor
+        newDocumentView.backgroundColor = Appearance.grayColor
         cancelButton.tintColor = Appearance.yellowColor
-        submitButton.backgroundColor = Appearance.darkMauveColor
+        submitButton.backgroundColor = Appearance.darkGrayPrimary
         
         documentLinkTextField.textColor = .white
         documentLinkTextField.placeholder = "Add a link"

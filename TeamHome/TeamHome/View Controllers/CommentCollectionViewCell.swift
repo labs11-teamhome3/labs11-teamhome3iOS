@@ -60,7 +60,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
     private func prepareDateLabel(with dateString: String) {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
-        dateLabel.textColor = Appearance.mauveColor
+        dateLabel.textColor = Appearance.boldGrayColor
         dateLabel.text = dateString
     }
     
@@ -71,7 +71,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         
         likeCountLabel = UILabel()
         likeCountLabel.text = "\(likes.count) likes"
-        likeCountLabel.textColor = Appearance.darkMauveColor
+        likeCountLabel.textColor = Appearance.darkGrayPrimary
         
         guard let currentUser = currentUser else { return }
         let id = currentUser.id
@@ -88,7 +88,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         favoriteButton.addTarget(self, action: #selector(self.clickedLikeButton(_:)), for: .touchUpInside)
         
         if comment.user.id == currentUser.id {
-            deleteButton = IconButton(title: "Delete", titleColor: Appearance.darkMauveColor)
+            deleteButton = IconButton(title: "Delete", titleColor: Appearance.darkGrayPrimary)
             deleteButton.fontSize = 12
             deleteButton.addTarget(self, action: #selector(self.deleteComment(_:)), for: .touchUpInside)
             
@@ -103,7 +103,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         
         toolbar.title = "\(comment.user.name)"
         toolbar.titleLabel.textAlignment = .left
-        toolbar.titleLabel.textColor = Appearance.darkMauveColor
+        toolbar.titleLabel.textColor = Appearance.darkGrayPrimary
         
         toolbar.detail = ""
         toolbar.detailLabel.textAlignment = .left
@@ -121,7 +121,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
         contentLabel.numberOfLines = 0
         contentLabel.text = comment.content
         contentLabel.font = RobotoFont.regular(with: 14)
-        contentLabel.textColor = Appearance.darkMauveColor
+        contentLabel.textColor = Appearance.darkGrayPrimary
         contentLabel.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 20)
         
         if let image = comment.image {

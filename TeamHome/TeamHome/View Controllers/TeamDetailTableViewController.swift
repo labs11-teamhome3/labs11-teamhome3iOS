@@ -39,7 +39,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewAppearance()
-        view.backgroundColor = Appearance.plumColor
+        view.backgroundColor = Appearance.grayColor
         UILabel.appearance().tintColor = .white
         let inviteBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickedInviteUser))
         navigationItem.rightBarButtonItem = inviteBarButton
@@ -238,7 +238,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
         gradientLayer.locations = [0.0, 0.25]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)

@@ -29,9 +29,9 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         super.viewDidLoad()
         
         setUpViewAppearance()
-        newMessageView.backgroundColor = Appearance.plumColor
+        newMessageView.backgroundColor = Appearance.grayColor
         cancelButton.tintColor = Appearance.yellowColor
-        submitButton.backgroundColor = Appearance.darkMauveColor
+        submitButton.backgroundColor = Appearance.darkGrayPrimary
         messageContentTextView.placeholder = "Enter your message"
         messageContentTextView.textColor = .white
         messageContentTextView.dividerColor = Appearance.yellowColor
@@ -167,7 +167,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         
         guard let tag = tags?[indexPath.row] else { return UICollectionViewCell() }
         cell.tagLabel.text = tag.name
-        cell.backgroundColor = Appearance.darkMauveColor
+        cell.backgroundColor = Appearance.darkGrayPrimary
         cell.layer.cornerRadius = cell.frame.height / 2
         
         if let message = self.message {
@@ -177,7 +177,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 
                 if tag.name == this {
                     self.tagSelected = messageTag.name
-                    cell.backgroundColor = Appearance.mauveColor
+                    cell.backgroundColor = Appearance.boldGrayColor
                 }
             }
         }
@@ -190,7 +190,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         self.tagSelected = tag.name
         let cell = collectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = Appearance.mauveColor
+        cell?.backgroundColor = Appearance.boldGrayColor
     }
     
     // MARK: - UIImagePickerControllerDelegate

@@ -170,7 +170,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
         
-        card.backgroundColor = Appearance.plumColor
+        card.backgroundColor = Appearance.grayColor
         
     }
     
