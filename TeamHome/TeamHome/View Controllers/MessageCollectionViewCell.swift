@@ -29,16 +29,11 @@ class MessageCollectionViewCell: UICollectionViewCell {
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         guard let oldDate = dateFormatter.date(from: dateString) else {return}
-        let date = dateFormatter.string(from: oldDate)
+    
         
-//        let newString = String(describing: oldDate)
-//        guard let dateDouble = Double(newString) else {return}
-//        let dateDouble2 = dateDouble / 1000.0
-//        let date = dateDouble2.getDateStringFromUTC()
-//
         prepareAvatarImage(for: message)
         prepareComments(for: message)
-        prepareDateLabel(date: date)
+        prepareDateLabel(date: oldDate)
         prepareImageButton(for: message)
         prepareMoreButton()
         prepareContentView(messageContent: message.content)
@@ -64,11 +59,15 @@ class MessageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func prepareDateLabel(date: String) {
+    private func prepareDateLabel(date: Date) {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
         dateLabel.textColor = Color.grey.base
-        dateLabel.text = date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        let newText = dateFormatter.string(from: date)
+        dateLabel.text =  newText
     }
     
     private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.Team.Message) {

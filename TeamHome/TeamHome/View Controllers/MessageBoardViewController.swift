@@ -30,7 +30,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        //setUpViewAppearance()
+        setUpViewAppearance()
         
         //createGradientLayer()
         
