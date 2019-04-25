@@ -30,7 +30,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViewAppearance()
+        //setUpViewAppearance()
         
         //createGradientLayer()
         
@@ -78,7 +78,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
             guard let destinationVC = segue.destination as? AddEditMessageViewController else { return }
             destinationVC.apollo = apollo
             destinationVC.team = team
-            destinationVC.currentUser = currentUser 
+            destinationVC.currentUser = currentUser
         }
     }
     

@@ -24,13 +24,18 @@ class MessageCollectionViewCell: UICollectionViewCell {
     private func updateViews() {
         
         guard let message = message,
-            let dateString = message.createdAt,
-            let dateDouble = Double(dateString) else { return }
+            let dateString = message.createdAt else {return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        guard let oldDate = dateFormatter.date(from: dateString) else {return}
+        let date = dateFormatter.string(from: oldDate)
         
-        let dateDouble2 = dateDouble / 1000.0
-        
-        let date = dateDouble2.getDateStringFromUTC()
-        
+//        let newString = String(describing: oldDate)
+//        guard let dateDouble = Double(newString) else {return}
+//        let dateDouble2 = dateDouble / 1000.0
+//        let date = dateDouble2.getDateStringFromUTC()
+//
         prepareAvatarImage(for: message)
         prepareComments(for: message)
         prepareDateLabel(date: date)
