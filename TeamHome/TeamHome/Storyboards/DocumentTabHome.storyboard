@@ -354,7 +354,7 @@
             <objects>
                 <viewController id="PI0-00-t65" customClass="DocumentDetailViewController" customModule="TeamHome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6fj-NF-GcE">
-                        <rect key="frame" x="0.0" y="0.0" width="281" height="257.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xxl-hv-RrG">
@@ -571,7 +571,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDz-5y-Iar" customClass="PresenterCard" customModule="Material">
-                                            <rect key="frame" x="0.0" y="0.0" width="306" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="212" height="0.0"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>

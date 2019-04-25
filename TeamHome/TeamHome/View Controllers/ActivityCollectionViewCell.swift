@@ -158,13 +158,13 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         guard let activity = activity else { return }
         
         if activity.message != nil {
-            card.backgroundColor = Appearance.plumColor
+            card.backgroundColor = Appearance.grayColor
         }
         if activity.comment != nil {
-            card.backgroundColor = Appearance.darkMauveColor
+            card.backgroundColor = Appearance.darkGrayPrimary
         }
         if activity.document != nil {
-            card.backgroundColor = Appearance.plumColor
+            card.backgroundColor = Appearance.grayColor
         }
         
 //        guard let currentUser = currentUser else { return }

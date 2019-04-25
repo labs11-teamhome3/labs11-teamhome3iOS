@@ -16,8 +16,10 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
         super.viewDidLoad()
 
         setUpViewAppearance()
-        createGradientLayer()
-        collectionView.backgroundColor = .black
+
+        //createGradientLayer()
+        collectionView.backgroundColor = .clear
+
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         label = UILabel()
@@ -39,7 +41,7 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
         
         gradientLayer.frame = self.view.bounds
         
-        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
         
         
         gradientLayer.locations = [0.0, 0.5]

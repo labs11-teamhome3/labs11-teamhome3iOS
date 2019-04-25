@@ -29,30 +29,30 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
         
         firstNameTextField.dividerActiveColor = Appearance.yellowColor
         firstNameTextField.placeholderActiveColor = Appearance.yellowColor
-        firstNameTextField.textColor = Appearance.darkMauveColor
+        firstNameTextField.textColor = Appearance.darkGrayPrimary
         
         lastNameTextField.dividerActiveColor = Appearance.yellowColor
         lastNameTextField.placeholderActiveColor = Appearance.yellowColor
-        lastNameTextField.textColor = Appearance.darkMauveColor
+        lastNameTextField.textColor = Appearance.darkGrayPrimary
         
         emailTextField.dividerActiveColor = Appearance.yellowColor
         emailTextField.placeholderActiveColor = Appearance.yellowColor
-        emailTextField.textColor = Appearance.darkMauveColor
+        emailTextField.textColor = Appearance.darkGrayPrimary
         
         phoneTextField.dividerActiveColor = Appearance.yellowColor
         phoneTextField.placeholderActiveColor = Appearance.yellowColor
-        phoneTextField.textColor = Appearance.darkMauveColor
+        phoneTextField.textColor = Appearance.darkGrayPrimary
         
         self.setUpViewAppearance()
         UILabel.appearance().textColor = .white
         teamNameLabel.textColor = .white
         notificationsLabel.font = Appearance.setTitleFont(with: .title3, pointSize: 18)
-        advancedSettingsButton.tintColor = Appearance.darkMauveColor
+        advancedSettingsButton.tintColor = Appearance.darkGrayPrimary
         
         self.setNeedsStatusBarAppearanceUpdate()
         
-        createGradientLayer()
-        saveChangesButton.backgroundColor = Appearance.darkMauveColor
+        //createGradientLayer()
+        saveChangesButton.backgroundColor = Appearance.darkGrayPrimary
         
         guard let apollo = apollo else { return }
         
@@ -270,7 +270,7 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
         
         gradientLayer.frame = self.view.bounds
         
-        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
         
         
         gradientLayer.locations = [0.0, 0.5]

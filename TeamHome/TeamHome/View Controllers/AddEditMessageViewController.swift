@@ -29,9 +29,9 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         super.viewDidLoad()
         
         setUpViewAppearance()
-        newMessageView.backgroundColor = Appearance.plumColor
+        newMessageView.backgroundColor = Appearance.grayColor
         cancelButton.tintColor = Appearance.yellowColor
-        submitButton.backgroundColor = Appearance.darkMauveColor
+        submitButton.backgroundColor = Appearance.darkGrayPrimary
         messageContentTextView.placeholder = "Enter your message"
         messageContentTextView.textColor = .white
         messageContentTextView.dividerColor = Appearance.yellowColor
@@ -137,9 +137,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         
         // Check if message already exists.
         guard let message = message else {
-            
-            
-                
             // Create a new message.
             createNewMessage(with: apollo, messageTitle: messageTitle, teamId: teamId, userId: userId, content: content)
             return
@@ -167,7 +164,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         
         guard let tag = tags?[indexPath.row] else { return UICollectionViewCell() }
         cell.tagLabel.text = tag.name
-        cell.backgroundColor = Appearance.darkMauveColor
+        cell.backgroundColor = Appearance.darkGrayPrimary
         cell.layer.cornerRadius = cell.frame.height / 2
         
         if let message = self.message {
@@ -177,7 +174,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 
                 if tag.name == this {
                     self.tagSelected = messageTag.name
-                    cell.backgroundColor = Appearance.mauveColor
+                    cell.backgroundColor = Appearance.boldGrayColor
                 }
             }
         }
@@ -190,7 +187,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         self.tagSelected = tag.name
         let cell = collectionView.cellForItem(at: indexPath)
         
-        cell?.backgroundColor = Appearance.mauveColor
+        cell?.backgroundColor = Appearance.boldGrayColor
     }
     
     // MARK: - UIImagePickerControllerDelegate
@@ -549,7 +546,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     private var tags: [FindTagsByTeamQuery.Data.FindTagsByTeam?]?
     private var tagsWatcher: GraphQLQueryWatcher<FindTagsByTeamQuery>?
     
-    private var currentUser: CurrentUserQuery.Data.User?
+    var currentUser: CurrentUserQuery.Data.User?
     weak var delegate: EditMessageDelegate?
     var apollo: ApolloClient?
     var team: TeamsByUserQuery.Data.TeamsByUser?

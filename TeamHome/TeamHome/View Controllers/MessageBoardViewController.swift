@@ -31,7 +31,9 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewAppearance()
-        createGradientLayer()
+        
+        //createGradientLayer()
+        
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         
@@ -74,9 +76,9 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
             self.delegate = destinationVC
         } else if segue.identifier == "AddMessage" {
             guard let destinationVC = segue.destination as? AddEditMessageViewController else { return }
-            
             destinationVC.apollo = apollo
             destinationVC.team = team
+            destinationVC.currentUser = currentUser
         }
     }
     
@@ -91,7 +93,7 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
     private func createGradientLayer() {
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+        gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)

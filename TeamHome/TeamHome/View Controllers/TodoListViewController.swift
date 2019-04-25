@@ -76,7 +76,9 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //setUpViewAppearance()
+
         // This gets rid of the empty table cell in the tableView at the bottom.
         tableView.tableFooterView = UIView()
         tableView.bounces = false
@@ -185,13 +187,15 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     private var gradientLayer: CAGradientLayer!
     // MARK: - Private Functions
     // Create gradient layer for view background.
-    private func createGradientLayer() {
-        gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-        gradientLayer.locations = [0.0, 0.5]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
-    }
+//    private func createGradientLayer() {
+//        gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = self.view.bounds
+//
+//        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
+//
+//        gradientLayer.locations = [0.0, 0.5]
+//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+//        self.view.layer.insertSublayer(gradientLayer, at: 0)
+//    }
 }

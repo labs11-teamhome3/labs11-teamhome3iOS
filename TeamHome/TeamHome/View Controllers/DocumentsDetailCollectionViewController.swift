@@ -148,7 +148,7 @@ class DocumentsDetailCollectionViewController: UICollectionViewController, AddNe
                 self.label.backgroundColor = .white
                 self.label.layer.cornerRadius = 4
                 self.label.clipsToBounds = true
-                self.label.textColor = Appearance.darkMauveColor
+                self.label.textColor = Appearance.darkGrayPrimary
                 self.collectionView.addSubview(self.label)
             }
         }

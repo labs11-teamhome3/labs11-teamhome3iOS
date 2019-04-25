@@ -24,16 +24,16 @@ class MessageCollectionViewCell: UICollectionViewCell {
     private func updateViews() {
         
         guard let message = message,
-            let dateString = message.createdAt,
-            let dateDouble = Double(dateString) else { return }
-        
-        let dateDouble2 = dateDouble / 1000.0
-        
-        let date = dateDouble2.getDateStringFromUTC()
+            let dateString = message.createdAt else {return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        guard let oldDate = dateFormatter.date(from: dateString) else {return}
+    
         
         prepareAvatarImage(for: message)
         prepareComments(for: message)
-        prepareDateLabel(date: date)
+        prepareDateLabel(date: oldDate)
         prepareImageButton(for: message)
         prepareMoreButton()
         prepareContentView(messageContent: message.content)
@@ -59,11 +59,15 @@ class MessageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func prepareDateLabel(date: String) {
+    private func prepareDateLabel(date: Date) {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
         dateLabel.textColor = Color.grey.base
-        dateLabel.text = date
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        let newText = dateFormatter.string(from: date)
+        dateLabel.text =  newText
     }
     
     private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.Team.Message) {
@@ -170,7 +174,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
         
-        card.backgroundColor = Appearance.plumColor
+        card.backgroundColor = Appearance.grayColor
         
     }
     
