@@ -22,6 +22,23 @@ todos {
 id
 createdAt
 description
+completed
 }
 }
 }
+
+
+mutation UpdateTodo ($id: String!, $description: String!, $completed: Boolean) {
+updateTodo(id: $id, description: $description, completed: $completed) {
+completed
+}
+}
+
+mutation CreateTodo ($partOf: ID!, $description: String!, $completed: Boolean) {
+createTodo(partOf: $partOf, description: $description, completed: $completed) {
+description
+completed
+}
+}
+
+

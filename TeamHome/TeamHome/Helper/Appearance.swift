@@ -5,7 +5,6 @@
 //  Created by Daniela Parra on 1/28/19.
 //  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import Material
@@ -16,7 +15,7 @@ enum Appearance {
     static let darkBackgroundColor = UIColor(red: 2/255.0, green: 29/255.0, blue: 18/255.0, alpha: 1.0)
     static let buttonBackgroundColor = UIColor(red: 79/255.0, green: 195/255.0, blue: 247/255.0, alpha: 1.0)
     static let redLikeColor = UIColor(red: 229/255.0, green: 115/255.0, blue: 115/255.0, alpha: 1.0)
- 
+    
     static let ligthBlueColor = UIColor(red: 139/255.0, green: 246/255.0, blue: 255/255, alpha: 1.0)
     static let boldGrayColor = UIColor(red: 38/255.0, green: 50/255.0, blue: 56/255.0, alpha: 1.0)
     static let darkGrayPrimary = UIColor(red: 0/255.0, green: 10/255.0, blue: 18/255.0, alpha: 1.0)
@@ -31,7 +30,7 @@ enum Appearance {
         
         
         UINavigationBar.appearance().backgroundColor = Appearance.darkBackgroundColor
-        UINavigationBar.appearance().isTranslucent = false 
+        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         let titleFont = Appearance.setTitleFont(with: .title1, pointSize: 20)
         let titleAttributes = [NSAttributedString.Key.font: titleFont, NSAttributedString.Key.foregroundColor: Appearance.yellowColor]

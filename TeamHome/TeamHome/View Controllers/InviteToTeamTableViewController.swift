@@ -23,6 +23,7 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
 
     // MARK: - Properties
     var apollo: ApolloClient?
+    
     var teamId: GraphQLID?
     var users: [FetchAllUsersQuery.Data.User?]? = []
     var filtering = false
@@ -41,7 +42,6 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Hhhhhhhhhheeeeeeeeeeellllllllooooooooooo")
         guard let apollo = apollo else { return }
         loadUsers(with: apollo)
         //setUpViewAppearance()
@@ -51,7 +51,7 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.title = "Add Team Members"
         searchBar.delegate = self
-        //tableView.allowsMultipleSelection = false
+
         self.tableView.tableFooterView = UIView()
     }
 
