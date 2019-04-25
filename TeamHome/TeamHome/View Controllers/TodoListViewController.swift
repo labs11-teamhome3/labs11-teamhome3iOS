@@ -58,7 +58,7 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewAppearance()
-        createGradientLayer()
+        //createGradientLayer()
         filterByTableView.isHidden = true
         sortByTableView.isHidden = true
         tableViewData = [cellData(opened: false, title: "TodoList_01", sectionData: ["Task1", "Task2", "Task3"]),

@@ -137,9 +137,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         
         // Check if message already exists.
         guard let message = message else {
-            
-            
-                
             // Create a new message.
             createNewMessage(with: apollo, messageTitle: messageTitle, teamId: teamId, userId: userId, content: content)
             return
@@ -549,7 +546,7 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     private var tags: [FindTagsByTeamQuery.Data.FindTagsByTeam?]?
     private var tagsWatcher: GraphQLQueryWatcher<FindTagsByTeamQuery>?
     
-    private var currentUser: CurrentUserQuery.Data.User?
+    var currentUser: CurrentUserQuery.Data.User?
     weak var delegate: EditMessageDelegate?
     var apollo: ApolloClient?
     var team: TeamsByUserQuery.Data.TeamsByUser?

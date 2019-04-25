@@ -17,7 +17,7 @@ class FolderContentsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.backgroundColor = .clear
         setUpViewAppearance()
-        createGradientLayer()
+        //createGradientLayer()
         loadDocuments(with: apollo!)
     }
     

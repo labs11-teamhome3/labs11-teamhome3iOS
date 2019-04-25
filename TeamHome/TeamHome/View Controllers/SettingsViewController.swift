@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController, TabBarChildrenProtocol, UIImageP
         
         self.setNeedsStatusBarAppearanceUpdate()
         
-        createGradientLayer()
+        //createGradientLayer()
         saveChangesButton.backgroundColor = Appearance.darkGrayPrimary
         
         guard let apollo = apollo else { return }

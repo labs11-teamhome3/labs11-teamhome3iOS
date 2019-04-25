@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamHome/View Controllers/DashboardCollectionViewController.swift"
-            timestampString = "577831591.3553081"
+            timestampString = "577899874.152793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "236"
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeamHome/View Controllers/MessageDetailViewController.swift"
-            timestampString = "577831591.355446"
+            filePath = "TeamHome/View Controllers/AddEditMessageViewController.swift"
+            timestampString = "577899874.1528879"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "createNewTag(with:under:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamHome/View Controllers/AddEditMessageViewController.swift"
+            timestampString = "577899874.153524"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "createNewTag(with:under:for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
