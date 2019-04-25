@@ -17,10 +17,9 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
 
         setUpViewAppearance()
         createGradientLayer()
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .black
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         label = UILabel()
         label.text = "Loading activity"
         collectionView.addSubview(label)

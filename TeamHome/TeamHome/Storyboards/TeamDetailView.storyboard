@@ -105,13 +105,13 @@
                                 <rect key="frame" x="32" y="108" width="311" height="672"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite someone new to your team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTg-qK-a2c">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="22.666666666666668"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="20"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <searchBar contentMode="redraw" placeholder="Search for team member" translatesAutoresizingMaskIntoConstraints="NO" id="doz-0M-SRT">
-                                        <rect key="frame" x="0.0" y="29.666666666666657" width="311" height="56"/>
+                                        <rect key="frame" x="0.0" y="26.999999999999996" width="311" height="58.666666666666657"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CtB-Z7-S4e">
