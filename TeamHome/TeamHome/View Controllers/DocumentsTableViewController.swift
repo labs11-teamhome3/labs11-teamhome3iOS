@@ -18,6 +18,7 @@ class DocumentsTableViewController: UITableViewController {
     var deleteIndexPath: IndexPath?
 
     override func viewDidLoad() {
+        setUpViewAppearance()
         super.viewDidLoad()
         tableView.backgroundColor = .clear
         guard let apollo = apollo else { return }

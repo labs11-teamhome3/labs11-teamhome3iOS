@@ -75,7 +75,7 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewAppearance()
-        createGradientLayer()
+        //createGradientLayer()
         // Do any additional setup after loading the view.
         assignTopLeftTableView.isHidden = true
         assignTopRightTableView.isHidden = true

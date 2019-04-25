@@ -76,9 +76,9 @@ class MessageBoardViewController: UIViewController, TabBarChildrenProtocol {
             self.delegate = destinationVC
         } else if segue.identifier == "AddMessage" {
             guard let destinationVC = segue.destination as? AddEditMessageViewController else { return }
-            
             destinationVC.apollo = apollo
             destinationVC.team = team
+            destinationVC.currentUser = currentUser
         }
     }
     
