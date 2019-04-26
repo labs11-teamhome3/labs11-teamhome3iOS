@@ -24,9 +24,10 @@ class CommentsCollectionViewController: UICollectionViewController, AddNewCommen
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.translatesAutoresizingMaskIntoConstraints = false
         setUpViewAppearance()
         collectionView.backgroundColor = .clear
-        
+       
         guard let messageId = messageId,
             let apollo = apollo else { return }
 

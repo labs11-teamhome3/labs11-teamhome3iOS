@@ -41,14 +41,14 @@ class CommentCollectionViewCell: UICollectionViewCell {
         print(self.contentView)
         
         guard let comment = comment,
-            let dateString = comment.createdAt,
-            let dateDouble = Double(dateString) else { return }
-        
-        let dateDouble2 = dateDouble / 1000.0
-        let date = dateDouble2.getDateStringFromUTC()
+            let dateString = comment.createdAt else {return}
+            let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        guard let oldDate = dateFormatter.date(from: dateString) else {return}
 
         prepareAvatarImage(for: comment)
-        prepareDateLabel(with: date)
+        prepareDateLabel(with: oldDate)
         prepareLikes(for: comment)
         prepareContentView(with: comment)
         prepareBottomBar()
@@ -57,11 +57,14 @@ class CommentCollectionViewCell: UICollectionViewCell {
     
     }
     
-    private func prepareDateLabel(with dateString: String) {
+    private func prepareDateLabel(with date: Date) {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
         dateLabel.textColor = Appearance.boldGrayColor
-        dateLabel.text = dateString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        let newText = dateFormatter.string(from: date)
+        dateLabel.text =  newText
     }
     
     private func prepareLikes(for comment:
