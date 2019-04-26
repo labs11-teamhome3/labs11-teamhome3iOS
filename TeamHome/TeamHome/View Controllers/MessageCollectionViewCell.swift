@@ -157,8 +157,11 @@ class MessageCollectionViewCell: UICollectionViewCell {
         card.contentView = contentLabel
         card.contentViewEdgeInsetsPreset = .wideRectangle5
         card.bottomBar = bottomBar
-        card.bottomBarEdgeInsetsPreset = .wideRectangle2
-        card.backgroundColor = Appearance.grayColor
+        card.bottomBarEdgeInsetsPreset = .wideRectangle2  
+        card.backgroundColor = Appearance.darkBlueColor
+
+        
+
     }
     
     // Set image for a given message.

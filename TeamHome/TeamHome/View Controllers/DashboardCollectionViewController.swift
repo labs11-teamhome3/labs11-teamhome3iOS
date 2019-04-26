@@ -171,6 +171,14 @@ import Apollo
                 
                 
                 guard let result = result else { return }
+                
+                if let error = result.errors {
+                    let upgradeError = UIAlertController(title: "Upgrade!", message: "\(error[0])", preferredStyle: .alert)
+                    self.present(upgradeError, animated: true, completion: nil)
+                    
+                    self.watcher?.refetch()
+                }
+                
                 // Call water to reload teams and present them to user
                 self.watcher?.refetch()
                 print(result)
