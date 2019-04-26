@@ -66,6 +66,7 @@ class DashboardTeamCollectionViewCell: UICollectionViewCell {
         card.toolbarEdgeInsets.right = 8
         card.backgroundColor = Appearance.darkBlueColor
         
+        
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
         
