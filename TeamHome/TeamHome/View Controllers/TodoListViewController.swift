@@ -23,9 +23,7 @@ struct cellData {
 
 class TodoListViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource, TabBarChildrenProtocol {
     var team: TeamsByUserQuery.Data.TeamsByUser?
-
     var currentUser: CurrentUserQuery.Data.User?
-
     @IBAction func filterButtonTapped(_ sender: Any) {
         print("Hello")
     }
@@ -51,17 +49,17 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     @IBOutlet weak var filterByTableView: UITableView!
     @IBOutlet weak var sortByTableView: UITableView!
     @IBOutlet weak var tableView: UITableView!
-
-
+    
+    
     // MARK: TODO THIS REPEATED CODE SHOULD CONSOLIDATE INTO ONE FUNCTION...
     @IBAction func filterByButtonTapped(_ sender: Any) {
         animateDropMenu(tableView: filterByTableView)
     }
-
+    
     @IBAction func sortByButtonTapped(_ sender: Any) {
         animateDropMenu(tableView: sortByTableView)
     }
-
+    
     func animateDropMenu( tableView: UITableView) {
         if tableView.isHidden {
             UIView.animate(withDuration: 0.3) {
@@ -73,28 +71,35 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //setUpViewAppearance()
-
         // This gets rid of the empty table cell in the tableView at the bottom.
         tableView.tableFooterView = UIView()
         tableView.bounces = false
-
         guard let apollo = apollo
             else { return }
         loadTodoLists(with: apollo)
         self.title = "Todos"
-        var button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width * 0.75, y: self.view.frame.height * 0.75), size: CGSize(width: 75, height: 75)))
+        var button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width * 0.80, y: self.view.frame.height * 0.8), size: CGSize(width: 65, height: 65)))
         button.backgroundColor = #colorLiteral(red: 0.350115478, green: 0.7936955094, blue: 0.9733197093, alpha: 1)
         button.layer.cornerRadius = button.frame.height * 0.50
         button.setTitle("+", for: .normal)
+        button.fontSize = 40
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         self.view.addSubview(button)
-
     }
-
+    
+    @objc func buttonTapped(sender: UIButton!){
+//        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TodoCreationViewController") as UIViewController
+//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
+//
+//        self.present(viewController, animated: false, completion: nil)
+       performSegue(withIdentifier: "NewTodoSegue", sender: nil)
+    }
+    
+    
     func loadTodoLists(with apollo: ApolloClient) {
         apollo.fetch(query: OtherFetchAllTodoListQuery(teamId: team?.id)) { (result, error) in
             if let error = error {
@@ -102,7 +107,7 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
             }
             guard let result = result,
                 let data = result.data else { return }
-                self.todoLists = data.todoLists
+            self.todoLists = data.todoLists
             for todolist in data.todoLists! {
                 print("Todolist ID: \(todolist!.id)")
                 print("Todolist Description: \(todolist!.description)")
@@ -111,42 +116,41 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
             }
         }
     }
-
-
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-//        if tableView == todosTableView {
-//            return tableViewData.count
-//        }
-//        return 1
+        //        if tableView == todosTableView {
+        //            return tableViewData.count
+        //        }
+        //        return 1
         return todoLists?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == todosTableView {
-//            if tableViewData[section].opened == true {
-//                return tableViewData[section].sectionData.count + 1
-//            }
-//        }
-//        return 1
+        //        if tableView == todosTableView {
+        //            if tableViewData[section].opened == true {
+        //                return tableViewData[section].sectionData.count + 1
+        //            }
+        //        }
+        //        return 1
         return (todoLists?[section]?.todos.count)! + 1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
-                cell.textLabel?.text = todoLists?[indexPath.section]?.description
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
-                let todo = todoLists?[indexPath.section]?.todos[indexPath.row - 1]
-                cell.todo = todo
-                cell.taskNameLabel?.text = todo?.description
-                cell.taskNameLabel.textColor = .black
-                return cell
-            }
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
+            cell.textLabel?.text = todoLists?[indexPath.section]?.description
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
+            let todo = todoLists?[indexPath.section]?.todos[indexPath.row - 1]
+            cell.todo = todo
+            cell.taskNameLabel?.text = todo?.description
+            cell.taskNameLabel.textColor = .black
+            return cell
+        }
     }
-
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderButton = UIButton(type: .custom)
         sectionHeaderButton.tag = section
@@ -158,44 +162,24 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-
         if indexPath.row == 0{
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                } else {
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                }
-            }
-
+            let sections = IndexSet.init(integer: indexPath.section)
+            tableView.reloadSections(sections, with: .none)
+        } else {
+            let sections = IndexSet.init(integer: indexPath.section)
+            tableView.reloadSections(sections, with: .none)
+        }
+    }
     
-
-
-
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
     }
-
-    private var gradientLayer: CAGradientLayer!
-    // MARK: - Private Functions
-    // Create gradient layer for view background.
-//    private func createGradientLayer() {
-//        gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = self.view.bounds
-//
-//        gradientLayer.colors = [Appearance.grayColor.cgColor, Appearance.likeGrayColor.cgColor, Appearance.grayColor.cgColor]
-//
-//        gradientLayer.locations = [0.0, 0.5]
-//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-//        self.view.layer.insertSublayer(gradientLayer, at: 0)
-//    }
+    
+    
 }

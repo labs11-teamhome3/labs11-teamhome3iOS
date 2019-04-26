@@ -43,7 +43,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         UILabel.appearance().tintColor = .white
         let inviteBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickedInviteUser))
         navigationItem.rightBarButtonItem = inviteBarButton
-        navigationItem.title = "Team Detail"
+        navigationItem.title = "Team"
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         guard let team = team else { return }
         teamNameLabel.text = team.teamName
