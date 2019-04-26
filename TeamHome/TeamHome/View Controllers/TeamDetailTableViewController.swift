@@ -43,7 +43,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         UILabel.appearance().tintColor = .white
         let inviteBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickedInviteUser))
         navigationItem.rightBarButtonItem = inviteBarButton
-        navigationItem.title = "Team Detail"
+        navigationItem.title = "Team"
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         guard let team = team else { return }
         teamNameLabel.text = team.teamName
@@ -61,16 +61,12 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamMemberCell", for: indexPath)
         guard let user = users?[indexPath.row] else { return UITableViewCell() }
         let name = user.name
-        //let firstName = user.user.firstName
-        //let lastName = user.user.lastName
         var email = ""
         if user.email == "" {
             email = "no email"
         } else {
-            //email = user.user.email
             email = user.email!
         }
-        //cell.textLabel?.text = "\(firstName) \(lastName)"
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = email
 
@@ -82,7 +78,6 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let image = image else { return }
                 let resizedImage = Toucan.init(image: image).resize(CGSize(width: 50, height: 50), fitMode: .crop).maskWithEllipse()
                 DispatchQueue.main.async {

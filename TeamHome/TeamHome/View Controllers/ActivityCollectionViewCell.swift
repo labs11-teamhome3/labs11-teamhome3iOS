@@ -14,93 +14,73 @@ import Toucan
 class ActivityCollectionViewCell: UICollectionViewCell {
     
     private func updateUI() {
-        
         guard let activity = activity else { return }
+        guard let dateString = activity.date else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        guard let oldDate = dateFormatter.date(from: dateString) else {return}
         
         prepareAvatarImage(for: activity)
-        prepareDateLabel(with: activity)
+        prepareDateLabel(date: oldDate)
         prepareContentView(with: activity)
         prepareBottomBar()
-        
     }
     
-    private func prepareDateLabel(with activity: Activity) {
-        
-        guard let dateUnformatted = activity.date,
-            let dateDouble = Double(dateUnformatted) else { return }
-        
-        let dateDouble2 = dateDouble / 1000.0
-        let date = dateDouble2.getDateStringFromUTC()
-        
+    private func prepareDateLabel(date: Date) {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
-        dateLabel.textColor = .white
-        dateLabel.text = date
+        dateLabel.textColor = Color.grey.base
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        let newText = dateFormatter.string(from: date)
+        dateLabel.text =  newText
     }
     
     private func prepareToolbar(with activity: Activity) {
-        
         guard let currentUser = currentUser else { return }
-        
         toolbar = Toolbar()
-        
         if activity.comment != nil {
             guard let comment = activity.comment else { return }
-            
             if comment.user.id == currentUser.id {
                 toolbar = Toolbar(rightViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .right
                 toolbar.detailLabel.textAlignment = .right
             } else {
                 toolbar = Toolbar(leftViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .left
                 toolbar.detailLabel.textAlignment = .left
-                
             }
-            
             toolbar.title = "\(comment.user.name!)"
             toolbar.detail = "added a comment"
-            
         }
+        
         if activity.document != nil {
             guard let document = activity.document else { return }
-            
             if document.user.id == currentUser.id {
                 toolbar = Toolbar(rightViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .right
                 toolbar.detailLabel.textAlignment = .right
             } else {
                 toolbar = Toolbar(leftViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .left
                 toolbar.detailLabel.textAlignment = .left
-                
             }
-            
             toolbar.title = "\(document.user.name!)"
             toolbar.detail = "added a document"
         }
         
         if activity.message != nil {
             guard let message = activity.message else { return }
-            
             if message.creator.id == currentUser.id {
                 toolbar = Toolbar(rightViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .right
                 toolbar.detailLabel.textAlignment = .right
-                
             } else {
                 toolbar = Toolbar(leftViews: [avatarImageView])
-                
                 toolbar.titleLabel.textAlignment = .left
                 toolbar.detailLabel.textAlignment = .left
-                
             }
-            
             toolbar.title = "\(message.creator.name!)"
             toolbar.detail = "added a message: \(message.title)"
         }
@@ -112,12 +92,10 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func prepareContentView(with activity: Activity) {
-        
         contentLabel = UILabel()
         contentLabel.numberOfLines = 1
         contentLabel.font = RobotoFont.regular(with: 14)
         contentLabel.textColor = .white
-        
         if activity.comment != nil {
             guard let comment = activity.comment else { return }
           contentLabel.text = comment.content
@@ -138,25 +116,20 @@ class ActivityCollectionViewCell: UICollectionViewCell {
         bottomBar = Bar()
         // I comment this out to stop the Activity tab from crashing wh
         // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value
-        //bottomBar.rightViews = [dateLabel]
+        bottomBar.rightViews = [dateLabel]
         bottomBar.backgroundColor = .clear
     }
     
     fileprivate func prepareCard() {
-        
         card.toolbar = toolbar
         card.toolbarEdgeInsetsPreset = .square3
         card.toolbarEdgeInsets.bottom = 0
         card.toolbarEdgeInsets.right = 8
-        
         card.contentView = contentLabel
         card.contentViewEdgeInsetsPreset = .wideRectangle5
-        
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
-        
         guard let activity = activity else { return }
-        
         if activity.message != nil {
             card.backgroundColor = Appearance.grayColor
         }
@@ -193,16 +166,13 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     private func updateViews() {
         DispatchQueue.main.async {
-            
             self.updateUI()
         }
     }
     
     private func prepareAvatarImage(for activity: Activity) {
-        
         setImage(for: activity) { (image) in
             DispatchQueue.main.async {
-                
                 let resizedImage = Toucan.init(image: image).resize(CGSize(width: 50, height: 50), fitMode: .crop).maskWithEllipse()
                 self.avatarImageView = UIImageView(image: resizedImage.image)
                 self.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.avatarImageView.frame.width, height: self.avatarImageView.frame.height)
@@ -214,7 +184,6 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     }
     
     private func setImage(for activity: Activity, completion: @escaping (UIImage) -> Void) {
-        
         if activity.comment != nil {
             guard let comment = activity.comment,
                 let avatar = comment.user.profilePic else {
@@ -236,8 +205,6 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                 }
                 
                 guard let image = image else { return }
-                
-                
                 completion(image)
             }
         } else {
@@ -259,13 +226,10 @@ class ActivityCollectionViewCell: UICollectionViewCell {
                     completion(image)
                     return
                 }
-                
                 guard let image = image else { return }
-                
                 completion(image)
             }
         }
-        
     }
     
     // MARK: - Properties
@@ -285,4 +249,5 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     private var dateLabel: UILabel!
     
     @IBOutlet weak var card: Card!
+    
 }
