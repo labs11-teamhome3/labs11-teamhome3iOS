@@ -7,11 +7,32 @@
 //
 
 import UIKit
+import Apollo
+import Material
+import Toucan
 
 class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
     var todos: [String]?
     let teamMemberArray: [String] = ["Tom", "Dick", "Harry", "Me"]
     
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+//        for user in members {
+//            if user.selected {
+//                print( user.member!.name)
+//                print( user.member!.email)
+//                print()
+//                apollo?.perform(mutation: AddUserToTeamMutation(teamId: teamId!, userId: user.member!.id), queue: DispatchQueue.global()) { (result, error) in
+//                    if let error = error {
+//                        NSLog("\(error)")
+//                        return
+//                    }
+//                }
+//            }
+//        }
+    }
+    @IBOutlet weak var saveButtonTapped: UIBarButtonItem!
+    @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var assignTopLeftButton: UIButton!
     @IBOutlet weak var assignTopLeftTableView: UITableView!
     @IBOutlet weak var assignTopRightButton: UIButton!
@@ -81,6 +102,7 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
         assignTopRightTableView.isHidden = true
         assignBottomLeftTableView.isHidden = true
         assignBottomRightTableView.isHidden = true
+        //teamNameLabel.text = team.teamName
     }
     
     
@@ -139,12 +161,9 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
