@@ -14,22 +14,19 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpViewAppearance()
         //createGradientLayer()
         collectionView.backgroundColor = .clear
         teamNameLabel.textColor = .white
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         label = UILabel()
         label.text = "Loading activity"
         collectionView.addSubview(label)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        
         guard let apollo = apollo,
             let team = team else { return }
-        
         super.viewWillAppear(animated)
         loadActivity(with: apollo, team: team)
         fetchCurrentUser(with: apollo)
@@ -37,21 +34,15 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
-        
         gradientLayer.frame = self.view.bounds
-        
         gradientLayer.colors = [Appearance.darkBlueColor.cgColor, Appearance.lightGrayColor.cgColor, Appearance.darkBlueColor.cgColor]
-        
-        
         gradientLayer.locations = [0.0, 0.5]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     // MARK: - UICollectionViewDataSource
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sortedActivity?.count ?? 0
     }

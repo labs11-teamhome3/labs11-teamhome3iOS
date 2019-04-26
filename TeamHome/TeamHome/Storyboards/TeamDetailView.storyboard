@@ -110,7 +110,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="doz-0M-SRT">
+                                    <searchBar contentMode="redraw" placeholder="Search for team member" translatesAutoresizingMaskIntoConstraints="NO" id="doz-0M-SRT">
                                         <rect key="frame" x="0.0" y="29.666666666666657" width="311" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>

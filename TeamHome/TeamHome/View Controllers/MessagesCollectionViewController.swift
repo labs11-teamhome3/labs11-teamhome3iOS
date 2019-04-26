@@ -16,7 +16,7 @@ class MessagesCollectionViewController: UICollectionViewController, UICollection
     func didClickFilter() {
         filter()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,34 +27,34 @@ class MessagesCollectionViewController: UICollectionViewController, UICollection
         //Load messages with watcher that can be called by other VCs
         loadMessages(with: apollo)
     }
-
+    
     // MARK: UICollectionViewDataSource
-
+    
     // Return the number of message from current team or return 0
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages?.count ?? 0
     }
-
+    
     // Set up cell with message information by passing message variable to collection view cell
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCollectionViewCell
         
         guard let message = messages?[indexPath.row],
             let currentUser = currentUser else { return UICollectionViewCell() }
-
+        
         cell.message = message
         cell.currentUser = currentUser
         cell.delegate = self
         
-//        let height = cell.card.frame.height
-//        cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width, height: height)
+        //        let height = cell.card.frame.height
+        //        cell.frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width, height: height)
         
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width, height: 170)
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //        return CGSize(width: view.frame.width, height: 170)
+    //    }
     
     
     func presentActionSheet(with optionMenu: UIAlertController) {
@@ -67,17 +67,17 @@ class MessagesCollectionViewController: UICollectionViewController, UICollection
         
         if segue.identifier == "ShowMessageDetail" {
             guard let destinationVC = segue.destination as? MessageDetailViewController,
-            let indexPath = collectionView.indexPathsForSelectedItems?.first,
-            let messages = messages,
-            let currentUser = currentUser,
-            let team = team else { return }
+                let indexPath = collectionView.indexPathsForSelectedItems?.first,
+                let messages = messages,
+                let currentUser = currentUser,
+                let team = team else { return }
             let  messageId = messages[indexPath.row].id
             
             
-                destinationVC.currentUser = currentUser
-                destinationVC.team = team
-                destinationVC.apollo = apollo
-                destinationVC.messageId = messageId
+            destinationVC.currentUser = currentUser
+            destinationVC.team = team
+            destinationVC.apollo = apollo
+            destinationVC.messageId = messageId
         }
     }
     
@@ -130,7 +130,7 @@ class MessagesCollectionViewController: UICollectionViewController, UICollection
     
     private func sort() {
         guard let messages = messages else { return }
-
+        
         let sortedMessages = messages.sorted(by: { ($0.createdAt)! > ($1.createdAt)!})
         self.messages = sortedMessages
         newestToOldest = true

@@ -23,6 +23,7 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
 
     // MARK: - Properties
     var apollo: ApolloClient?
+    
     var teamId: GraphQLID?
     var users: [FetchAllUsersQuery.Data.User?]? = []
     var filtering = false
@@ -41,7 +42,6 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Hhhhhhhhhheeeeeeeeeeellllllllooooooooooo")
         guard let apollo = apollo else { return }
         loadUsers(with: apollo)
         //setUpViewAppearance()
@@ -51,7 +51,7 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.title = "Add Team Members"
         searchBar.delegate = self
-        //tableView.allowsMultipleSelection = false
+        tableView.bounces = false
         self.tableView.tableFooterView = UIView()
     }
 
@@ -75,11 +75,8 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == nil || searchBar.text == "" {
             filtering = false
-            //filterMembers = members
         } else {
             filtering = true
-            //filterUsers = users!.filter({$0!.name!.prefix(searchText.count) == searchText})
-            //filterMembers = members.filter({$0.member!.name!.lowercased().prefix(searchText.count) == searchText.lowercased()})
             filterMembers = members.filter({$0.member!.name!.lowercased().contains(searchText.lowercased())})
             // That's right I'm killing kittens.
         }
