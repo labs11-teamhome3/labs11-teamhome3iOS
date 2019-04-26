@@ -25,34 +25,24 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     func editedMessage() {
         messageWatcher?.refetch()
     }
-
+    
     // MARK: - Lifecycle Functions
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpViewAppearance()
         Appearance.styleOrange(button: sendCommentButton)
-        
         let editMessageBarButtonView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let editImage = UIImage(named: "New Message")!
         let imageView = UIImageView(image: editImage)
         imageView.frame = CGRect(x: 8, y: 8, width: 20, height: 20)
         editMessageBarButtonView.addSubview(imageView)
-        
         let barButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(clickedEditButton))
         navigationItem.rightBarButtonItem = barButton
-        
         messageTitleLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
-        
         dateLabel.font = RobotoFont.regular(with: 12)
-        
         setUpCommentTextView()
-        
         self.updateViews()
-        
         guard let apollo = apollo else { return }
-        
         loadMessageDetails(with: apollo)
     }
     
@@ -63,39 +53,39 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             let apollo = apollo else { return }
         let id = currentUser.id
         
-//        if isSubscribed {
-//            apollo.perform(mutation: UnsubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
-//                if let error = error {
-//                    NSLog("\(error)")
-//                    return
-//                }
-//
-//                guard let result = result else { return }
-//
-//                print(result)
-//
-//                DispatchQueue.main.async {
-//                    self.isSubscribed = false
-//                    self.subscribeButton.setTitle("Subscribe", for: .normal)
-//                }
-//            }
-//        } else {
-//            apollo.perform(mutation: SubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
-//                if let error = error {
-//                    NSLog("\(error)")
-//                    return
-//                }
-//
-//                guard let result = result else { return }
-//
-//                print(result)
-//
-//                DispatchQueue.main.async {
-//                    self.isSubscribed = true
-//                    self.subscribeButton.setTitle("Unsubscribe", for: .normal)
-//                }
-//            }
-//        }
+        //        if isSubscribed {
+        //            apollo.perform(mutation: UnsubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+        //                if let error = error {
+        //                    NSLog("\(error)")
+        //                    return
+        //                }
+        //
+        //                guard let result = result else { return }
+        //
+        //                print(result)
+        //
+        //                DispatchQueue.main.async {
+        //                    self.isSubscribed = false
+        //                    self.subscribeButton.setTitle("Subscribe", for: .normal)
+        //                }
+        //            }
+        //        } else {
+        //            apollo.perform(mutation: SubscribeMutation(id: id), queue: DispatchQueue.global()) { (result, error) in
+        //                if let error = error {
+        //                    NSLog("\(error)")
+        //                    return
+        //                }
+        //
+        //                guard let result = result else { return }
+        //
+        //                print(result)
+        //
+        //                DispatchQueue.main.async {
+        //                    self.isSubscribed = true
+        //                    self.subscribeButton.setTitle("Unsubscribe", for: .normal)
+        //                }
+        //            }
+        //        }
     }
     
     @IBAction func submitCommit(_ sender: Any) {
@@ -107,7 +97,6 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         let messageId = message.id
         
         guard let imageData = imageData else {
-            
             apollo.perform(mutation: CreateCommentMutation(messageId: messageId, userId: userId, content: commentContent), queue: DispatchQueue.global()) { (result, error) in
                 if let error = error {
                     NSLog("\(error)")
@@ -115,12 +104,9 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
                 }
                 
                 guard let result = result else { return }
-                
                 print(result)
-                
                 commentsWatcher?.refetch()
                 messagesWatcher?.refetch()
-                
                 DispatchQueue.main.async {
                     self.commentTextView.text = ""
                     self.updateViews()
@@ -154,14 +140,10 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let result = result else { return }
-                
                 print(result)
-                
                 commentsWatcher?.refetch()
                 messagesWatcher?.refetch()
-                
                 DispatchQueue.main.async {
                     self.commentTextView.text = ""
                     self.updateViews()
@@ -230,7 +212,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let apollo = apollo else { return }
@@ -284,8 +266,8 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         
         guard let image = info[.originalImage] as? UIImage else { return }
         
-//        imageView.isHidden = false
-//        imageView.image = image
+        //        imageView.isHidden = false
+        //        imageView.image = image
         guard let imageData: Data = image.jpegData(compressionQuality: 0) else { return }
         self.imageData = imageData
         
@@ -322,7 +304,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             guard let result = result,
                 let data = result.data,
                 let message = data.message else { return }
-             let id = message.id
+            let id = message.id
             
             self.message = message
             self.messageId = id
@@ -404,11 +386,8 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         }
         
         var heightConstraint: NSLayoutConstraint!
-        
         heightConstraint = NSLayoutConstraint(item: commentContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 165)
-        
         guard let comments = message.comments else { return }
-        
         if comments.count == 0 {
             heightConstraint = NSLayoutConstraint(item: commentContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
         } else if comments.count == 1 {
@@ -416,18 +395,15 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
         } else if comments.count > 2 {
             heightConstraint = NSLayoutConstraint(item: commentContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
         }
-        
         NSLayoutConstraint.activate([heightConstraint])
     }
     
     func fetchMessage(with apollo: ApolloClient, id: GraphQLID) {
-        
         messageWatcher = apollo.watch(query: FindMessageByIdQuery(id: id), resultHandler: { (result, error) in
             if let error = error {
                 print("\(error)")
                 return
             }
-            
             guard let result = result,
                 let data = result.data,
                 let message = data.message else { return }
@@ -439,7 +415,6 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     private func figureOutIfSubscribed() {
         guard let subscribers = subscribers,
             let currentUser = currentUser else { return }
-        
         for subscriber in subscribers {
             if let subscriber = subscriber {
                 if subscriber.id == currentUser.id {
@@ -451,9 +426,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     private func presentImagePickerController() {
-        
         let imagePicker = UIImagePickerController()
-        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
@@ -480,7 +453,7 @@ class MessageDetailViewController: UIViewController, UICollectionViewDelegate, U
             }
         }
     }
-
+    
     var messageId: GraphQLID?
     var apollo: ApolloClient?
     var team: TeamsByUserQuery.Data.TeamsByUser?

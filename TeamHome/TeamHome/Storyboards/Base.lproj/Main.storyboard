@@ -370,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vie-xk-am2">
-                                <rect key="frame" x="16" y="104" width="382" height="741"/>
+                                <rect key="frame" x="16" y="104" width="382" height="693"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tjc-ws-qmm">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="31.333333333333332"/>
@@ -384,7 +384,7 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4BH-us-QEI">
-                                        <rect key="frame" x="0.0" y="39.333333333333314" width="382" height="701.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="39.333333333333314" width="382" height="653.66666666666674"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cfd-2u-PfS">
                                             <size key="itemSize" width="381" height="160"/>
@@ -429,20 +429,27 @@
                         <constraints>
                             <constraint firstItem="vie-xk-am2" firstAttribute="top" secondItem="m3Q-QH-rAZ" secondAttribute="top" constant="16" id="AVv-Kb-8u0"/>
                             <constraint firstItem="vie-xk-am2" firstAttribute="leading" secondItem="m3Q-QH-rAZ" secondAttribute="leading" constant="16" id="J13-hK-Djz"/>
-                            <constraint firstItem="vie-xk-am2" firstAttribute="bottom" secondItem="m3Q-QH-rAZ" secondAttribute="bottom" constant="32" id="s8c-EY-8ka"/>
+                            <constraint firstItem="vie-xk-am2" firstAttribute="bottom" secondItem="m3Q-QH-rAZ" secondAttribute="bottom" constant="-16" id="s8c-EY-8ka"/>
                             <constraint firstAttribute="trailing" secondItem="vie-xk-am2" secondAttribute="trailing" constant="16" id="uVF-d7-DFs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m3Q-QH-rAZ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Activity" id="Mnz-hG-cB7"/>
+                    <navigationItem key="navigationItem" title="Activity" id="Mnz-hG-cB7">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Change Team" id="yoq-t4-PnK">
+                            <connections>
+                                <segue destination="Ve1-jP-0Do" kind="unwind" unwindAction="unwindToDashboardWithSegue:" id="mX2-7g-nrs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="4BH-us-QEI" id="Jn8-Zt-iNG"/>
                         <outlet property="teamNameLabel" destination="BEs-IB-46o" id="HkQ-KJ-5t5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O30-uR-lXq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ve1-jP-0Do" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="-368"/>
+            <point key="canvasLocation" x="1808.6956521739132" y="-368.30357142857139"/>
         </scene>
         <!--MessageDetailView-->
         <scene sceneID="udm-S5-1gT">
@@ -670,7 +677,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u17-dH-NcR"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Account Settings" id="uvi-mU-KOi"/>
+                    <navigationItem key="navigationItem" title="Account Settings" id="uvi-mU-KOi">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Change Team" id="rCZ-cM-iHO">
+                            <connections>
+                                <segue destination="7tj-Un-wEx" kind="unwind" identifier="DashboardSegue" unwindAction="unwindToDashboardWithSegue:" id="DW1-cb-UlH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addRemoveImageButton" destination="XlH-rI-sij" id="baz-ns-u6D"/>
                         <outlet property="advancedSettingsButton" destination="bi8-7w-d9a" id="rNQ-8c-AtY"/>
@@ -984,19 +997,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jG-Ak-Z0Q">
+                                <rect key="frame" x="16" y="104" width="382" height="31.333333333333343"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q6Y-Jg-TE9">
-                                <rect key="frame" x="20" y="135" width="372.66666666666674" height="543.66666666666652"/>
+                                <rect key="frame" x="16" y="151.33333333333331" width="382" height="645.66666666666674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoCell" textLabel="XkL-I6-51b" rowHeight="40" style="IBUITableViewCellStyleDefault" id="Q0Y-3d-bJc">
-                                        <rect key="frame" x="0.0" y="28" width="372.66666666666674" height="40"/>
+                                        <rect key="frame" x="0.0" y="28" width="382" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q0Y-3d-bJc" id="FVK-vF-Onv">
-                                            <rect key="frame" x="0.0" y="0.0" width="372.66666666666674" height="39.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="39.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XkL-I6-51b">
-                                                    <rect key="frame" x="20" y="0.0" width="332.66666666666674" height="39.666666666666664"/>
+                                                    <rect key="frame" x="20" y="0.0" width="342" height="39.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1007,10 +1026,10 @@
                                         <color key="backgroundColor" red="0.16674897074699402" green="0.22319066524505615" blue="0.25249174237251282" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" rowHeight="40" id="nDN-np-Lhq" customClass="TaskTableViewCell" customModule="TeamHome" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="68" width="372.66666666666674" height="40"/>
+                                        <rect key="frame" x="0.0" y="68" width="382" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nDN-np-Lhq" id="cFe-cp-OYo">
-                                            <rect key="frame" x="0.0" y="0.0" width="372.66666666666674" height="39.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="39.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFq-Hd-6p9">
@@ -1057,14 +1076,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="width" secondItem="hkd-RD-nuo" secondAttribute="width" multiplier="0.9" id="gF6-3H-KnS"/>
-                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="height" secondItem="hkd-RD-nuo" secondAttribute="height" multiplier="0.75" id="j0W-Cm-Yj4"/>
-                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="centerX" secondItem="pKc-uS-S8I" secondAttribute="centerX" id="wwx-Q6-Vg2"/>
-                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="centerY" secondItem="pKc-uS-S8I" secondAttribute="centerY" id="xjt-fm-eJG"/>
+                            <constraint firstItem="hkd-RD-nuo" firstAttribute="trailing" secondItem="Q6Y-Jg-TE9" secondAttribute="trailing" constant="16" id="DPk-Wd-Q7H"/>
+                            <constraint firstItem="1jG-Ak-Z0Q" firstAttribute="top" secondItem="hkd-RD-nuo" secondAttribute="top" constant="16" id="Hoc-hk-G7k"/>
+                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="top" secondItem="1jG-Ak-Z0Q" secondAttribute="bottom" constant="16" id="Hug-vw-eyN"/>
+                            <constraint firstItem="hkd-RD-nuo" firstAttribute="trailing" secondItem="1jG-Ak-Z0Q" secondAttribute="trailing" constant="16" id="PDe-cE-ybi"/>
+                            <constraint firstItem="hkd-RD-nuo" firstAttribute="bottom" secondItem="Q6Y-Jg-TE9" secondAttribute="bottom" constant="16" id="U1N-bo-Zke"/>
+                            <constraint firstItem="Q6Y-Jg-TE9" firstAttribute="leading" secondItem="hkd-RD-nuo" secondAttribute="leading" constant="16" id="fA6-55-0pK"/>
+                            <constraint firstItem="1jG-Ak-Z0Q" firstAttribute="leading" secondItem="hkd-RD-nuo" secondAttribute="leading" constant="16" id="gdF-NU-B7g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hkd-RD-nuo"/>
                     </view>
                     <navigationItem key="navigationItem" title="Team Name" id="obK-cJ-NoP">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Change Team" id="zfr-cy-0zK">
+                            <connections>
+                                <segue destination="8ko-wV-SnL" kind="unwind" unwindAction="unwindToDashboardWithSegue:" id="b6e-tC-LvW"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="Filter" id="db6-Zw-ixc">
                             <connections>
                                 <action selector="filterButtonTapped:" destination="xgx-Ra-crd" id="6A9-Qk-qcb"/>
@@ -1073,10 +1100,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Q6Y-Jg-TE9" id="qIb-CC-h0a"/>
+                        <outlet property="teamNameLabel" destination="1jG-Ak-Z0Q" id="x3g-LN-Zyb"/>
                         <segue destination="kF9-NA-MB1" kind="show" identifier="NewTodoSegue" id="hpL-Yy-mcp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xum-Nn-ZWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8ko-wV-SnL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2553.6231884057975" y="397.76785714285711"/>
         </scene>
