@@ -42,7 +42,9 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         view.backgroundColor = Appearance.grayColor
         UILabel.appearance().tintColor = .white
         let inviteBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(clickedInviteUser))
+        let changeTeamButton = UIBarButtonItem(image: UIImage(named: "Change Team"), style: .plain, target: self, action: #selector(clickedChangeTeam))
         navigationItem.rightBarButtonItem = inviteBarButton
+        navigationItem.leftBarButtonItem = changeTeamButton
         navigationItem.title = "Team"
         teamNameLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         guard let team = team else { return }
@@ -230,6 +232,9 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
         performSegue(withIdentifier: "InviteUser", sender: self)
     }
     
+    @objc func clickedChangeTeam() {
+        performSegue(withIdentifier: "DashboardSegue", sender: self)
+    }
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds

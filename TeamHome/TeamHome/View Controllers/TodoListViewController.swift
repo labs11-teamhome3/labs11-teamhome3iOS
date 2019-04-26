@@ -44,6 +44,7 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     // Need to get the team members
     // Need to get todos
     // OUTLETS AND ACTIONS
+    @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var sortByButton: UIButton!
     @IBOutlet weak var filterByButton: UIButton!
     @IBOutlet weak var filterByTableView: UITableView!
@@ -82,13 +83,15 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
             else { return }
         loadTodoLists(with: apollo)
         self.title = "Todos"
-        var button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width * 0.80, y: self.view.frame.height * 0.8), size: CGSize(width: 65, height: 65)))
+        let button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width * 0.80, y: self.view.frame.height * 0.8), size: CGSize(width: 65, height: 65)))
         button.backgroundColor = #colorLiteral(red: 0.350115478, green: 0.7936955094, blue: 0.9733197093, alpha: 1)
         button.layer.cornerRadius = button.frame.height * 0.50
         button.setTitle("+", for: .normal)
         button.fontSize = 40
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         self.view.addSubview(button)
+        teamNameLabel.text = team?.teamName
+        teamNameLabel.textColor = .black
     }
     
     @objc func buttonTapped(sender: UIButton!){
