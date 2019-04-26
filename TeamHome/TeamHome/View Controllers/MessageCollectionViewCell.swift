@@ -43,17 +43,13 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareAvatarImage(for message: FindMessagesByTeamQuery.Data.Team.Message) {
-        
         setImage(for: message) { (image) in
             DispatchQueue.main.async {
-                
                 let resizedImage = Toucan.init(image: image).resize(CGSize(width: 50, height: 50), fitMode: .crop).maskWithEllipse()
                 self.avatarImageView = UIImageView(image: resizedImage.image)
                 self.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.avatarImageView.frame.width, height: self.avatarImageView.frame.height)
                 self.avatarImageView.contentMode = .scaleAspectFit
-                
-                //IYIN Come back and parse the name string (Important!!)
-                self.prepareToolbar(firstName: message.creator.name!, lastName: message.creator.name!, messageTitle: message.title, message: message)
+                self.prepareToolbar(name: message.creator.name!, messageTitle: message.title, message: message)
                 self.prepareCard()
             }
         }
@@ -63,7 +59,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
         dateLabel = UILabel()
         dateLabel.font = RobotoFont.regular(with: 12)
         dateLabel.textColor = Color.grey.base
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         let newText = dateFormatter.string(from: date)
@@ -71,7 +66,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareImageButton(for message: FindMessagesByTeamQuery.Data.Team.Message) {
-        
         tagLabel = UILabel()
         if let tag = message.tag {
             tagLabel.text = "#\(tag.name)"
@@ -82,7 +76,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
         
         // Create image button.
         imageButton = IconButton(image: Icon.image, tintColor: Color.white)
-        
          // Show image icon if images are included in message.
         if let images = message.images {
             if images.count > 0 {
@@ -103,7 +96,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
         imageView.frame = CGRect(x: 8, y: 8, width: 24, height: 24)
         imageView.tintColor = .white
         commentIcon.addSubview(imageView)
-        
         commentsCountLabel = UILabel()
         
         // Display number of comments in message or hides count if no comments
@@ -123,24 +115,20 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     private func prepareMoreButton() {
         moreButton = IconButton(image: Icon.cm.moreVertical, tintColor: Color.grey.base)
-
         moreButton.addTarget(self, action: #selector(presentActionSheet(_:)), for: .touchUpInside)
-        
         guard let currentUser = currentUser,
             let message = message else { return }
-        
         if message.creator.id == currentUser.id {
             moreButton.addTarget(self, action: #selector(presentDeleteActionSheet(_:)), for: .touchUpInside)
         }
     }
     
-    private func prepareToolbar(firstName: String, lastName: String, messageTitle: String, message: FindMessagesByTeamQuery.Data.Team.Message) {
+    private func prepareToolbar(name: String, messageTitle: String, message: FindMessagesByTeamQuery.Data.Team.Message) {
         toolbar = Toolbar(leftViews: [avatarImageView], rightViews: [commentsCountLabel, commentIcon, moreButton])
-        
         toolbar.title = messageTitle
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = .white
-        toolbar.detail = "\(firstName) \(lastName)"
+        toolbar.detail = "\(name)"
         toolbar.detailLabel.textAlignment = .left
         toolbar.detailLabel.textColor = .white
         toolbar.backgroundColor = .clear
@@ -162,20 +150,15 @@ class MessageCollectionViewCell: UICollectionViewCell {
     }
     
     private func prepareCard() {
-        
         card.toolbar = toolbar
         card.toolbarEdgeInsetsPreset = .square3
         card.toolbarEdgeInsets.bottom = 0
         card.toolbarEdgeInsets.right = 8
-        
         card.contentView = contentLabel
         card.contentViewEdgeInsetsPreset = .wideRectangle5
-        
         card.bottomBar = bottomBar
         card.bottomBarEdgeInsetsPreset = .wideRectangle2
-        
         card.backgroundColor = Appearance.grayColor
-        
     }
     
     // Set image for a given message.
@@ -198,38 +181,28 @@ class MessageCollectionViewCell: UICollectionViewCell {
                 completion(image)
                 return
             }
-            
             guard let image = image else { return }
-            
-            
             completion(image)
         }
-
     }
     
     @objc func presentActionSheet(_ sender: IconButton) {
         let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
-        
         let viewAction = UIAlertAction(title: "View", style: .default)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
         optionMenu.addAction(viewAction)
         optionMenu.addAction(cancelAction)
-        
         delegate?.presentActionSheet(with: optionMenu)
     }
     
     @objc func presentDeleteActionSheet(_ sender: IconButton) {
         let optionMenu = UIAlertController(title: nil, message: "Message Options", preferredStyle: .actionSheet)
-        
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive)
         let viewAction = UIAlertAction(title: "View", style: .default)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(viewAction)
         optionMenu.addAction(cancelAction)
-        
         delegate?.presentActionSheet(with: optionMenu)
     }
 
