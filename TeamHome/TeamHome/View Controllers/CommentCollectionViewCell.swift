@@ -104,7 +104,7 @@ class CommentCollectionViewCell: UICollectionViewCell {
     private func prepareToolbar(comment: FindCommentsByMessageQuery.Data.FindMessageCommentsByMessage) {
         toolbar = Toolbar(leftViews: [avatarImageView])
         
-        toolbar.title = "\(comment.user.name)"
+        toolbar.title = "\(String(describing: comment.user.name))"
         toolbar.titleLabel.textAlignment = .left
         toolbar.titleLabel.textColor = Appearance.darkGrayPrimary
         
