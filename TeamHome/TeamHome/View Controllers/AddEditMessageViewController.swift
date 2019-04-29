@@ -24,10 +24,8 @@ protocol EditMessageDelegate: class {
 class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
     
     // MARK: - Lifecycle Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpViewAppearance()
         newMessageView.backgroundColor = Appearance.grayColor
         cancelButton.tintColor = Appearance.yellowColor
@@ -44,23 +42,18 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         tagsTextField.placeholderAnimation = .hidden
         titleLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         collectionView.backgroundColor = .clear
-        
         updateViews()
-        
         guard let apollo = apollo,
             let team = team else { return }
         let teamId = team.id
-        
         fetchAllTags(with: apollo, for: teamId)
     }
     
     // MARK: - IBActions
-    
     // Let user select photo from photo library to add to new message
     @IBAction func addPhoto(_ sender: Any) {
         // Get authorization status
         let status = PHPhotoLibrary.authorizationStatus()
-        
         switch status {
         // If status is already authorized, present the image picker to the user
         case .authorized:
@@ -68,7 +61,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         // If status is not determined, request authorization and check status again
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { (authorizationStatus) in
-                
                 switch authorizationStatus {
                 // If user authorizes, present the image picker to the user
                 case .authorized:
@@ -100,24 +92,18 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             let team = team,
             let tag = tagsTextField.text else { return }
         let teamId = team.id
-        
         apollo.perform(mutation: CreateNewTagMutation(name: tag, teamId: teamId), queue: DispatchQueue.global()) { (result, error) in
             if let error = error {
                 print("\(error)")
                 return
             }
-            
             guard let result = result,
                 let data = result.data,
                 let tag = data.addTag else { return }
-            
             print(tag)
-            
             self.tagsWatcher?.refetch()
-            
             DispatchQueue.main.async {
                 self.tagsTextField.text = ""
-                
                 // Show tag alert?
             }
         }
@@ -125,7 +111,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     
     // Create or update message.
     @IBAction func submitMessage(_ sender: Any) {
-        
         // Unwrap apollo client and other message details.
         guard let apollo = apollo,
             let team = team,
@@ -134,7 +119,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             let content = messageContentTextView.text,
             let tagId = findSelectedTag() else { return }
         let teamId = team.id
-        
         // Check if message already exists.
         guard let message = message else {
             // Create a new message.
@@ -143,42 +127,34 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         }
         let messageId = message.id
         // Update message.
-        
         updateMessage(with: apollo, messageId: messageId, messageTitle: messageTitle, teamId: teamId, content: content, tagId: tagId)
     }
     
     // Cancel create new message and return to message board.
     @IBAction func cancelNewMessage(_ sender: Any) {
-        
         navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UICollectionViewDataSource for tags
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TagCell", for: indexPath) as! TagCollectionViewCell
-        
         guard let tag = tags?[indexPath.row] else { return UICollectionViewCell() }
         cell.tagLabel.text = tag.name
         cell.backgroundColor = Appearance.darkGrayPrimary
         cell.layer.cornerRadius = cell.frame.height / 2
-        
         if let message = self.message {
-            
             if let messageTag = message.tag {
                 let this = messageTag.name
-                
                 if tag.name == this {
                     self.tagSelected = messageTag.name
                     cell.backgroundColor = Appearance.boldGrayColor
                 }
             }
         }
-        
         return cell
     }
     
@@ -186,23 +162,17 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
         guard let tag = tags?[indexPath.row] else { return }
         self.tagSelected = tag.name
         let cell = collectionView.cellForItem(at: indexPath)
-        
         cell?.backgroundColor = Appearance.boldGrayColor
     }
     
     // MARK: - UIImagePickerControllerDelegate
-    
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         picker.dismiss(animated: true, completion: nil)
-        
         guard let image = info[.originalImage] as? UIImage else { return }
-        
         imageView.isHidden = false
         imageView.image = image
         guard let imageData: Data = image.jpegData(compressionQuality: 0) else { return }
         self.imageData = imageData
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -210,7 +180,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     // MARK: - Keyboard Animation and Delegate functions
-    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -241,45 +210,34 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     // MARK: - Private Methods
-    
     private func updateViews() {
         guard isViewLoaded,
             let message = message else { return }
-        
         titleLabel.text = "Edit message"
         messageTitleTextField.text = message.title
         messageContentTextView.text = message.content
-        
         self.tagSelectedId = message.tag?.id
-        
         guard let images = message.images else { return }
         
         // Only grabs first photo.
         if images.count > 0 {
             guard let image = images.first,
                 let imageURL = image else { return }
-            
             self.imageURL = imageURL
-            
             cloudinary.createDownloader().fetchImage(imageURL, { (progress) in
                 // Show progress
-                
             }) { (image, error) in
                 if let error = error {
                     print("\(error)")
                     return
                 }
-                
                 guard let image = image else { return }
-                
                 DispatchQueue.main.async {
                     self.imageView.isHidden = false
                     self.imageView.image = image
                 }
-                
             }
         }
-        
         // If no image is included in message, set imageURL to nil.
         self.imageURL = nil
     }
@@ -291,14 +249,11 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 NSLog("\(error)")
                 return
             }
-            
             guard let result = result,
                 let data = result.data,
                 let tags = data.findTagsByTeam else { return }
-            
             // Save tags and populate collection view
             print(tags)
-
             self.tags = tags
             self.collectionView.reloadData()
         }
@@ -309,19 +264,14 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             if let error = error {
                 NSLog("\(error)")
             }
-            
             guard let result = result,
                 let newTagId = result.data?.addTag?.id else { return }
-            
             print(newTagId)
-            
         })
     }
     
     private func presentImagePickerController() {
-        
         let imagePicker = UIImagePickerController()
-        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
@@ -330,7 +280,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     private func findSelectedTag() -> GraphQLID? {
-        
         // Unwrap tag selection or recently created tag.
         guard let selectedTag = self.tagSelected,
             let tags = tags else {
@@ -339,7 +288,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 }
                 return nil
         }
-        
         for tag in tags {
             if let tag = tag {
                 if tag.name == selectedTag {
@@ -347,15 +295,12 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 }
             }
         }
-        
         return nil
     }
     
     private func createNewMessage(with apollo: ApolloClient, messageTitle: String, teamId: GraphQLID, userId: String, content: String) {
-        
         // Check to see if user selected image.
         guard let imageData = imageData else {
-            
             // If no photo is selected, create message without images attached.
             apollo.perform(mutation: AddNewMessageMutation(title: messageTitle, teamId: teamId,  userId: userId, content: content), queue: DispatchQueue.global()) { (result, error) in
                 // Check for errors.
@@ -363,16 +308,12 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let result = result,
                     let data = result.data,
                     let message = data.createMessage else { return }
-                
                 print(message.title)
-                
                 // Call messages watcher to refetch all messages.
                 messagesWatcher?.refetch()
-                
                 DispatchQueue.main.async {
                     // Go back to previous view controller.
                     self.navigationController?.popViewController(animated: true)
@@ -380,27 +321,21 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             }
             return
         }
-        
         // If photo is selected, create new message with photo.
-        
         // Set up upload request parameters.
         let params = CLDUploadRequestParams()
-        
         // Upload image to cloudinary.
         cloudinary.createUploader().upload(data: imageData, uploadPreset: "dfcfme0b", params: params, progress: { (progress) in
             //Show progress.
-            
         }) { (result, error) in
             // Check for errors.
             if let error = error {
                 NSLog("\(error)")
                 return
             }
-            
             // Unwrap image url.
             guard let result = result,
                 let url = result.url else { return }
-            
             // Pass image url to Apollo client to create message.
 //            apollo.perform(mutation: AddNewImagesMessageMutation(title: messageTitle, team: teamId, content: content, images: [url], tagId: tagId), queue: DispatchQueue.global()) { (result, error) in
 //                // Check for errors.
@@ -408,17 +343,13 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
 //                    NSLog("\(error)")
 //                    return
 //                }
-//
 //                guard let result = result,
 //                    let data = result.data,
 //                    let message = data.addMessage else { return }
-//
 //                print(message.title)
-//
 //                DispatchQueue.main.async {
 //                    // Call messages watcher to refetch all messages.
 //                    messagesWatcher?.refetch()
-//
 //                    // Go back to previous view controller.
 //                    self.navigationController?.popViewController(animated: true)
 //                }
@@ -427,7 +358,6 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     private func updateMessage(with apollo: ApolloClient, messageId: GraphQLID, messageTitle: String, teamId: GraphQLID, content: String, tagId: String) {
-        
         // Check to see if user selected image.
         guard let imageData = imageData else {
             
@@ -436,31 +366,23 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                 
                 apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()) { (result, error) in
                     // Check for errors.
-                    
-                    
                     if let error = error {
                         NSLog("\(error)")
                         return
                     }
-            
                     guard let result = result,
                         let data = result.data,
                         let message = data.updateMessage else { return }
-                    
                     print(message.title)
-                    
                     DispatchQueue.main.async {
                         // Call messages watcher to refetch all messages.
                         messagesWatcher?.refetch()
                         messageWatcher?.refetch()
-                        
                         self.delegate?.editedMessage()
-                        
                         // Go back to previous view controller.
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
-                
             } else {
                 apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()){ (result, error) in
                     // Check for errors.
@@ -468,20 +390,15 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
                         NSLog("\(error)")
                         return
                     }
-                    
                     guard let result = result,
                         let data = result.data,
                         let message = data.updateMessage else { return }
-                    
                     print(message.title)
-                    
                     DispatchQueue.main.async {
                         // Call messages watcher to refetch all messages.
                         messagesWatcher?.refetch()
                         messageWatcher?.refetch()
-                        
                         self.delegate?.editedMessage()
-                        
                         // Go back to previous view controller.
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -489,47 +406,36 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
             }
             return
         }
-        
         // If photo is selected, create new message with photo.
-        
         // Set up upload request parameters.
         let params = CLDUploadRequestParams()
-        
         // Upload image to cloudinary.
         cloudinary.createUploader().upload(data: imageData, uploadPreset: "dfcfme0b", params: params, progress: { (progress) in
             //Show progress.
-            
         }) { (result, error) in
             // Check for errors.
             if let error = error {
                 NSLog("\(error)")
                 return
             }
-            
             // Unwrap image url.
             guard let result = result,
                 let url = result.url else { return }
-            
             //apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId))
-            
             apollo.perform(mutation: UpdateMessageMutation(title: messageTitle, content: content, id: messageId), queue: DispatchQueue.global()) { (result, error) in
                 // Check for errors.
                 if let error = error {
                     NSLog("\(error)")
                     return
                 }
-                
                 guard let result = result,
                     let data = result.data,
                     let message = data.updateMessage else { return }
-                
                 print(message.title)
-                
                 DispatchQueue.main.async {
                     // Call messages watcher to refetch all messages.
                     messagesWatcher?.refetch()
                     messageWatcher?.refetch()
-                    
                     // Go back to previous view controller.
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -538,14 +444,12 @@ class AddEditMessageViewController: UIViewController,  UIImagePickerControllerDe
     }
     
     // MARK: - Properties
-    
     private var tagSelected: String?
     private var tagSelectedId: GraphQLID?
     private var imageURL: String?
     private var imageData: Data?
     private var tags: [FindTagsByTeamQuery.Data.FindTagsByTeam?]?
     private var tagsWatcher: GraphQLQueryWatcher<FindTagsByTeamQuery>?
-    
     var currentUser: CurrentUserQuery.Data.User?
     weak var delegate: EditMessageDelegate?
     var apollo: ApolloClient?

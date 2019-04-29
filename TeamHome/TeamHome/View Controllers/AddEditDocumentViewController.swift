@@ -31,11 +31,9 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         } else {
             updateViewsForAdd()
         }
-        
         guard let apollo = apollo,
             let team = team else { return }
         let teamId = team.id
-        
         fetchAllTags(with: apollo, for: teamId)
     }
     
@@ -60,9 +58,9 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         
     }
     @IBAction func cancelNewMessage(_ sender: Any) {
-        
         navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func createTag(_ sender: Any) {
         guard let apollo = apollo,
             let team = team,
@@ -93,8 +91,8 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
     @IBAction func addToFolder(_ sender: Any) {
         
     }
-    // MARK: - UICollectionViewDataSource for tags
     
+    // MARK: - UICollectionViewDataSource for tags
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags?.count ?? 0
     }
@@ -136,23 +134,20 @@ class AddEditDocumentViewController: UIViewController, UICollectionViewDelegate,
         newDocumentView.backgroundColor = Appearance.grayColor
         cancelButton.tintColor = Appearance.yellowColor
         submitButton.backgroundColor = Appearance.darkGrayPrimary
-        
         documentLinkTextField.textColor = .white
         documentLinkTextField.placeholder = "Add a link"
         documentNotesTextView.textColor = .white
         documentNotesTextView.placeholder = "Add a note"
-        
         documentNotesTextView.dividerColor = Appearance.yellowColor
         documentTitleTextField.textColor = .white
-        
         tagsTextField.textColor = .white
         documentTitleTextField.placeholderAnimation = .hidden
         documentLinkTextField.placeholderAnimation = .hidden
         tagsTextField.placeholderAnimation = .hidden
-        
         titleLabel.font = Appearance.setTitleFont(with: .title2, pointSize: 20)
         collectionView.backgroundColor = .clear
     }
+    
     private func updateViewsForEdit(document: Document){
         titleLabel.text = "Edit Document"
         documentTitleTextField.text = document.title

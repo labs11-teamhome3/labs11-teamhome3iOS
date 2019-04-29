@@ -19,7 +19,6 @@ let credentialsManager = CredentialsManager.init(authentication: Auth0.authentic
 class LandingPageViewController: UIViewController, UITextFieldDelegate {
 
     // MARK - Lifecycle Methods
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,7 +80,6 @@ class LandingPageViewController: UIViewController, UITextFieldDelegate {
 
 
     // MARK: - IBActions
-
     // To unwind to this view from settings view when user logs out.
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
 

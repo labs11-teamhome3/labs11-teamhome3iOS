@@ -18,12 +18,10 @@ struct cellData {
     var title = String()
     var sectionData = [String]()
 }
-// Todo should be composed of Tasks == Todo: [Task]
-// Todos should be composed of Todo == Todos: [Todos]
+
 
 class TodoListViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource, TabBarChildrenProtocol {
-    var team: TeamsByUserQuery.Data.TeamsByUser?
-    var currentUser: CurrentUserQuery.Data.User?
+    
     @IBAction func filterButtonTapped(_ sender: Any) {
         print("Hello")
     }
@@ -40,7 +38,9 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     // MARK: - Properties
     var apollo: ApolloClient?
     var teamId: GraphQLID?
-    var users: [FetchAllUsersQuery.Data.User?]?
+    var users: [FindTeamByIdQuery.Data.Team.Member?]?
+    var team: TeamsByUserQuery.Data.TeamsByUser?
+    var currentUser: CurrentUserQuery.Data.User?
     // Need to get the team members
     // Need to get todos
     // OUTLETS AND ACTIONS
@@ -82,24 +82,26 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         guard let apollo = apollo
             else { return }
         loadTodoLists(with: apollo)
+        loadUsers(with: apollo)
         self.title = "Todos"
-        let button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width * 0.80, y: self.view.frame.height * 0.8), size: CGSize(width: 65, height: 65)))
+        let button = UIButton(frame: CGRect(origin: CGPoint(x: self.view.frame.width - 150, y: self.view.frame.height * 0.8), size: CGSize(width: 125, height: 40)))
         button.backgroundColor = #colorLiteral(red: 0.350115478, green: 0.7936955094, blue: 0.9733197093, alpha: 1)
-        button.layer.cornerRadius = button.frame.height * 0.50
-        button.setTitle("+", for: .normal)
-        button.fontSize = 40
+        button.layer.cornerRadius = button.frame.height * 0.05
+        button.setTitle("Create Todo List", for: .normal)
+        button.fontSize = 14
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         self.view.addSubview(button)
         teamNameLabel.text = team?.teamName
         teamNameLabel.textColor = .black
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc func buttonTapped(sender: UIButton!){
-//        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TodoCreationViewController") as UIViewController
-//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-//
-//        self.present(viewController, animated: false, completion: nil)
-       performSegue(withIdentifier: "NewTodoSegue", sender: nil)
+        //        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TodoCreationViewController") as UIViewController
+        //        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
+        //
+        //        self.present(viewController, animated: false, completion: nil)
+        performSegue(withIdentifier: "NewTodoSegue", sender: nil)
     }
     
     
@@ -120,12 +122,23 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         }
     }
     
+    private func loadUsers(with apollo: ApolloClient) {
+        // Get team's id
+        guard let team = team,
+            //let teamId = team.id else { return }
+            let teamId = team.id as String? else { return }
+        teamWatcher = apollo.watch(query: FindTeamByIdQuery(id: teamId)) { (result, error) in
+            if let error = error {
+                NSLog("\(error)")
+            }
+            guard let result = result,
+                let data = result.data else { return }
+            let team = data.team
+            self.users = team.members
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //        if tableView == todosTableView {
-        //            return tableViewData.count
-        //        }
-        //        return 1
         return todoLists?.count ?? 0
     }
     
@@ -177,12 +190,13 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "NewTodoSegue" {
+            guard let destinationVC = segue.destination as? TodoCreationViewController,
+                let apollo = apollo,
+                let team = team else { return }
+            destinationVC.apollo = apollo
+            destinationVC.team = team
+            destinationVC.users = users
+        }
     }
-    
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-    }
-    
-    
 }

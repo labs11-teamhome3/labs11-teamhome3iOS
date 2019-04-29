@@ -60,7 +60,6 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     }
 
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ViewTeam" {
             guard let destinationVC = segue.destination as? TeamDetailTableViewController,
@@ -72,7 +71,6 @@ class ActivityTimelineViewController: UIViewController, TabBarChildrenProtocol, 
     }
     
     // MARK: - Private Methods
-    
     private func loadActivity(with apollo: ApolloClient, team: TeamsByUserQuery.Data.TeamsByUser) {
         
         teamNameLabel.text = team.teamName

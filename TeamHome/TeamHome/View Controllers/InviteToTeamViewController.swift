@@ -139,10 +139,7 @@ class InviteToTeamViewController: UIViewController, UISearchBarDelegate,  UITabl
 //    func setSelected(_ selected: Bool, animated: Bool) {
 //
 //    }
-    
-    func prepareForReuse() {
-    
-    }
+
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!

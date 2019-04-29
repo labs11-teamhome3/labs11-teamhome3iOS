@@ -235,6 +235,7 @@ class TeamDetailTableViewController: UITableViewController, TabBarChildrenProtoc
     @objc func clickedChangeTeam() {
         performSegue(withIdentifier: "DashboardSegue", sender: self)
     }
+    
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
