@@ -27,31 +27,31 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     }
     let sortByArray: [String] = ["Date Ascending", "Date Descending", "Creator", "Asignee"]
     let filterByArray: [String] = ["Active", "Complete", "Created by Me", "Assigned to Me", "All"]
-    static var tasks: [String] = []
     var task: String?
-    var tableViewData = [cellData]()
     var todoLists: [OtherFetchAllTodoListQuery.Data.TodoList?]? {
         didSet {
-            tableView.reloadData()
+            todolistTableView.reloadData()
         }
     }
+    var selectedTodolist: OtherFetchAllTodoListQuery.Data.TodoList?
     // MARK: - Properties
     var apollo: ApolloClient?
     var teamId: GraphQLID?
     var users: [FindTeamByIdQuery.Data.Team.Member?]?
     var team: TeamsByUserQuery.Data.TeamsByUser?
     var currentUser: CurrentUserQuery.Data.User?
-    // Need to get the team members
-    // Need to get todos
+    var owners: [TeamsByUserQuery.Data.TeamsByUser?] = []
+    var assignees: [TeamsByUserQuery.Data.TeamsByUser?] = []
     // OUTLETS AND ACTIONS
+    @IBOutlet weak var todolistNameLabel: UILabel!
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var sortByButton: UIButton!
     @IBOutlet weak var filterByButton: UIButton!
     @IBOutlet weak var filterByTableView: UITableView!
     @IBOutlet weak var sortByTableView: UITableView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var detailTableView: UITableView!
     
-    
+    @IBOutlet weak var todolistTableView: UITableView!
     // MARK: TODO THIS REPEATED CODE SHOULD CONSOLIDATE INTO ONE FUNCTION...
     @IBAction func filterByButtonTapped(_ sender: Any) {
         animateDropMenu(tableView: filterByTableView)
@@ -77,8 +77,11 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         super.viewDidLoad()
         //setUpViewAppearance()
         // This gets rid of the empty table cell in the tableView at the bottom.
-        tableView.tableFooterView = UIView()
-        tableView.bounces = false
+        //        tableView.tableFooterView = UIView()
+        //        tableView.bounces = false
+        detailTableView.tableFooterView = UIView()
+        todolistTableView.tableFooterView = UIView()
+
         guard let apollo = apollo
             else { return }
         loadTodoLists(with: apollo)
@@ -139,51 +142,79 @@ class TodoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return todoLists?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        if tableView == todosTableView {
-        //            if tableViewData[section].opened == true {
-        //                return tableViewData[section].sectionData.count + 1
-        //            }
-        //        }
-        //        return 1
-        return (todoLists?[section]?.todos.count)! + 1
+        if tableView == detailTableView {
+            return selectedTodolist?.todos.count ?? 0
+        }
+        return todoLists?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
-            cell.textLabel?.text = todoLists?[indexPath.section]?.description
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
-            let todo = todoLists?[indexPath.section]?.todos[indexPath.row - 1]
-            cell.todo = todo
-            cell.taskNameLabel?.text = todo?.description
-            cell.taskNameLabel.textColor = .black
+        if tableView == detailTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTaskCell", for: indexPath)
+            cell.textLabel?.text = selectedTodolist?.todos[indexPath.row].description
+            cell.textLabel?.textColor = .black
+            if selectedTodolist?.todos[indexPath.row].completed == true {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
             return cell
         }
+        if tableView == todolistTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TodolistCell", for: indexPath) as! TodolistTableViewCell
+            cell.todolist = todoLists?[indexPath.row]
+            
+            cell.textLabel?.text = todoLists?[indexPath.row]?.description
+            cell.textLabel?.textColor = .white
+            let numberOfTask = todoLists?[indexPath.row]?.todos.count
+            var finishTask = 0
+            for task in (todoLists?[indexPath.row]!.todos)! {
+                if task.completed == true {
+                    finishTask += 1
+                }
+            }
+            cell.detailTextLabel?.text = "\(finishTask) / \(numberOfTask!) Tasks"
+            cell.detailTextLabel?.textColor = .white
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodolistCell", for: indexPath)
+        //cell.textLabel?.text = todoLists?[indexPath.row]?.description
+        cell.textLabel?.text = "Uh oh..."
+        cell.textLabel?.textColor = .red
+        return cell
+        //        }
+        //        } else {
+        //            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
+        //            let todo = todoLists?[indexPath.section]?.todos[indexPath.row - 1]
+        //            cell.todo = todo
+        //            cell.taskNameLabel?.text = todo?.description
+        //            cell.taskNameLabel.textColor = .black
+        //            return cell
+        //        }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionHeaderButton = UIButton(type: .custom)
-        sectionHeaderButton.tag = section
-        for _ in todoLists! {
-            sectionHeaderButton.setTitle("", for: .normal)
-        }
-        //sectionHeaderButton.addTarget(self, action: #selector(toggleSection), for: .touchUpInside)
-        return sectionHeaderButton
-    }
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let sectionHeaderButton = UIButton(type: .custom)
+    //        sectionHeaderButton.tag = section
+    //        for _ in todoLists! {
+    //            sectionHeaderButton.setTitle("", for: .normal)
+    //        }
+    //        //sectionHeaderButton.addTarget(self, action: #selector(toggleSection), for: .touchUpInside)
+    //        return sectionHeaderButton
+    //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0{
-            let sections = IndexSet.init(integer: indexPath.section)
-            tableView.reloadSections(sections, with: .none)
-        } else {
-            let sections = IndexSet.init(integer: indexPath.section)
-            tableView.reloadSections(sections, with: .none)
+        if tableView == todolistTableView {
+            selectedTodolist = todoLists?[indexPath.row]
+            todolistNameLabel.text = todoLists?[indexPath.row]?.description
+            //todolistNameLabel.textColor = .white
+            todolistNameLabel.backgroundColor = #colorLiteral(red: 0.1667489707, green: 0.2231906652, blue: 0.2524917424, alpha: 1)
+            detailTableView.reloadData()
         }
     }
     

@@ -146,6 +146,7 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
             destinationVC.apollo = apollo
             destinationVC.team = team
             destinationVC.users = users
+            //destinationVC.assignees = assignees
         } else if segue.identifier == "AssignOwners" {
             guard let destinationVC = segue.destination as? TeamOwnersViewController,
                 let apollo = apollo,
@@ -153,6 +154,7 @@ class TodoCreationViewController: UIViewController, UITableViewDelegate,  UITabl
             destinationVC.apollo = apollo
             destinationVC.team = team
             destinationVC.users = users
+            //destinationVC.owners = owners
         }
     }
 }

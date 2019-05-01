@@ -17,6 +17,7 @@
 		1092D5B1221E8A5300579B34 /* DocumentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1092D5B0221E8A5300579B34 /* DocumentsTableViewController.swift */; };
 		1092D5B3221E8B7D00579B34 /* DocumentsTableViewController.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 1092D5B2221E8B7D00579B34 /* DocumentsTableViewController.graphql */; };
 		10E2A19C2216153F007EC662 /* AddEditDocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E2A19B2216153F007EC662 /* AddEditDocumentViewController.swift */; };
+		2C178EE222781AFC00FC170B /* TodolistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C178EE122781AFB00FC170B /* TodolistTableViewCell.swift */; };
 		2C24457022541AE600D104B2 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */; };
 		2C24457222551BE700D104B2 /* TaskCreationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */; };
 		2C34E0B222507186001D3EB9 /* TodoCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */; };
@@ -107,6 +108,7 @@
 		1092D5B0221E8A5300579B34 /* DocumentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsTableViewController.swift; sourceTree = "<group>"; };
 		1092D5B2221E8B7D00579B34 /* DocumentsTableViewController.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DocumentsTableViewController.graphql; sourceTree = "<group>"; };
 		10E2A19B2216153F007EC662 /* AddEditDocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDocumentViewController.swift; sourceTree = "<group>"; };
+		2C178EE122781AFB00FC170B /* TodolistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodolistTableViewCell.swift; sourceTree = "<group>"; };
 		2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationTableViewCell.swift; sourceTree = "<group>"; };
 		2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCreationViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				2C34E0B022507186001D3EB9 /* TodoCreationViewController.swift */,
 				2CA8034A2270D5CD00FAD703 /* TodoCreationViewController.graphql */,
 				2C34E0B122507186001D3EB9 /* TodoListViewController.swift */,
+				2C178EE122781AFB00FC170B /* TodolistTableViewCell.swift */,
 				2CA8034C2270D65500FAD703 /* TodoListViewController.graphql */,
 				2C24456F22541AE500D104B2 /* TaskTableViewCell.swift */,
 				2C24457122551BE700D104B2 /* TaskCreationTableViewCell.swift */,
@@ -605,6 +608,7 @@
 				103E72F72227A81000F54B0F /* DocumentDetailViewController.graphql in Sources */,
 				7BA77EBA21E93CDE00C862C1 /* ActivityCollectionViewCell.swift in Sources */,
 				7BA77E9021E7F68300C862C1 /* Tag.swift in Sources */,
+				2C178EE222781AFC00FC170B /* TodolistTableViewCell.swift in Sources */,
 				7BA77EAE21E9385E00C862C1 /* InviteToTeamViewController.swift in Sources */,
 				2C24457222551BE700D104B2 /* TaskCreationTableViewCell.swift in Sources */,
 				7BA77E8A21E7F3E200C862C1 /* Message.swift in Sources */,

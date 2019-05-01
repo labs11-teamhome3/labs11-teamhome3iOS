@@ -20,10 +20,7 @@ class TaskCreationTableViewCell: UITableViewCell {
     
     @IBAction func editButtonTapped(_ sender: Any) {
     }
-    
-    
-    
-    
+  
     
 
     override func awakeFromNib() {

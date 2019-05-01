@@ -1,8 +1,8 @@
 //
-//  TeamMembersViewController.swift
+//  TeamOwnersViewController.swift
 //  TeamHome
 //
-//  Created by Ivan Caldwell on 4/26/19.
+//  Created by Ivan Caldwell on 4/27/19.
 //  Copyright © 2019 Lambda School under the MIT license. All rights reserved.
 //
 
@@ -11,56 +11,43 @@ import Apollo
 import Cloudinary
 import Toucan
 
-class TeamMembersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class TeamOwnersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var todos: [String]?
     let teamMemberArray: [String] = ["Tom", "Dick", "Harry", "Me"]
     var apollo: ApolloClient?
     var teamId: GraphQLID?
-    var users: [FindTeamByIdQuery.Data.Team.Member?]? {
-        didSet {
-            print("Value changed")
-            if isViewLoaded {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    var assignees: [TeamsByUserQuery.Data.TeamsByUser?]?
+    var users: [FindTeamByIdQuery.Data.Team.Member?]?
     var team: TeamsByUserQuery.Data.TeamsByUser?
     var currentUser: CurrentUserQuery.Data.User?
-    @IBOutlet weak var tableView: UITableView!
+    var owners: [TeamsByUserQuery.Data.TeamsByUser?]?
     
     @IBOutlet weak var teamNameLabel: UILabel!
-    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
-        for user in users! {
-            print (user?.name)
-        }
         teamNameLabel.textColor = .black
         teamNameLabel.text = team?.teamName
     }
     
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(users?.count)
         return users?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AssignedCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OwnerCell", for: indexPath)
         cell.textLabel?.text = users?[indexPath.row]?.name
         cell.textLabel?.textColor = .black
-        cell.detailTextLabel?.textColor = .black
         cell.detailTextLabel?.text = users?[indexPath.row]?.email
+        cell.detailTextLabel?.textColor = .black
         if let avatar = users?[indexPath.row]?.profilePic {
             cloudinary.createDownloader().fetchImage(avatar, { (progress) in
             }) { (image, error) in
@@ -75,6 +62,7 @@ class TeamMembersViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -88,7 +76,10 @@ class TeamMembersViewController: UIViewController, UITableViewDelegate, UITableV
         }
         tableView.reloadData()
     }
-
+    
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -96,7 +87,7 @@ class TeamMembersViewController: UIViewController, UITableViewDelegate, UITableV
         //tableView.frame = CGRect(center: CGPoint(x: self.view.frame.height / 8, y: self.view.frame.width / 2), size: CGSize(width: 100, height: 30 * teamMemberArray.count))
     }
     
-    
+    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -104,6 +95,7 @@ class TeamMembersViewController: UIViewController, UITableViewDelegate, UITableV
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-    
-    
+     */
+
+
 }
