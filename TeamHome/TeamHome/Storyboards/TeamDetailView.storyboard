@@ -87,9 +87,11 @@
                     <connections>
                         <outlet property="teamNameLabel" destination="qvn-0r-rCZ" id="2wk-2M-Zeg"/>
                         <segue destination="LzE-eM-CGC" kind="show" identifier="InviteUser" id="h1o-bT-GTp"/>
+                        <segue destination="gIE-U3-YVO" kind="unwind" identifier="DashboardSegue" unwindAction="unwindToDashboardWithSegue:" id="aNK-Nd-Isu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Za-vx-XPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gIE-U3-YVO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2918" y="-955"/>
         </scene>

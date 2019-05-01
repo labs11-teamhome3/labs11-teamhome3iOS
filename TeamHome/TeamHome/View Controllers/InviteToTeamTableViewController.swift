@@ -23,11 +23,9 @@ class InviteToTeamTableViewController: UITableViewController, UISearchBarDelegat
 
     // MARK: - Properties
     var apollo: ApolloClient?
-    
     var teamId: GraphQLID?
     var users: [FetchAllUsersQuery.Data.User?]? = []
     var filtering = false
-    //var filterUsers: [FetchAllUsersQuery.Data.User?]? = []
     var members: [selectedTeamMembers] = []{
         didSet{
             self.tableView.reloadData()
